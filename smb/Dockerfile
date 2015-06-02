@@ -13,6 +13,7 @@ ONBUILD RUN bash /scripts/provision/smbpasswd_batch.sh
 
 RUN echo "service rpcbind start" >> ~/.bashrc
 RUN echo "service smbd start" >> ~/.bashrc
+RUN echo "service nmbd start" >> ~/.bashrc
 CMD ["/bin/bash"]
 
 EXPOSE 138/udp
