@@ -1,1 +1,1 @@
-Machine configurations
+SMB enabled Ubuntu Server
