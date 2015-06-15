@@ -3,7 +3,7 @@ MAINTAINER Bruno Sant'Anna "mail@bsantanna.me"
 ENV REFRESHED_AT 2015-06-15
 
 RUN apt-get update -qq && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -qqy lxde-core tightvncserver && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -qqy xfce4 xfce4-goodies tightvncserver && \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /data
