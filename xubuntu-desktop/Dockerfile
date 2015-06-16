@@ -4,7 +4,10 @@ ENV REFRESHED_AT 2015-06-15
 
 RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -qqy xfce4 tightvncserver
 RUN apt-get install -qqy tango-icon-theme tango-icon-theme-extras tango-icon-theme-common human-icon-theme gnome-icon-theme gnome-human-icon-theme
-#RUN apt-get install -qqy language-pack-pt language-pack-pt-base
+RUN apt-get install -qqy language-pack-pt language-pack-pt-base
+RUN update-locale pt_BR.UTF-8
+ENV LC_ALL=pt_BR.UTF-8
+
 RUN rm -fr /usr/bin/apt-get /usr/bin/dpkg /usr/lib/dpkg
 
 WORKDIR /data
