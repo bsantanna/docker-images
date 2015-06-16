@@ -4,13 +4,13 @@ ENV REFRESHED_AT 2015-06-15
 
 RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -qqy xfce4 tightvncserver
 RUN apt-get install -qqy tango-icon-theme tango-icon-theme-extras tango-icon-theme-common human-icon-theme gnome-icon-theme gnome-human-icon-theme
-RUN apt-get install -qqy language-pack-pt language-pack-pt-base
+#RUN apt-get install -qqy language-pack-pt language-pack-pt-base
 RUN rm -fr /usr/bin/apt-get /usr/bin/dpkg /usr/lib/dpkg
 
 WORKDIR /data
 
-ADD setup/vnc /root/.vnc
-ADD setup/config /root/.config
+ADD setup/root/vnc /root/.vnc
+ADD setup/root/config /root/.config
 
 ENV USER root
 ENTRYPOINT ["/bin/bash"]
