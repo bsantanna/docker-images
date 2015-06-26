@@ -4,7 +4,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 $script = <<SCRIPT
-apt-get update && apt-get install -y docker.io
+apt-get update && apt-get install -y wget
+wget -qO- https://get.docker.com/ | sh
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
