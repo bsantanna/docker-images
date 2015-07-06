@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER Bruno Sant'Anna "mail@bsantanna.me"
-ENV REFRESHED_AT 2015-06-16
+ENV REFRESHED_AT 2015-07-01
 
 RUN apt-get update -qq && apt-get install -qqy nginx
 
