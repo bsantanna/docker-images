@@ -9,7 +9,7 @@ docker build -t bsantanna/jira .
 
 Start mysql container:
 ```
-docker run --name jira-mysql -e MYSQL_ROOT_PASSWORD=bt3chr0cks -d -v $HOME/jira-mysql:/var/lib/mysql mysql
+docker run --name jira-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -v $HOME/jira-mysql:/var/lib/mysql mysql
 ```
 
 Start jira container:
