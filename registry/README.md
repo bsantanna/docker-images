@@ -8,7 +8,6 @@ docker run -d \
     --name some-registry \
     -e STORAGE_PATH=/registry \
     -e SETTINGS_FLAVOR=s3 \
-    -e STORAGE_PATH=/registry \
     -e SEARCH_BACKEND=sqlalchemy \
     registry
 ```
