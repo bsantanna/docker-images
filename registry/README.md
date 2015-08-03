@@ -1,0 +1,6 @@
+# Docker Image Private Registry
+
+Running registry:
+```
+docker run -d -p 5000:5000 --name some-registry registry
+```
