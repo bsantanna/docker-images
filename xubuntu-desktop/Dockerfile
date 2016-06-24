@@ -1,5 +1,5 @@
 FROM ubuntu:15.04
-MAINTAINER Bruno Sant'Anna "mail@bsantanna.me"
+MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2015-06-15
 
 RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -qqy xfce4 tightvncserver

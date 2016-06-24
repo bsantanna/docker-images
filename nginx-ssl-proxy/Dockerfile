@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Bruno Sant'Anna "mail@bsantanna.me"
+MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2015-07-01
 
 RUN apt-get update -qq && apt-get install -qqy nginx

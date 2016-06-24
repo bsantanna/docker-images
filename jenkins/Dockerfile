@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER mail@bsantanna.me
+MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2016-02-01
 
 RUN apt-get update -qq && apt-get install -y curl openjdk-7-jdk git-core
@@ -12,7 +12,7 @@ RUN curl -sf -o /opt/jenkins/jenkins.war -L $JENKINS_MIRROR/war-stable/latest/je
 
 RUN for plugin in chucknorris greenballs scm-api git-client git ws-cleanup ; do curl -sf -o $JENKINS_HOME/plugins/${plugin}.hpi -L $JENKINS_MIRROR/plugins/${plugin}/latest/${plugin}.hpi ; done
 
-ADD ./jenkins.sh /usr/local/bin/jenkins.sh
+ONBUILD ADD ./jenkins.sh /usr/local/bin/jenkins.sh
 RUN chmod +x /usr/local/bin/jenkins.sh
 
 VOLUME /var/lib/docker
