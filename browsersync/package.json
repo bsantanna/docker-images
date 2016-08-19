@@ -9,7 +9,8 @@
   "author": "bruno@btech.software",
   "license": "All rights reserved",
   "dependencies": {
-    "browser-sync": "^2.13.0"
+    "browser-sync": "^2.13.0",
+    "weinre": "^2.0.0-pre-I0Z7U9OV"
   },
   "engines": {
     "node": "0.10.x",
