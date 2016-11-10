@@ -12,8 +12,5 @@ RUN echo "   IdentityFile ${SSH_DIR}/id_rsa" >> /etc/ssh/ssh_config
 RUN mkdir ~/.ssh/
 RUN ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 
-ADD ./entrypoint.sh /opt/frontend-dev/entrypoint.sh
-RUN chmod +x /opt/frontend-dev/entrypoint.sh
-
 ENTRYPOINT ["/opt/frontend-dev/entrypoint.sh"]
 

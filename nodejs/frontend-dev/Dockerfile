@@ -8,8 +8,8 @@ RUN npm install -g gulp bower
 RUN gem install compass
 
 RUN mkdir /opt/frontend-dev
-ADD ./entrypoint.sh /opt/frontend-dev/entrypoint.sh
-RUN chmod +x /opt/frontend-dev/entrypoint.sh
+ONBUILD ADD ./entrypoint.sh /opt/frontend-dev/entrypoint.sh
+ONBUILD RUN chmod +x /opt/frontend-dev/entrypoint.sh
 
 ENV WORKSPACE_DIR /opt/workspace
 RUN mkdir ${WORKSPACE_DIR}

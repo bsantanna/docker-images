@@ -1,0 +1,33 @@
+{
+  "name": "docker-npm_lazy",
+  "version": "1.8.0",
+  "description": "Dockerized distribution of npm_lazy",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node cache.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bsantanna/containers.git"
+  },
+  "keywords": [
+    "docker",
+    "npm",
+    "mirror",
+    "server",
+    "lazy"
+  ],
+  "author": "bruno@btech.software",
+  "license": "ISC",
+  "engines": {
+    "node": "0.12"
+  },
+  "dependencies": {
+    "commander": "^2.6.0",
+    "npm_lazy": "^1.8.0",
+    "underscore": "^1.7.0",
+    "underscore.string": "^3.0.3"
+  }
+}
