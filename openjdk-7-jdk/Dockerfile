@@ -1,10 +1,8 @@
-FROM ubuntu:14.04
+FROM bsantanna:openssh-client
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2015-06-01
+ENV REFRESHED_AT 2016-12-16
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/
 
 RUN apt-get update -qq && apt-get install -qqy ca-certificates openjdk-7-jdk
 
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/
-
-ENTRYPOINT ["/usr/lib/jvm/java-7-openjdk-amd64/bin/java"]
-CMD ["-version"]
+CMD ["/usr/lib/jvm/java-7-openjdk-amd64/bin/java", "-version"]

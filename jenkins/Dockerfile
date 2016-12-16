@@ -1,8 +1,8 @@
-FROM ubuntu:14.04
+FROM bsantanna/openjdk-7-jdk
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2016-02-01
+ENV REFRESHED_AT 2016-12-16
 
-RUN apt-get update -qq && apt-get install -y curl openjdk-7-jdk git-core
+RUN apt-get update -qq && apt-get install -yqq curl git-core
 
 ENV JENKINS_HOME /opt/jenkins/data
 ENV JENKINS_MIRROR http://mirrors.jenkins-ci.org
@@ -22,16 +22,5 @@ EXPOSE 8080
 ENV WORKSPACE_DIR /opt/jenkins-workspace
 RUN mkdir ${WORKSPACE_DIR}
 VOLUME ["${WORKSPACE_DIR}"]
-
-RUN apt-get install -y openssh-client
-
-ENV SSH_DIR /opt/ssh
-
-RUN mkdir ${SSH_DIR}
-RUN ssh-keygen -t rsa -N "" -f ${SSH_DIR}/id_rsa
-RUN cat ${SSH_DIR}/id_rsa.pub
-RUN echo "   IdentityFile ${SSH_DIR}/id_rsa" >> /etc/ssh/ssh_config
-RUN mkdir ~/.ssh/
-RUN ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 
 ENTRYPOINT [ "/usr/local/bin/jenkins.sh" ]
