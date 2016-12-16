@@ -36,4 +36,6 @@ do
 done
 popd
 
+service docker start
+
 exec java -jar /opt/jenkins/jenkins.war --prefix=/jenkins
