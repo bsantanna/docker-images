@@ -8,5 +8,5 @@ RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 581
 
 RUN echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" > /etc/apt/sources.list.d/docker.list
 
-RUN apt-get update -qq && apt-get install -yqq docker-engine aufs-tools xz-utils apparmor
+RUN apt-get update -qq && apt-get install -y docker-engine aufs-tools xz-utils apparmor
 
