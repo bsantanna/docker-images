@@ -18,8 +18,7 @@ VOLUME /var/lib/docker
 
 EXPOSE 8080
 
-ENV WORKSPACE_DIR /opt/jenkins-workspace
-RUN mkdir ${WORKSPACE_DIR}
+ENV WORKSPACE_DIR /opt/jenkins/data/workspace
 VOLUME ["${WORKSPACE_DIR}"]
 
 ENTRYPOINT [ "/usr/local/bin/jenkins.sh" ]
