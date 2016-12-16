@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker run bsantanna/openjdk-7-jdk
+docker run -it --rm bsantanna/openjdk-8-jdk

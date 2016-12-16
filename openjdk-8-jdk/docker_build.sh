@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build -t "bsantanna/openjdk-7-jdk" .
+docker build -t "bsantanna/openjdk-8-jdk" .
