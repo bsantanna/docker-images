@@ -2,7 +2,7 @@ FROM bsantanna/openssh-client
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2016-12-16
 
-RUN apt-get update -qq && apt-get install -y nodejs npm ruby ruby-dev libpng-dev libjpeg-dev gifsicle nasm autoconf git
+RUN apt-get update -qq && apt-get install -yqq nodejs npm ruby ruby-dev libpng-dev libjpeg-dev gifsicle nasm autoconf git
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g gulp bower
 RUN gem install compass
