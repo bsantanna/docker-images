@@ -1,4 +1,4 @@
-FROM bsantanna/openjdk-7-jdk
+FROM bsantanna/openjdk-8-jdk
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2016-12-16
 
