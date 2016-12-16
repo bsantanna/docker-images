@@ -2,7 +2,7 @@ FROM bsantanna/jenkins
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2016-12-15
 
-RUN apt-get update -qq && apt-get install -y apt-transport-https
+RUN apt-get update -qq && apt-get install -y apt-transport-https aufs-tools
 
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
