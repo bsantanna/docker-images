@@ -1,8 +1,8 @@
 FROM bsantanna/openjdk-8-jdk
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2016-12-16
+ENV REFRESHED_AT 2016-12-20
 
-RUN apt-get update -qq && apt-get install -yqq curl git-core
+RUN apt-get update -qq && apt-get install -yqq curl git git-svn subversion
 
 ENV JENKINS_HOME /opt/jenkins/data
 
