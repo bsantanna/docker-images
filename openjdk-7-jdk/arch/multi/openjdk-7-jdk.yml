@@ -1,0 +1,10 @@
+image: bsantanna/openjdk-7-jdk:latest
+manifests:
+  - image: bsantanna/openjdk-7-jdk-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/openjdk-7-jdk-armv7:latest
+    platform:
+      architecture: arm
+      os: linux

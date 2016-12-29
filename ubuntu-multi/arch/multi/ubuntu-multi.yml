@@ -1,3 +1,14 @@
+image: bsantanna/ubuntu-multi:14.04
+manifests:
+  - image: ubuntu:14.04
+    platform:
+      architecture: amd64
+      os: linux
+  - image: armhf/ubuntu:14.04
+    platform:
+      architecture: arm
+      os: linux
+
 image: bsantanna/ubuntu-multi:16.04
 manifests:
   - image: ubuntu:16.04
