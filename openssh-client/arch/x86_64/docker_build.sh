@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build -t "bsantanna/openssh-client-x86_64" ..
+docker build -t "bsantanna/openssh-client-x86_64" ../../
