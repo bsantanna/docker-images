@@ -8,9 +8,9 @@ ENV SQUID_VERSION=3.3.8 \
     SQUID_USER=proxy
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 80F70E11F0F0D5F10CB20E62F5DA5F09C3173AA6 \
- && echo "deb http://ppa.launchpad.net/brightbox/squid-ssl/ubuntu trusty main" >> /etc/apt/sources.list \
- && apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y squid3-ssl=${SQUID_VERSION}* \
+ && echo "deb http://ppa.launchpad.net/brightbox/squid-ssl/ubuntu xenial main" >> /etc/apt/sources.list \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -yqq squid3-ssl=${SQUID_VERSION}* \
  && mv /etc/squid3/squid.conf /etc/squid3/squid.conf.dist \
  && rm -rf /var/lib/apt/lists/*
 
