@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2016-12-16
 ENV SSH_DIR /opt/ssh
@@ -11,3 +11,4 @@ RUN echo "   IdentityFile ${SSH_DIR}/id_rsa" >> /etc/ssh/ssh_config
 RUN mkdir ~/.ssh/
 RUN ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 RUN ssh-keyscan github.org >> ~/.ssh/known_hosts
+RUN ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
