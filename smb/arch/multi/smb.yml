@@ -1,0 +1,10 @@
+image: bsantanna/smb:latest
+manifests:
+  - image: bsantanna/smb-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/smb-armv7:latest
+    platform:
+      architecture: arm
+      os: linux

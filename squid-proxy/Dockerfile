@@ -1,6 +1,6 @@
-FROM ubuntu:14.04
+FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2016-06-24
+ENV REFRESHED_AT 2016-12-29
 
 ENV SQUID_VERSION=3.3.8 \
     SQUID_CACHE_DIR=/var/spool/squid3 \

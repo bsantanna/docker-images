@@ -1,1 +1,0 @@
-SMB enabled Ubuntu Server
