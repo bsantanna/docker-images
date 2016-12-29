@@ -1,0 +1,10 @@
+image: bsantanna/jenkins:latest
+manifests:
+  - image: bsantanna/jenkins-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/jenkins-armv7:latest
+    platform:
+      architecture: arm
+      os: linux
