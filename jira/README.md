@@ -1,9 +1,3 @@
-# Atlassian Jira Image
-
-## Building:
-```
-docker build -t bsantanna/jira .
-```
 
 ## Running:
 

@@ -1,0 +1,6 @@
+image: bsantanna/jira:latest
+manifests:
+  - image: bsantanna/jira-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
