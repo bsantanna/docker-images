@@ -1,0 +1,10 @@
+image: bsantanna/openssh-client:latest
+manifests:
+  - image: bsantanna/openssh-client-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/openssh-client-armv7:latest
+    platform:
+      architecture: arm
+      os: linux
