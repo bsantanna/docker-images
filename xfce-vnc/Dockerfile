@@ -1,6 +1,6 @@
-FROM ubuntu:15.04
+FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2015-06-15
+ENV REFRESHED_AT 2016-12-29
 
 RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -qqy xfce4 tightvncserver
 RUN apt-get install -qqy tango-icon-theme tango-icon-theme-extras tango-icon-theme-common human-icon-theme gnome-icon-theme gnome-human-icon-theme

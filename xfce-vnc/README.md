@@ -1,9 +1,3 @@
-# Ubuntu Desktop image
-
-## Building:
-```
-docker build -t bsantanna/xubuntu-desktop .
-```
 
 ## Running:
 ```
