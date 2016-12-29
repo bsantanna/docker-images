@@ -1,9 +1,3 @@
-# NGINX Reverse SSL Proxy image
-
-## Building:
-```
-docker build -t bsantanna/nginx-ssl-proxy .
-```
 
 ## Running:
 ```

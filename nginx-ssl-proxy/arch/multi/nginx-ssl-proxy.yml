@@ -1,0 +1,10 @@
+image: bsantanna/nginx-ssl-proxy:latest
+manifests:
+  - image: bsantanna/nginx-ssl-proxy-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/nginx-ssl-proxy-armv7:latest
+    platform:
+      architecture: arm
+      os: linux

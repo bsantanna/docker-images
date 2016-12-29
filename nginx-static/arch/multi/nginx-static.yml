@@ -1,0 +1,10 @@
+image: bsantanna/nginx-static:latest
+manifests:
+  - image: bsantanna/nginx-static-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/nginx-static-armv7:latest
+    platform:
+      architecture: arm
+      os: linux

@@ -1,6 +1,6 @@
-FROM ubuntu:14.04
+FROM bsantanna/openssh-client
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2015-07-01
+ENV REFRESHED_AT 2016-12-29
 
 RUN apt-get update -qq && apt-get install -qqy nginx
 

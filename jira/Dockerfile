@@ -1,6 +1,6 @@
-FROM bsantanna/ubuntu-multi:14.04
+FROM bsantanna/openjdk-8-jdk
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2015-06-22
+ENV REFRESHED_AT 2016-12-29
 ENV DATABASE_DRIVER mysql-connector-java-5.1.26
 ENV JIRA_BINARY atlassian-jira-6.4.6-x64.bin
 
