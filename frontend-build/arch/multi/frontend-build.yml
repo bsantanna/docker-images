@@ -1,0 +1,10 @@
+image: bsantanna/frontend-build:latest
+manifests:
+  - image: bsantanna/frontend-build-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/frontend-build-armv7:latest
+    platform:
+      architecture: arm
+      os: linux
