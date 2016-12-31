@@ -4,7 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/frontend-build-armv7:latest
-    platform:
-      architecture: arm
-      os: linux
+#  - image: bsantanna/frontend-build-armv7:latest
+#    platform:
+#      architecture: arm
+#      os: linux
