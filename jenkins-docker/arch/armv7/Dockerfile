@@ -23,7 +23,6 @@ VOLUME ["${WORKSPACE_DIR}"]
 
 # Docker install
 VOLUME /var/lib/docker
-
 RUN curl -sSL get.docker.com | sh
 
 # Entrypoint
