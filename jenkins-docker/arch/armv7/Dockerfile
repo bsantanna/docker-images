@@ -5,7 +5,7 @@ ENV REFRESHED_AT 2017-01-01
 RUN apt-get update -qq
 
 # Java install
-RUN apt-get install -yqq ca-certificates openjdk-8-jdk
+RUN apt-get install -yqq ca-certificates openjdk-7-jdk
 
 # Build tools install
 RUN apt-get install -yqq curl git git-svn subversion
