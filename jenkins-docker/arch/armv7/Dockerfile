@@ -1,22 +1,30 @@
-FROM bsantanna/openjdk-8-jdk
+FROM armhf/debian
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2016-12-29
+ENV REFRESHED_AT 2017-01-01
 
-RUN apt-get update -qq && apt-get install -yqq curl git git-svn subversion
+RUN apt-get update -qq
 
+# Java install
+RUN apt-get install -yqq ca-certificates openjdk-8-jdk
+
+# Build tools install
+RUN apt-get install -yqq curl git git-svn subversion
+
+# Jenkins install
 ENV JENKINS_HOME /opt/jenkins/data
-
 RUN mkdir -p $JENKINS_HOME/plugins
 RUN curl -sf -o /opt/jenkins/jenkins.war -L http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
-
 RUN for plugin in scm-api git-client git ws-cleanup blueocean ant subversion structs workflow-step-api workflow-scm-step maven-plugin mailer ; do curl -sf -o $JENKINS_HOME/plugins/${plugin}.hpi -L http://mirrors.jenkins-ci.org/plugins/${plugin}/latest/${plugin}.hpi ; done
-
 ONBUILD ADD ./jenkins.sh /usr/local/bin/jenkins.sh
 ONBUILD RUN chmod +x /usr/local/bin/jenkins.sh
-
 EXPOSE 8080
-
 ENV WORKSPACE_DIR /opt/jenkins/data/workspace
 VOLUME ["${WORKSPACE_DIR}"]
 
+# Docker install
+VOLUME /var/lib/docker
+
+RUN curl -sSL get.docker.com | sh
+
+# Entrypoint
 ENTRYPOINT [ "/usr/local/bin/jenkins.sh" ]
