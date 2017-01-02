@@ -40,4 +40,4 @@ popd
 rm -fr /var/run/docker*
 service docker restart
 
-exec java -jar /opt/jenkins/jenkins.war --prefix=/jenkins
+exec java -jar -Xmx512m /opt/jenkins/jenkins.war --prefix=/jenkins
