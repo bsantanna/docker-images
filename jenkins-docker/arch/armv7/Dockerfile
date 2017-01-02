@@ -26,4 +26,4 @@ VOLUME /var/lib/docker
 RUN curl -sSL get.docker.com | sh
 
 # Entrypoint
-ENTRYPOINT [ "/usr/local/bin/jenkins.sh" ]
+ENTRYPOINT ["bash", "/usr/local/bin/jenkins.sh" ]
