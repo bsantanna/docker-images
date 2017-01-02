@@ -40,4 +40,4 @@ popd
 rm -fr /var/run/docker*
 service docker restart
 
-exec java -jar -Xmx512m /opt/jenkins/jenkins.war --prefix=/jenkins
+exec java -jar -XX:PermSize=512M -XX:MaxPermSize=640M -Xmn128M -Xms512M -Xmx640M /opt/jenkins/jenkins.war --prefix=/jenkins
