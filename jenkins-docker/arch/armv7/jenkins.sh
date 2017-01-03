@@ -40,4 +40,4 @@ popd
 rm -fr /var/run/docker*
 service docker restart
 
-exec java -jar -XX:PermSize=512M -XX:MaxPermSize=640M -Xmn128M -Xms512M -Xmx640M /opt/jenkins/jenkins.war --prefix=/jenkins
+exec java -jar -XX:PermSize=512M -XX:MaxPermSize=640M -Xmn128M -Xms512M -Xmx640M -Djava.util.logging.config.file=/opt/jenkins/log.properties /opt/jenkins/jenkins.war --prefix=/jenkins
