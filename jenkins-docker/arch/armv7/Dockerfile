@@ -1,29 +1,26 @@
-FROM armhf/debian
+FROM armhf/alpine
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2017-01-01
-
-RUN apt-get update -qq
+ENV REFRESHED_AT 2017-01-02
 
 # Java install
-RUN apt-get install -yqq ca-certificates openjdk-7-jdk
+ENV LANG C.UTF-8
 
-# Build tools install
-RUN apt-get install -yqq curl git git-svn subversion
+# add a simple script that can auto-detect the appropriate JAVA_HOME value
+# based on whether the JDK or only the JRE is installed
+RUN { \
+		echo '#!/bin/sh'; \
+		echo 'set -e'; \
+		echo; \
+		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
+	} > /usr/local/bin/docker-java-home \
+	&& chmod +x /usr/local/bin/docker-java-home
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/jre
+ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
 
-# Jenkins install
-ENV JENKINS_HOME /opt/jenkins/data
-RUN mkdir -p $JENKINS_HOME/plugins
-RUN curl -sf -o /opt/jenkins/jenkins.war -L http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
-RUN for plugin in scm-api git-client git ws-cleanup blueocean ant subversion structs workflow-step-api workflow-scm-step maven-plugin mailer ; do curl -sf -o $JENKINS_HOME/plugins/${plugin}.hpi -L http://mirrors.jenkins-ci.org/plugins/${plugin}/latest/${plugin}.hpi ; done
-ENV WORKSPACE_DIR /opt/jenkins/data/workspace
-VOLUME ["${WORKSPACE_DIR}"]
+ENV JAVA_VERSION 8u111
+ENV JAVA_ALPINE_VERSION 8.111.14-r0
 
-# Docker install
-VOLUME /var/lib/docker
-RUN curl -sSL get.docker.com | sh
-
-# Entrypoint
-EXPOSE 8080
-ADD ./jenkins.sh /usr/local/bin/jenkins.sh
-ADD ./log.properties /opt/jenkins
-ENTRYPOINT ["bash", "/usr/local/bin/jenkins.sh" ]
+RUN set -x \
+	&& apk add --no-cache \
+		openjdk8-jre="$JAVA_ALPINE_VERSION" \
+	&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
