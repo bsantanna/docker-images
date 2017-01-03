@@ -75,3 +75,4 @@ ENTRYPOINT ["bash", "/usr/local/bin/jenkins.sh"]
 
 COPY plugins.sh /usr/local/bin/plugins.sh
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
+COPY log.properties /usr/share/jenkins
