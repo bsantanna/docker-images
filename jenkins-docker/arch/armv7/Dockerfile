@@ -25,6 +25,4 @@ RUN curl -sSL get.docker.com | sh
 # Entrypoint
 EXPOSE 8080
 ADD ./jenkins.sh /usr/local/bin/jenkins.sh
-ADD ./log.properties /opt/jenkins
-RUN chmod +x /usr/local/bin/jenkins.sh
 ENTRYPOINT ["bash", "/usr/local/bin/jenkins.sh" ]
