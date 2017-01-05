@@ -4,7 +4,3 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/jenkins-docker-armv7:latest
-    platform:
-      architecture: arm
-      os: linux
