@@ -1,6 +1,6 @@
 FROM bsantanna/openjdk-8-jdk
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2016-12-29
+ENV REFRESHED_AT 2017-01-09
 
 RUN apt-get update -qq && apt-get install -yqq curl git git-svn subversion
 
