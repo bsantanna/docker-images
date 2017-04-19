@@ -18,3 +18,5 @@ EXPOSE 111/udp
 EXPOSE 111
 EXPOSE 2049
 EXPOSE 2049/udp
+
+#RESTART: https://github.com/ErezHorev/dockerized_nfs_server
