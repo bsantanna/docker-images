@@ -4,6 +4,7 @@ ENV REFRESHED_AT 2017-04-18
 
 RUN apt-get update -qq && apt-get install -qqy nfs-kernel-server
 
+ADD scripts/ /scripts
 ADD config/ /config
 ONBUILD ADD config/ /config
 ONBUILD RUN mv /config/idmapd.conf /etc/idmapd.conf
