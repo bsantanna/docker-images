@@ -3,6 +3,7 @@ MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2016-12-29
 
 RUN apt-get update -qq && apt-get install -qqy samba expect rpcbind
+
 ADD scripts /scripts
 ONBUILD ADD config/ /config
 ONBUILD RUN mv /config/smb.conf /etc/samba/smb.conf

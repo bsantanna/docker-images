@@ -3,5 +3,5 @@
 for line in `cat /config/users.txt`
 do
   USERNAME=`echo $line | cut -f1 -d:`
-  useradd -d /homes/$USERNAME -g embraco -s /bin/false $USERNAME
+  useradd -d /homes/$USERNAME -s /bin/false $USERNAME
 done
