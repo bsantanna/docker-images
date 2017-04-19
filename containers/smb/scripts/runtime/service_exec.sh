@@ -4,4 +4,4 @@ service rpcbind start
 service nmbd start
 service smbd start
 
-top
+tail -v /var/log/samba/log.smbd
