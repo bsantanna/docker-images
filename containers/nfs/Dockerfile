@@ -8,7 +8,7 @@ ADD scripts/ /scripts
 ADD config/ /config
 ONBUILD ADD config/ /config
 ONBUILD RUN mv /config/idmapd.conf /etc/idmapd.conf
-ONBUILD RUN mv /config/exports.conf /etc/exports.conf
+ONBUILD RUN mv /config/exports /etc/exports
 
 
 CMD ["/bin/bash", "/scripts/runtime/service_exec.sh"]
