@@ -2,6 +2,7 @@
 
 rpcdebug -m nfs -s proc
 
+service rpcbind start
 service nfs-kernel-server start
 
-tail -v /var/log/messages
+sleep infinity
