@@ -11,3 +11,9 @@ ONBUILD RUN mv /config/exports.conf /etc/exports.conf
 
 
 CMD ["/bin/bash", "/scripts/runtime/service_exec.sh"]
+
+
+EXPOSE 111/udp
+EXPOSE 111
+EXPOSE 2049
+EXPOSE 2049/udp
