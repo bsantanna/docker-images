@@ -1,7 +1,7 @@
 #!/bin/bash
 ##########################################################
 ## This script is here to make adding/subtracting users ##
-## to the smbpasswd file easyer etc.				 ##
+## to the smbpasswd file easier etc.				    ##
 ##########################################################
 
 NO_ARGS=2
