@@ -10,6 +10,6 @@ ONBUILD RUN mv /config/vsftpd.conf /etc/vsftpd.conf
 ONBUILD RUN bash /scripts/provision/useradd_batch.sh
 ONBUILD RUN bash /scripts/provision/passwd_batch.sh
 
-EXPOSE 20 21 4559 4560 4561 4562 4563 4564
+EXPOSE 20 21
 
 CMD ["/bin/bash", "/scripts/runtime/service_exec.sh"]
