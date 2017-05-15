@@ -8,7 +8,6 @@ ADD scripts/ /scripts
 ONBUILD ADD config/ /config
 ONBUILD RUN mv /config/exports /etc/exports
 
-EXPOSE 111/udp
-EXPOSE 2049
+EXPOSE 111 111/udp 2049 2049/udp
 
 CMD ["/bin/bash", "/scripts/runtime/service_exec.sh"]
