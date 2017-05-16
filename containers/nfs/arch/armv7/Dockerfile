@@ -11,8 +11,8 @@ RUN cd /src/unfs3 && tar -zxf unfs3-0.9.22.tar.gz && \
     cd unfs3-0.9.22 && ./configure && make && make install
 
 ADD scripts/ /scripts
-#ONBUILD ADD config/ /config
-#ONBUILD RUN mv /config/exports /etc/exports
+ONBUILD ADD config/ /config
+ONBUILD RUN mv /config/exports /etc/exports
 
 EXPOSE 111 111/udp 2049 2049/udp
 

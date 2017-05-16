@@ -1,3 +1,7 @@
 #!/bin/bash
 
-sleep infinity
+mkdir -p "/run/sendsigs.omit.d/rpcbind"
+
+service rpcbind start
+
+unfsd -d
