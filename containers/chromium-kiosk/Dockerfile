@@ -8,7 +8,7 @@ RUN apt-get update && \
       libexif-dev \
       libpango1.0-0 \
       libv4l-0 \
-      chromium-bsu && \
+      chromium-browser && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
