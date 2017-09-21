@@ -4,7 +4,8 @@ for line in `cat /config/users.txt`
 do
   username=`echo ${line} | cut -f1 -d:`
   groupname=`echo ${line} | cut -f3 -d:`
+  groupid=`echo ${line} | cut -f4 -d:`
 
-  groupadd ${groupname} || true
+  groupadd ${groupname} --gid ${groupid} || true
   usermod -aG ${groupname} ${username}
 done
