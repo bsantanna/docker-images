@@ -6,6 +6,6 @@ do
   groupname=`echo ${line} | cut -f4 -d:`
   groupid=`echo ${line} | cut -f5 -d:`
 
-  groupadd ${groupname} --gid ${groupid} || true
-  usermod -aG ${groupname} ${username}
+  bash -x -c "groupadd ${groupname} --gid ${groupid}" || true
+  bash -x -c "usermod -aG ${groupname} ${username}"
 done
