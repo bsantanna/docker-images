@@ -16,19 +16,20 @@ RUN echo '+ to = |/usr/bin/smokeping-alert\n' \
     echo '+ from = smokealert@localhost\n\n' \
                 >>/etc/smokeping/config.d/Alert && \
     echo '+ hostdown\ntype = loss\npattern = >60%\nedgetrigger = yes\ncomment = Massive loss for 5 mins\n' \
-                >>/etc/smokeping/config.d/Alert && \
-    echo '+ EchoPingHttp\n\nbinary = /usr/bin/echoping\n' \
+                >>/etc/smokeping/config.d/Alert
+
+RUN echo '+ EchoPingHttp\n\nbinary = /usr/bin/echoping\n' \
                 >>/etc/smokeping/config.d/Probes && \
     echo '+ EchoPingHttps\n\nbinary = /usr/bin/echoping\n' \
                 >>/etc/smokeping/config.d/Probes && \
-    echo '+ FPing\n\nbinary = /usr/bin/fping\npacketsize = 1000\n' \
-                >>/etc/smokeping/config.d/Probes && \
     echo '+ Curl\n\nbinary = /usr/bin/curl\nstep = 60\nurlformat = http://%host%/\n' \
-                >>/etc/smokeping/config.d/Probes && \
-    sed -i '/^syslogfacility/s/^/#/' /etc/smokeping/config.d/General && \
+                >>/etc/smokeping/config.d/Probes
+
+RUN sed -i '/^syslogfacility/s/^/#/' /etc/smokeping/config.d/General && \
     sed -i 's/the \(SmokePing website\) of xxx Company/our \1/' \
-                /etc/smokeping/config.d/General && \
-    conf=/etc/lighttpd/lighttpd.conf dir=/etc/lighttpd/conf-available \
+                /etc/smokeping/config.d/General
+
+RUN conf=/etc/lighttpd/lighttpd.conf dir=/etc/lighttpd/conf-available \
                 header=setenv.add-response-header && \
     sed -i '/server.errorlog/s|^|#|' $conf && \
     sed -i '/server.document-root/s|/html||' $conf && \
@@ -61,18 +62,18 @@ RUN echo '+ to = |/usr/bin/smokeping-alert\n' \
     echo '\t\t"docroot" => "/var/www",' >>$dir/10-fastcgi.conf && \
     echo '\t\t"check-local"     => "disable",\n\t))\n)' \
                 >>$dir/10-fastcgi.conf && \
-    unset conf dir header && \
-    lighttpd-enable-mod cgi && \
-    lighttpd-enable-mod fastcgi && \
-    [[ -d /var/cache/smokeping ]] || mkdir -p /var/cache/smokeping && \
-    [[ -d /var/lib/smokeping ]] || mkdir -p /var/lib/smokeping && \
-    [[ -d /run/smokeping ]] || mkdir -p /run/smokeping && \
-    [[ -d /var/www/cgi-bin ]] || rmdir /var/www/cgi-bin && \
+    unset conf dir header
+
+RUN lighttpd-enable-mod cgi && lighttpd-enable-mod fastcgi
+
+RUN if [ ! -d /var/cache/smokeping ] ; then mkdir -p /var/cache/smokeping ; fi && \
+    if [ ! -d /var/lib/smokeping ] ; then mkdir -p /var/lib/smokeping ; fi && \
+    if [ ! -d /run/smokeping ] ; then mkdir -p /run/smokeping ; fi && \
+    if [ -d /var/www/cgi-bin ] ; then rmdir /var/www/cgi-bin ; fi && \
     ln -s /usr/share/smokeping/www /var/www/smokeping && \
     ln -s /usr/lib/cgi-bin /var/www/ && \
     ln -s /usr/lib/cgi-bin/smokeping.cgi /var/www/smokeping/ && \
-    chown -Rh smokeping:www-data /var/cache/smokeping /var/lib/smokeping \
-                /run/smokeping && \
+    chown -Rh smokeping:www-data /var/cache/smokeping /var/lib/smokeping /run/smokeping && \
     chmod -R g+ws /var/cache/smokeping /var/lib/smokeping /run/smokeping && \
     chmod u+s /usr/bin/fping && \
     rm -rf /var/lib/apt/lists/* /tmp/*
