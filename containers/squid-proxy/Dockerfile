@@ -1,18 +1,15 @@
 FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2016-12-29
+ENV REFRESHED_AT 2017-11-09
 
-ENV SQUID_VERSION=3.3.8 \
-    SQUID_CACHE_DIR=/var/spool/squid3 \
+ENV SQUID_CACHE_DIR=/var/spool/squid3 \
     SQUID_LOG_DIR=/var/log/squid3 \
     SQUID_USER=proxy
 
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 80F70E11F0F0D5F10CB20E62F5DA5F09C3173AA6 \
- && echo "deb http://ppa.launchpad.net/brightbox/squid-ssl/ubuntu xenial main" >> /etc/apt/sources.list \
- && apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get install -yqq squid3-ssl=${SQUID_VERSION}* \
- && mv /etc/squid3/squid.conf /etc/squid3/squid.conf.dist \
- && rm -rf /var/lib/apt/lists/*
+RUN export DEBIAN_FRONTEND='noninteractive' && \
+    apt-get update -qq && \
+    apt-get install -qqy --no-install-recommends ca-certificates squid  && \
+    apt-get clean
 
 ONBUILD ADD config/squid.conf /etc/squid3/squid.conf
 
