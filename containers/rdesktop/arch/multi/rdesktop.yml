@@ -1,0 +1,6 @@
+image: bsantanna/rdesktop:latest
+manifests:
+  - image: bsantanna/rdesktop-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
