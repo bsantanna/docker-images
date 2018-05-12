@@ -1,6 +1,0 @@
-image: bsantanna/ftp:latest
-manifests:
-  - image: bsantanna/ftp-x86_64:latest
-    platform:
-      architecture: amd64
-      os: linux

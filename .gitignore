@@ -2,3 +2,4 @@
 jira/*.bin
 .idea/
 .tmp/
+*.iml
