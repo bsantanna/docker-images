@@ -1,1 +1,0 @@
-This directory serves as a volume mount for bsantanna/jenkins-docker image based container.

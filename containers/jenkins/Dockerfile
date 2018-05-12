@@ -1,8 +1,10 @@
 FROM bsantanna/openjdk-8-jdk
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2017-01-10
+ENV CREATED_AT 2017-01-10
+ENV REFRESHED_AT 2018-05-12
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update -qq && apt-get install -yqq curl git git-svn subversion
+RUN apt-get update -qq && apt-get install -yqq curl git git-svn subversion maven
 
 ENV JENKINS_HOME /opt/jenkins/data
 

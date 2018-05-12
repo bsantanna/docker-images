@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-mvn clean compile
+echo "mvn clean compile"| bash -x

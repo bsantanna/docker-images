@@ -1,9 +1,12 @@
 FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2016-12-29
+ENV CREATED_AT 2016-12-29
+ENV REFRESHED_AT 2018-05-12
+ENV DEBIAN_FRONTEND noninteractive
 ENV SSH_DIR /opt/ssh
 
-RUN apt-get update -qq && apt-get install -yqq openssh-client
+
+RUN apt-get update -qq && apt-get install -yqq openssh-client ca-certificates
 RUN mkdir ${SSH_DIR}
 RUN ssh-keygen -t rsa -N "" -f ${SSH_DIR}/id_rsa
 RUN cat ${SSH_DIR}/id_rsa.pub

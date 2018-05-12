@@ -1,6 +1,8 @@
 FROM bsantanna/openssh-client
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2017-08-02
+ENV CREATED_AT 2017-08-02
+ENV REFRESHED_AT 2018-05-12
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq && apt-get install -yqq nodejs npm ruby ruby-dev libpng-dev libjpeg-dev libfontconfig1 gifsicle nasm autoconf git
 RUN ln -s /usr/bin/nodejs /usr/bin/node
