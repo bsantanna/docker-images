@@ -3,3 +3,5 @@ jira/*.bin
 .idea/
 .tmp/
 *.iml
+
+containers/jenkins-cluster/workspace
