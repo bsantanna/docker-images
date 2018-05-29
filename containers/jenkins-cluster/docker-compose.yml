@@ -21,4 +21,4 @@ services:
 #    links:
 #      - master
 
-networks: {default: {}}  
+#networks: {default: {}}  
