@@ -4,7 +4,7 @@ ENV CREATED_AT 2018-06-07
 
 VOLUME /var/lib/docker
 
-RUN apt-get update -q && apt-get install -yqq curl
+RUN apt-get update -q && apt-get install -yqq curl git git-svn subversion maven
 RUN curl -sSL get.docker.com | sh
 
 ADD ./jenkins-slave.sh /usr/local/bin/jenkins-slave
