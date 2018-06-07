@@ -5,3 +5,4 @@ jira/*.bin
 *.iml
 
 containers/jenkins-cluster/workspace
+containers/jenkins-cluster/remote/agent-jnlp-1
