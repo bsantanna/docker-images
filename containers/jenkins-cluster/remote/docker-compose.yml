@@ -9,7 +9,7 @@ services:
       - JENKINS_URL=http://master:8080/jenkins
       - JENKINS_SECRET=?
       - JENKINS_AGENT_NAME=agent-jnlp-1
-      - JENKINS_WORKDIR=/home/jenkins
+      - JENKINS_WORKDIR=/home/jenkins/agent
     extra_hosts:
       - "master:192.168.2.3"
 
