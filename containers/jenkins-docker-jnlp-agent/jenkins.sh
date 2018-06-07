@@ -40,5 +40,4 @@ popd
 rm -fr /var/run/docker*
 service docker restart
 
-# must be in $PATH
 jenkins-slave

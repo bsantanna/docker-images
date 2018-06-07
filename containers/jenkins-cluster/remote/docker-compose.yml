@@ -3,15 +3,15 @@ version: '3'
 services:
 
   agent-jnlp-1:
-    image: jenkins/jnlp-slave
+    image: bsantanna/jenkins-docker-jnlp-agent-x86_64
     container_name: agent-jnlp-1
     environment:
       - JENKINS_URL=http://master:8080/jenkins
       - JENKINS_SECRET=?
       - JENKINS_AGENT_NAME=agent-jnlp-1
-      - JENKINS_WORKDIR=/var/jenkins
+      - JENKINS_WORKDIR=/home/jenkins
     extra_hosts:
-      - "master:?"
+      - "master:192.168.2.3"
 
 #  agent-jnlp-2:
 #    image: jonathank/jenkins-jnlp-slave-windows
