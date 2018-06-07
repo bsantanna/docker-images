@@ -19,7 +19,7 @@ RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-c
   && chmod 644 /usr/share/jenkins/slave.jar
 
 ENV JENKINS_HOME /opt/jenkins/data
-ENV WORKSPACE_DIR /opt/jenkins/data/agent
+ENV WORKSPACE_DIR /opt/jenkins/data/workspace
 
 RUN mkdir -p ${JENKINS_HOME}
 
