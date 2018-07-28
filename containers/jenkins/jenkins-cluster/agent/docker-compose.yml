@@ -1,0 +1,17 @@
+---
+version: '3'
+services:
+  agent-linux-x86_64-?:
+    image: jenkins/jnlp-slave
+    container_name: agent-linux-x86_64-?
+    environment:
+      - JENKINS_URL=http://master:8080/jenkins
+      - JENKINS_SECRET=?
+      - JENKINS_AGENT_NAME=agent-linux-x86_64-?
+    extra_hosts:
+      - "master:?"
+    volumes:
+      - ./workspace:/opt/jenkins/data/workspace
+    privileged: true
+
+networks: {default: {}}  
