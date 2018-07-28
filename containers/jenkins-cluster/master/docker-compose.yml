@@ -2,7 +2,7 @@
 version: '3'
 services:
   master:
-    build: ../..
+    image: bsantanna/jenkins-docker
     container_name: master
     ports:
       - "8080:8080"
