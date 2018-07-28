@@ -1,0 +1,24 @@
+---
+version: '3'
+services:
+  master:
+    image: bsantanna/jenkins-docker
+    container_name: master
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ./workspace:/opt/jenkins/data/workspace
+    privileged: true
+
+#  agent-jnlp-1:
+#    image: jenkins/jnlp-slave
+#    container_name: agent-1
+#    environment:
+#      - JENKINS_URL=http://master:8080/jenkins
+#      - JENKINS_SECRET=12345
+#      - JENKINS_AGENT_NAME=agent-1
+#    links:
+#      - master
+
+#networks: {default: {}}  
