@@ -10,5 +10,4 @@ services:
     volumes:
       - ./workspace:/opt/jenkins/data/workspace
     privileged: true
-
-networks: {default: {}}  
+#networks: {default: {}}  
