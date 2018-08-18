@@ -41,7 +41,7 @@ catchError {
     final ARCH_x86_64 = "x86_64"
 
     // parallel build for different architectures
-    parallel "Arch: ${ARCH_x86_64}": {
+    parallel "Images: ${ARCH_x86_64}": {
       node(ARCH_x86_64) {
 
         // cleanup workspace
