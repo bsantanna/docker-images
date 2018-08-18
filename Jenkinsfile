@@ -55,15 +55,15 @@ catchError {
 
     final ARCH_x86_64 = "x86_64"
     final ARCH_x86_64_IMAGES = [
+        "ddclient",
         "openssh-client",
         "openjdk-7-jdk",
         "openjdk-8-jdk",
         "jenkins",
         "jenkins-docker",
-        "frontend-dev",
-        "frontend-build",
-        "backend-dev",
-        "backend-build"
+        "jenkins-docker-jnlp-agent",
+        "npm-dev",
+        "java-dev",
     ]
 
     // parallel build for different architectures

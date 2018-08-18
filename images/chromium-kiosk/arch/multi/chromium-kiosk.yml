@@ -1,6 +1,6 @@
 image: bsantanna/chromium-kiosk:latest
 manifests:
-  - image: bsantanna/chromium-kiosk-armv7:latest
+  - image: bsantanna/chromium-kiosk-armhf:latest
     platform:
       architecture: arm
       os: linux

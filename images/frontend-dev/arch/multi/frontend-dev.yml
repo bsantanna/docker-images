@@ -1,6 +1,0 @@
-image: bsantanna/frontend-dev:latest
-manifests:
-  - image: bsantanna/frontend-dev-x86_64:latest
-    platform:
-      architecture: amd64
-      os: linux

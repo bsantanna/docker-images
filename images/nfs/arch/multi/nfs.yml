@@ -4,7 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/nfs-armv7:latest
+  - image: bsantanna/nfs-armhf:latest
     platform:
       architecture: arm
       os: linux

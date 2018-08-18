@@ -4,7 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/nginx-ssl-proxy-armv7:latest
+  - image: bsantanna/nginx-ssl-proxy-armhf:latest
     platform:
       architecture: arm
       os: linux
