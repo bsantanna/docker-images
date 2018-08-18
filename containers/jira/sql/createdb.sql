@@ -1,7 +1,0 @@
-CREATE DATABASE jira_db CHARACTER SET utf8 COLLATE utf8_bin;
-CREATE USER 'jira_user'@'localhost' IDENTIFIED BY "my_secret_pw";
-CREATE USER 'jira_user'@'%' IDENTIFIED BY "my_secret_pw";
-GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX ON jira_db.* TO 'jira_user'@'localhost';
-GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX ON jira_db.* TO 'jira_user'@'%';
-FLUSH PRIVILEGES;
-
