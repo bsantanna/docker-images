@@ -66,7 +66,7 @@ catchError {
         // build each image
         for (def image : images) {
           dir("images/${image}/arch/${ARCH_x86_64}") {
-            sh "docker_build.sh"
+            sh "./docker_build.sh"
           }
         }
       }
