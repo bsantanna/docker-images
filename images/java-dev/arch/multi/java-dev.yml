@@ -1,10 +1,10 @@
-image: bsantanna/backend-dev:latest
+image: bsantanna/java-dev:latest
 manifests:
-  - image: bsantanna/backend-dev-x86_64:latest
+  - image: bsantanna/java-dev-x86_64:latest
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/backend-dev-armv7:latest
+  - image: bsantanna/java-dev-armhf:latest
     platform:
       architecture: arm
       os: linux
