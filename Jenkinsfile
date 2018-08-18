@@ -36,4 +36,42 @@ catchError {
     }
   }
 
+  stage("Build") {
+
+    final ARCH_x86_64 = "x86_64"
+
+    // parallel build for different architectures
+    parallel "Arch: ${ARCH_x86_64}": {
+      node(ARCH_x86_64) {
+
+        // cleanup workspace
+        deleteDir()
+
+        // unstash
+        unstash "sources"
+
+        // define images array
+        final images = [
+            "openssh-client",
+            "openjdk-7-jdk",
+            "openjdk-8-jdk",
+            "jenkins",
+            "jenkins-docker",
+            "frontend-dev",
+            "frontend-build",
+            "backend-dev",
+            "backend-build"
+        ]
+
+        // build each image
+        for (def image : images) {
+          dir("images/${image}/arch/${ARCH_x86_64}") {
+            sh "docker_build.sh"
+          }
+        }
+      }
+    }
+
+  }
+
 }

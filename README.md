@@ -1,3 +1,6 @@
 
+
+docker_build.sh script used to allow flexile / per architecture build.
+
 Tools
-* https://github.com/estesp/manifest-tool
+* https://github.com/bsantanna/manifest-tool
