@@ -4,7 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/maven-build-armv7:latest
+  - image: bsantanna/maven-build-armhf:latest
     platform:
       architecture: arm
       os: linux

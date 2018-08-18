@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/backend-dev-armv7"
+docker push "bsantanna/java-dev-armhf"
