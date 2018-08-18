@@ -44,6 +44,10 @@ catchError {
     parallel "Images: ${ARCH_x86_64}": {
       node(ARCH_x86_64) {
 
+        // restart docker environment
+        sh "\$(service docker start && sleep 15) || true"
+        sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
+
         // cleanup workspace
         deleteDir()
 
