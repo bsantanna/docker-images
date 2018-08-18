@@ -1,6 +1,0 @@
-image: bsantanna/xfce-vnc:latest
-manifests:
-  - image: bsantanna/xfce-vnc-x86_64:latest
-    platform:
-      architecture: amd64
-      os: linux
