@@ -59,11 +59,20 @@ catchError {
         "openssh-client",
         "openjdk-7-jdk",
         "openjdk-8-jdk",
+        "java-dev",
         "jenkins",
         "jenkins-docker",
         "jenkins-docker-jnlp-agent",
+        //"maven-build",
+        "nfs",
+        "nginx-ssl-proxy",
+        "nginx-static",
         "npm-dev",
-        "java-dev",
+        //"npm-build",
+        "rdesktop",
+        "smb",
+        "smokeping",
+        "squid-proxy"
     ]
 
     // parallel build for different architectures
