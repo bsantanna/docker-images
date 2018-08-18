@@ -12,15 +12,28 @@ final REGISTRY_CREDENTIALS_ID = "dockerhub_credentials"
 final TIMESTAMP = new Date().format("yyyyMMdd_HHmm")
 
 // reusable functions
-def defaultErrorHandler(message, e) {
-  echo "==== ERROR ===="
-  echo message
-  echo "==== CURRENT DIR ===="
-  sh "pwd"
-  echo "==== DIR CONTENT ===="
-  sh "ls -lh ."
-  echo "==== STACK TRACE CONTENT ===="
-  throw e
+def restartDockerDaemon() {
+  echo "==== RESTARTING DOCKER DAEMON ===="
+  sh "\$(service docker start && sleep 15) || true"
+  sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
+  echo "==== DOCKER DAEMON RESTART COMPLETE===="
+}
+
+def dockerRegistryLogin(registryCredentialsId) {
+  // login docker hub
+  withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: registryCredentialsId, usernameVariable: 'REGISTRY_USERNAME', passwordVariable: 'REGISTRY_PASSWORD']]) {
+    sh "docker login -u ${env.REGISTRY_USERNAME} -p ${env.REGISTRY_PASSWORD}"
+  }
+}
+
+def dockerBuildAndPush(arch, image) {
+  dir("images/${image}/arch/${arch}") {
+    echo "==== BUILDING DOCKER IMAGE: ${image} for ARCHITECTURE: ${arch} ===="
+    sh "./docker_build.sh"
+
+    echo "==== PUSHING IMAGE TO REGISTRY: ${image} for ARCHITECTURE: ${arch} ===="
+    sh "./docker_push.sh"
+  }
 }
 
 catchError {
@@ -41,6 +54,17 @@ catchError {
   stage("Build") {
 
     final ARCH_x86_64 = "x86_64"
+    final ARCH_x86_64_IMAGES = [
+        "openssh-client",
+        "openjdk-7-jdk",
+        "openjdk-8-jdk",
+        "jenkins",
+        "jenkins-docker",
+        "frontend-dev",
+        "frontend-build",
+        "backend-dev",
+        "backend-build"
+    ]
 
     // parallel build for different architectures
     parallel "Images: ${ARCH_x86_64}": {
@@ -53,38 +77,17 @@ catchError {
         unstash "sources"
 
         // restart docker environment
-        sh "\$(service docker start && sleep 15) || true"
-        sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
+        restartDockerDaemon()
 
-        // login docker hub
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: REGISTRY_CREDENTIALS_ID, usernameVariable: 'REGISTRY_USERNAME', passwordVariable: 'REGISTRY_PASSWORD']]) {
-          sh "docker login -u ${env.REGISTRY_USERNAME} -p ${env.REGISTRY_PASSWORD}"
-        }
-
-        // define images array
-        final images = [
-            "openssh-client",
-            "openjdk-7-jdk",
-            "openjdk-8-jdk",
-            "jenkins",
-            "jenkins-docker",
-            "frontend-dev",
-            "frontend-build",
-            "backend-dev",
-            "backend-build"
-        ]
+        // login docker registry
+        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
 
         // build each image
-        for (def image : images) {
-          dir("images/${image}/arch/${ARCH_x86_64}") {
-            sh "./docker_build.sh"
-            sh "./docker_push.sh"
-          }
+        for (def image : ARCH_x86_64_IMAGES) {
+          dockerBuildAndPush(ARCH_x86_64, image)
         }
-
       }
     }
-
   }
 
 }
