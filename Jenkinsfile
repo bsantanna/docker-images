@@ -57,7 +57,7 @@ def dockerManifestPublish(image, registryCredentialsId) {
 
     // publish using docker-manifest-publisher image
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: registryCredentialsId, usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
-      sh "docker run -it --rm " +
+      sh "docker run -i --rm " +
           " -e DOCKER_REGISTRY_USERNAME=${env.DOCKER_REGISTRY_USERNAME} " +
           " -e DOCKER_REGISTRY_PASSWORD=${env.DOCKER_REGISTRY_PASSWORD} " +
           " -v \$(pwd):/opt/workspace/ bsantanna/docker-manifest-publisher /opt/workspace/${image}.yml"
