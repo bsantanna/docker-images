@@ -1,15 +1,15 @@
 # based on https://github.com/dperson/smokeping
 FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2017-10-25
+ENV CREATED_AT 2017-10-25
+ENV REFRESHED_AT 2018-08-19
+ENV DEBIAN_FRONTEND noninteractive
 
 # Install lighttpd and smokeping
-RUN export DEBIAN_FRONTEND='noninteractive' && \
-    apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends ca-certificates curl dnsutils \
-                echoping fonts-dejavu-core lighttpd procps smokeping ssmtp \
-                $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
-    apt-get clean
+RUN apt-get update -q && \
+    apt-get install -qqy --no-install-recommends ca-certificates curl dnsutils echoping fonts-dejavu-core lighttpd procps smokeping ssmtp $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN echo '+ to = |/usr/bin/smokeping-alert\n' \
                 >>/etc/smokeping/config.d/Alert && \

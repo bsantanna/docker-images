@@ -1,8 +1,13 @@
 FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2017-05-15
+ENV CREATED_AT 2017-05-15
+ENV REFRESHED_AT 2018-08-19
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update -qq && apt-get install -qqy samba expect rpcbind
+RUN apt-get update -q && \
+    apt-get install -yqq samba expect rpcbind && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD scripts /scripts
 ONBUILD ADD config/ /config

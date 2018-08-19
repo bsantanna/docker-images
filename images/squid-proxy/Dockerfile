@@ -1,15 +1,17 @@
 FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV REFRESHED_AT 2017-11-09
+ENV CREATED_AT 2017-11-09
+ENV REFRESHED_AT 2018-08-19
+ENV DEBIAN_FRONTEND noninteractive
 
 ENV SQUID_CACHE_DIR=/var/spool/squid3 \
     SQUID_LOG_DIR=/var/log/squid3 \
     SQUID_USER=proxy
 
-RUN export DEBIAN_FRONTEND='noninteractive' && \
-    apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends ca-certificates squid  && \
-    apt-get clean
+RUN apt-get update -q && \
+    apt-get install -yqq --no-install-recommends ca-certificates squid  && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ONBUILD ADD config/squid.conf /etc/squid3/squid.conf
 
