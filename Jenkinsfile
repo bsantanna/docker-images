@@ -60,7 +60,7 @@ def dockerManifestPublish(image, registryCredentialsId) {
       sh "docker run -it --rm " +
           " -e DOCKER_REGISTRY_USERNAME=${env.DOCKER_REGISTRY_USERNAME} " +
           " -e DOCKER_REGISTRY_PASSWORD=${env.DOCKER_REGISTRY_PASSWORD} " +
-          " -v \$(pwd):/opt/workspace/ bsantanna/docker-manifest-publisher-x86_64 /opt/workspace/${image}.yml"
+          " -v \$(pwd):/opt/workspace/ bsantanna/docker-manifest-publisher /opt/workspace/${image}.yml"
     }
 
   }
