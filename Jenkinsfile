@@ -55,6 +55,7 @@ catchError {
 
     final ARCH_x86_64 = "x86_64"
     final ARCH_x86_64_IMAGES = [
+        "docker-manifest-publisher",
         "ddclient",
         "openssh-client",
         "openjdk-7-jdk",
