@@ -21,6 +21,7 @@ final DOCKER_IMAGES = [
     "jenkins-docker",
     "jenkins-docker-agent",
     "jenkins-docker-jnlp-agent",
+    "jenkins-docker-sshd-agent",
     "maven-build",
     "nfs",
     "nginx-ssl-proxy",
