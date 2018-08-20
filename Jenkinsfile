@@ -19,6 +19,7 @@ final DOCKER_IMAGES = [
     "java-dev",
     "jenkins",
     "jenkins-docker",
+    "jenkins-docker-agent",
     "jenkins-docker-jnlp-agent",
     "maven-build",
     "nfs",
