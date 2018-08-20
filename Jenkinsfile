@@ -107,18 +107,19 @@ catchError {
         dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
 
         // build each image
-        for (def image : DOCKER_IMAGES) {
+        for (String image : DOCKER_IMAGES) {
           dockerBuildAndPush(ARCH_x86_64, image)
         }
 
       }
     }
+
   }
 
   stage("Publish") {
     node(ARCH_x86_64) {
       // publish each image
-      for (def image : DOCKER_IMAGES) {
+      for (String image : DOCKER_IMAGES) {
         dockerManifestPublish(image, REGISTRY_CREDENTIALS_ID)
       }
     }
