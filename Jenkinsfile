@@ -9,7 +9,8 @@ final ORIGIN_GIT_BRANCH = "2.x"
 final REGISTRY_CREDENTIALS_ID = "dockerhub_credentials"
 
 // build vars
-final ARCH_x86_64 = "x86_64"
+final ARCH_AMD64 = "x86_64"
+final ARCH_ARM = "armhf"
 final DOCKER_IMAGES = [
     "docker-manifest-publisher",
     "ddclient",
@@ -33,14 +34,35 @@ final DOCKER_IMAGES = [
     "smokeping",
     "squid-proxy"
 ]
-final TIMESTAMP = new Date().format("yyyyMMdd_HHmm")
 
 // reusable functions
-def restartDockerDaemon() {
-  echo "==== RESTARTING DOCKER DAEMON ===="
-  sh "\$(service docker start && sleep 15) || true"
-  sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
-  echo "==== DOCKER DAEMON RESTART COMPLETE===="
+def build(credentialsId, arch, images) {
+  // cleanup workspace
+  deleteDir()
+
+  // unstash
+  unstash "sources"
+
+  // restart docker environment
+  dockerDaemonRestart()
+
+  // login docker registry
+  dockerRegistryLogin(credentialsId)
+
+  // filter image list
+  Set<String> filteredImages = new HashSet<>()
+  for (String image : images) {
+    def archExists = fileExists "images/${image}/arch/${arch}"
+    if (archExists) {
+      filteredImages.add(image)
+    }
+  }
+
+  // build each image
+  for (String image : filteredImages) {
+    dockerBuildAndPush(arch, image)
+  }
+
 }
 
 def dockerBuildAndPush(arch, image) {
@@ -51,6 +73,13 @@ def dockerBuildAndPush(arch, image) {
     echo "==== PUSHING IMAGE TO REGISTRY: ${image} for ARCHITECTURE: ${arch} ===="
     sh "./docker_push.sh"
   }
+}
+
+def dockerDaemonRestart() {
+  echo "==== RESTARTING DOCKER DAEMON ===="
+  sh "\$(service docker start && sleep 15) || true"
+  sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
+  echo "==== DOCKER DAEMON RESTART COMPLETE===="
 }
 
 def dockerManifestPublish(image, registryCredentialsId) {
@@ -93,33 +122,20 @@ catchError {
   stage("Build") {
 
     // parallel build for different architectures
-    parallel "Images: ${ARCH_x86_64}": {
-      node(ARCH_x86_64) {
-
-        // cleanup workspace
-        deleteDir()
-
-        // unstash
-        unstash "sources"
-
-        // restart docker environment
-        restartDockerDaemon()
-
-        // login docker registry
-        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
-
-        // build each image
-        for (String image : DOCKER_IMAGES) {
-          dockerBuildAndPush(ARCH_x86_64, image)
-        }
-
+    parallel "${ARCH_AMD64}": {
+      node(ARCH_AMD64) {
+        build(REGISTRY_CREDENTIALS_ID, ARCH_AMD64, DOCKER_IMAGES)
+      }
+    }, "${ARCH_ARM}": {
+      node(ARCH_ARM) {
+        build(REGISTRY_CREDENTIALS_ID, ARCH_ARM, DOCKER_IMAGES)
       }
     }
 
   }
 
   stage("Publish") {
-    node(ARCH_x86_64) {
+    node(ARCH_AMD64) {
       // publish each image
       for (String image : DOCKER_IMAGES) {
         dockerManifestPublish(image, REGISTRY_CREDENTIALS_ID)
