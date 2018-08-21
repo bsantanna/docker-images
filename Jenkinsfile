@@ -50,7 +50,7 @@ def build(credentialsId, arch, images) {
   dockerRegistryLogin(credentialsId)
 
   // filter image list
-  Set<String> filteredImages = new HashSet<>()
+  List<String> filteredImages = []
   for (String image : images) {
     def archExists = fileExists "images/${image}/arch/${arch}"
     if (archExists) {
