@@ -47,7 +47,7 @@ final IMAGES_CATEGORIES = [
 ]
 
 // reusable functions
-def build(credentialsId, arch, category, images) {
+def build(arch, category, images) {
   // cleanup workspace
   deleteDir()
 
@@ -56,9 +56,6 @@ def build(credentialsId, arch, category, images) {
 
   // restart docker environment
   dockerDaemonRestart()
-
-  // login docker registry
-  dockerRegistryLogin(credentialsId)
 
   // filter image list
   List<String> filteredImages = []
@@ -136,14 +133,24 @@ catchError {
     // parallel build for different architectures
     parallel "${ARCH_AMD64}": {
       node(ARCH_AMD64) {
+        // login docker registry
+        dockerRegistryLogin(credentialsId)
+
+        // build
         for (String category : IMAGES_CATEGORIES.keySet()) {
-          build(REGISTRY_CREDENTIALS_ID, ARCH_AMD64, category, IMAGES_CATEGORIES[category])
+          build(ARCH_AMD64, category, IMAGES_CATEGORIES[category])
         }
 
       }
     }, "${ARCH_ARM}": {
       node(ARCH_ARM) {
-        build(REGISTRY_CREDENTIALS_ID, ARCH_ARM, category, IMAGES_CATEGORIES[category])
+        // login docker registry
+        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+
+        // build
+        for (String category : IMAGES_CATEGORIES.keySet()) {
+          build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
+        }
       }
     }
 
