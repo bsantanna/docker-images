@@ -33,8 +33,7 @@ final DOCKER_IMAGES = [
     "rdesktop",
     "smb",
     "smokeping",
-    "squid-proxy",
-    "ubuntu-multi"
+    "squid-proxy"
 ]
 
 // reusable functions
