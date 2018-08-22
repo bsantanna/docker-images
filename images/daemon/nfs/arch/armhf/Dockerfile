@@ -18,7 +18,7 @@ RUN cd /src/unfs3 && \
     make && \
     make install
 
-ADD scripts/ /scripts
+ADD scripts /scripts
 ONBUILD ADD config/ /config
 ONBUILD RUN mv /config/exports /etc/exports
 

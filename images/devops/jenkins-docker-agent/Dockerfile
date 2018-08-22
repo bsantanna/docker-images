@@ -16,7 +16,7 @@ RUN curl -sSL get.docker.com | sh
 
 ONBUILD ADD ./jenkins-agent.sh /usr/local/bin/jenkins-agent
 ONBUILD RUN chmod +x /usr/local/bin/jenkins-agent
-ADD ./jenkins.sh /usr/local/bin/jenkins
+ADD jenkins.sh /usr/local/bin/jenkins
 RUN chmod +x /usr/local/bin/jenkins
 
 ARG VERSION=3.20

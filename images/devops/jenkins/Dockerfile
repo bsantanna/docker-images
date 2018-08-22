@@ -17,7 +17,7 @@ RUN curl -sf -o /opt/jenkins/jenkins.war -L http://mirrors.jenkins.io/war-stable
 
 RUN for plugin in scm-api git-client git ; do curl -sf -o $JENKINS_HOME/plugins/${plugin}.hpi -L http://mirrors.jenkins.io/plugins/${plugin}/latest/${plugin}.hpi ; done
 
-ADD ./jenkins.sh /usr/local/bin/jenkins.sh
+ADD jenkins.sh /usr/local/bin/jenkins.sh
 RUN chmod +x /usr/local/bin/jenkins.sh
 
 EXPOSE 8080

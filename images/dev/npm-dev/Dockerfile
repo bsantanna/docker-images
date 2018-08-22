@@ -16,7 +16,7 @@ RUN npm install -g grunt-cli gulp bower foundation-cli@2.2.1
 RUN gem install compass
 
 RUN mkdir /opt/frontend-dev
-ONBUILD ADD ./entrypoint.sh /opt/frontend-dev/entrypoint.sh
+ONBUILD ADD entrypoint.sh /opt/frontend-dev/entrypoint.sh
 ONBUILD RUN chmod +x /opt/frontend-dev/entrypoint.sh
 
 RUN mkdir ${WORKSPACE_DIR}

@@ -11,33 +11,50 @@ final REGISTRY_CREDENTIALS_ID = "dockerhub_credentials"
 // build vars
 final ARCH_AMD64 = "x86_64"
 final ARCH_ARM = "armhf"
-final DOCKER_IMAGES = [
+
+// images categories
+final IMAGES_CATEGORIES = [:]
+
+// clients
+IMAGES_CATEGORIES["clients"] = [
     "chromium-kiosk",
-    "docker-manifest-publisher",
-    "ddclient",
     "openssh-client",
-    "openjdk-7-jdk",
-    "openjdk-8-jdk",
-    "java-dev",
-    "jenkins",
-    "jenkins-docker",
-    "jenkins-docker-agent",
-    "jenkins-docker-jnlp-agent",
-    "jenkins-docker-sshd-agent",
-    "maven-build",
+    "rdesktop"
+]
+
+// daemon
+IMAGES_CATEGORIES["daemon"] = [
+    "ddclient",
     "nfs",
     "nginx-ssl-proxy",
     "nginx-static",
-    "npm-dev",
-    "npm-build",
-    "rdesktop",
     "smb",
     "smokeping",
     "squid-proxy"
 ]
 
+// dev
+IMAGES_CATEGORIES["dev"] = [
+    "openjdk-7-jdk",
+    "openjdk-8-jdk",
+    "java-dev",
+    "maven-build",
+    "npm-dev",
+    "npm-build"
+]
+
+// devops
+IMAGES_CATEGORIES["devops"] = [
+    "docker-manifest-publisher",
+    "jenkins",
+    "jenkins-docker",
+    "jenkins-docker-agent",
+    "jenkins-docker-jnlp-agent",
+    "jenkins-docker-sshd-agent"
+]
+
 // reusable functions
-def build(credentialsId, arch, images) {
+def build(credentialsId, arch, category, images) {
   // cleanup workspace
   deleteDir()
 
@@ -53,7 +70,7 @@ def build(credentialsId, arch, images) {
   // filter image list
   List<String> filteredImages = []
   for (String image : images) {
-    def archExists = fileExists "images/${image}/arch/${arch}"
+    def archExists = fileExists "images/${category}/${image}/arch/${arch}"
     if (archExists) {
       filteredImages.add(image)
     }
@@ -61,13 +78,13 @@ def build(credentialsId, arch, images) {
 
   // build each image
   for (String image : filteredImages) {
-    dockerBuildAndPush(arch, image)
+    dockerBuildAndPush(arch, category, image)
   }
 
 }
 
-def dockerBuildAndPush(arch, image) {
-  dir("images/${image}/arch/${arch}") {
+def dockerBuildAndPush(arch, category, image) {
+  dir("images/${category}/${image}/arch/${arch}") {
     echo "==== BUILDING DOCKER IMAGE: ${image} for ARCHITECTURE: ${arch} ===="
     sh "./docker_build.sh"
 
@@ -125,11 +142,14 @@ catchError {
     // parallel build for different architectures
     parallel "${ARCH_AMD64}": {
       node(ARCH_AMD64) {
-        build(REGISTRY_CREDENTIALS_ID, ARCH_AMD64, DOCKER_IMAGES)
+        for (String category : IMAGES_CATEGORIES.keySet()) {
+          build(REGISTRY_CREDENTIALS_ID, ARCH_AMD64, category, IMAGES_CATEGORIES[category])
+        }
+
       }
     }, "${ARCH_ARM}": {
       node(ARCH_ARM) {
-        build(REGISTRY_CREDENTIALS_ID, ARCH_ARM, DOCKER_IMAGES)
+        build(REGISTRY_CREDENTIALS_ID, ARCH_ARM, category, IMAGES_CATEGORIES[category])
       }
     }
 

@@ -9,7 +9,7 @@ RUN apt-get update -q && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD scripts/ /scripts
+ADD scripts /scripts
 ONBUILD ADD config/ /config
 ONBUILD RUN mv /config/exports /etc/exports
 

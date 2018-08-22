@@ -5,7 +5,7 @@ ENV CREATED_AT 2016-12-29
 ENV REFRESHED_AT 2018-08-18
 ENV DEBIAN_FRONTEND noninteractive
 
-ADD ./entrypoint.sh /opt/npm-dev/entrypoint.sh
+ADD entrypoint.sh /opt/npm-dev/entrypoint.sh
 RUN chmod +x /opt/npm-dev/entrypoint.sh
 
 ENTRYPOINT ["/opt/npm-dev/entrypoint.sh"]
