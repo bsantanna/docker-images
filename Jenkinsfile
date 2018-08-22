@@ -136,7 +136,7 @@ catchError {
     parallel "${ARCH_AMD64}": {
       node(ARCH_AMD64) {
         // login docker registry
-        dockerRegistryLogin(credentialsId)
+        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
 
         // build
         for (String category : IMAGES_CATEGORIES.keySet()) {
