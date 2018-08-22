@@ -67,8 +67,10 @@ def build(arch, category, images) {
   }
 
   // build each image
-  for (String image : filteredImages) {
-    dockerBuildAndPush(arch, category, image)
+  if (!filteredImages.isEmpty()) {
+    for (String image : filteredImages) {
+      dockerBuildAndPush(arch, category, image)
+    }
   }
 
 }
