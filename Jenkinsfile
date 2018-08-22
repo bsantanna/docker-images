@@ -12,6 +12,7 @@ final REGISTRY_CREDENTIALS_ID = "dockerhub_credentials"
 final ARCH_AMD64 = "x86_64"
 final ARCH_ARM = "armhf"
 final DOCKER_IMAGES = [
+    "chromium-kiosk",
     "docker-manifest-publisher",
     "ddclient",
     "openssh-client",
@@ -32,7 +33,8 @@ final DOCKER_IMAGES = [
     "rdesktop",
     "smb",
     "smokeping",
-    "squid-proxy"
+    "squid-proxy",
+    "ubuntu-multi"
 ]
 
 // reusable functions
