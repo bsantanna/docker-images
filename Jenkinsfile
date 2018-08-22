@@ -54,9 +54,6 @@ def build(arch, category, images) {
   // unstash
   unstash "sources"
 
-  // restart docker environment
-  dockerDaemonRestart()
-
   // filter image list
   List<String> filteredImages = []
   for (String image : images) {
@@ -135,6 +132,9 @@ catchError {
     // parallel build for different architectures
     parallel "${ARCH_AMD64}": {
       node(ARCH_AMD64) {
+        // restart docker environment
+        dockerDaemonRestart()
+
         // login docker registry
         dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
 
@@ -146,6 +146,9 @@ catchError {
       }
     }, "${ARCH_ARM}": {
       node(ARCH_ARM) {
+        // restart docker environment
+        dockerDaemonRestart()
+
         // login docker registry
         dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
 
