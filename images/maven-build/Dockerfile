@@ -8,8 +8,4 @@ ENV DEBIAN_FRONTEND noninteractive
 # defined in bsantanna/java-dev
 ADD config/settings.xml /etc/maven/settings.xml
 
-ADD ./entrypoint.sh /opt/java-dev/entrypoint.sh
-RUN chmod +x /opt/java-dev/entrypoint.sh
-
-ENTRYPOINT ["/opt/java-dev/entrypoint.sh"]
 
