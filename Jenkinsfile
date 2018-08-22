@@ -13,44 +13,37 @@ final ARCH_AMD64 = "x86_64"
 final ARCH_ARM = "armhf"
 
 // images categories
-final IMAGES_CATEGORIES = [:]
-
-// clients
-IMAGES_CATEGORIES["clients"] = [
-    "chromium-kiosk",
-    "openssh-client",
-    "rdesktop"
-]
-
-// daemon
-IMAGES_CATEGORIES["daemon"] = [
-    "ddclient",
-    "nfs",
-    "nginx-ssl-proxy",
-    "nginx-static",
-    "smb",
-    "smokeping",
-    "squid-proxy"
-]
-
-// dev
-IMAGES_CATEGORIES["dev"] = [
-    "openjdk-7-jdk",
-    "openjdk-8-jdk",
-    "java-dev",
-    "maven-build",
-    "npm-dev",
-    "npm-build"
-]
-
-// devops
-IMAGES_CATEGORIES["devops"] = [
-    "docker-manifest-publisher",
-    "jenkins",
-    "jenkins-docker",
-    "jenkins-docker-agent",
-    "jenkins-docker-jnlp-agent",
-    "jenkins-docker-sshd-agent"
+final IMAGES_CATEGORIES = [
+    "clients": [
+        "chromium-kiosk",
+        "openssh-client",
+        "rdesktop"
+    ],
+    "daemon" : [
+        "ddclient",
+        "nfs",
+        "nginx-ssl-proxy",
+        "nginx-static",
+        "smb",
+        "smokeping",
+        "squid-proxy"
+    ],
+    "dev"    : [
+        "openjdk-7-jdk",
+        "openjdk-8-jdk",
+        "java-dev",
+        "maven-build",
+        "npm-dev",
+        "npm-build"
+    ],
+    "devops" : [
+        "docker-manifest-publisher",
+        "jenkins",
+        "jenkins-docker",
+        "jenkins-docker-agent",
+        "jenkins-docker-jnlp-agent",
+        "jenkins-docker-sshd-agent"
+    ]
 ]
 
 // reusable functions
