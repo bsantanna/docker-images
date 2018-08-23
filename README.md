@@ -1,7 +1,7 @@
 # bsantanna/containers
 
 - [Introduction](#introduction)
-  - [What's this?](#what's-this?)
+  - [This project](#this-project)
   - [Author](#author)
 
 
@@ -10,7 +10,7 @@
 Welcome to bsantanna/containers repository!
 Here you'll find several different [Dockerfiles](https://docs.docker.com/engine/reference/builder/) that I build during the last few years.
 
-## What's this?
+## This project
 
 This project is a collection of base-images used in [apps development with Docker](https://docs.docker.com/develop/), classified by similarity and/or purpose.
 A [Jenkins Pipeline](https://jenkins.io/doc/book/pipeline/) daily builds all images and uploads them to [DockerHub](https://hub.docker.com/u/bsantanna/).
