@@ -1,8 +1,8 @@
 # bsantanna/containers
 
 - [Introduction](#introduction)
-  - [This project](#this-project)
-  - [Author](#author)
+  - [About this project](#about-this-project)
+  - [About the author](#about-the-author)
 
 
 # Introduction
@@ -10,13 +10,13 @@
 Welcome to bsantanna/containers repository!
 Here you'll find several different [Dockerfiles](https://docs.docker.com/engine/reference/builder/) that I build during the last few years.
 
-## This project
+## About this project
 
 This project is a collection of base-images used in [apps development with Docker](https://docs.docker.com/develop/), classified by similarity and/or purpose.
 A [Jenkins Pipeline](https://jenkins.io/doc/book/pipeline/) daily builds all images and uploads them to [DockerHub](https://hub.docker.com/u/bsantanna/).
 Several images were designed with [IoT](https://en.wikipedia.org/wiki/Internet_of_things) as goal and support computers with [ARM architecture](https://en.wikipedia.org/wiki/ARM_architecture) (such as [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi)).
 
-## Author
+## About the author
 
 This is my contribution [OSS](https://en.wikipedia.org/wiki/Open-source_software) community.
 [I'm a geek](http://linkedin.com/in/brnsantanna/) born in Brazil and living in The Netherlands, work coding for automated container terminals in naval logistics industry.
