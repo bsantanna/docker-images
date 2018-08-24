@@ -1,5 +1,9 @@
 image: bsantanna/chromium-kiosk:latest
 manifests:
+  - image: bsantanna/chromium-kiosk-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
   - image: bsantanna/chromium-kiosk-armhf:latest
     platform:
       architecture: arm
