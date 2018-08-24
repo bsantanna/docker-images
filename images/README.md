@@ -1,6 +1,6 @@
 # Categories
 
-A [categoty](images/) is an abstraction layer, in this context; it is a general end-goal for a set of images.
+A [category](images/) is an abstraction layer, in this context; it is a general end-goal for a set of images.
 
  - **base**    : source from which all images are based on, currently this directory holds a manifest which points to [ubuntu:xenial](https://hub.docker.com/_/ubuntu/).
  - **clients** : client software which connects to some server.
