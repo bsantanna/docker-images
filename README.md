@@ -40,7 +40,7 @@ Project internal directory arrangement has the following general structure:
          
 ## Categories
 
-A category is an abstraction layer, in this context; it is a general end-goal for a set of images.
+A [categoty](images/README.md) is an abstraction layer, in this context; it is a general end-goal for a set of images.
 
  - **base**    : source from which all images are based on, currently this directory holds a manifest which points to [ubuntu:xenial](https://hub.docker.com/_/ubuntu/).
  - **clients** : client software which connects to some server.
