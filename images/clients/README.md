@@ -10,7 +10,7 @@ Client applications which connects to a remote host in the network.
 ### Description
 This Docker image is used for displaying [single page applications](https://en.wikipedia.org/wiki/Single-page_application) in a controlled environment such as a [interactive kiosks](https://en.wikipedia.org/wiki/Interactive_kiosk) or purpose specific [set-top boxes](https://en.wikipedia.org/wiki/Set-top_box). 
 It uses [Chromium Browser](https://www.chromium.org/Home) distribution in kiosk mode.
-Configuration and examples can be found in image [README file](chromium-kiosk/README.md).
+Configuration and examples can be found in image [README file](chromium-kiosk/).
 
 ---
 
@@ -24,10 +24,9 @@ From the [official project page](https://sourceforge.net/p/ddclient/wiki/Home/):
 
 > DDclient is a Perl client used to update dynamic DNS entries for accounts on Dynamic DNS Network Service Provider.
 
-Configuration and examples can be found in image [README file](ddclient/README.md).
+Configuration and examples can be found in image [README file](ddclient/).
  
 ---
-
 
 ## [openssh-client](openssh-client/)
 
@@ -46,4 +45,4 @@ This image is used also as a base image to daemons or build agents which request
 ### Description
 This Docker image uses [rdesktop](https://packages.ubuntu.com/xenial/rdesktop) package.
 This image is used in [thin clients](https://en.wikipedia.org/wiki/Thin_client) to connect to a remote [Windows Remote Desktop Services (RDS)](https://en.wikipedia.org/wiki/Remote_Desktop_Services).
-Configuration and examples can be found in image [README file](rdesktop/README.md).
+Configuration and examples can be found in image [README file](rdesktop/).
