@@ -40,8 +40,7 @@ Configuration and examples can be found in image [README file](nginx-ssl-proxy/)
  
 ### Description
 his Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
-This image uses [NGINX](http://nginx.com) to serve static files through http.
+This image uses [NGINX](http://nginx.com) to serve static content through HTTP.
 Configuration and examples can be found in image [README file](nginx-static/).
 
 ---
-
