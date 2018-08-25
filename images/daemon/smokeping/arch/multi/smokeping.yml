@@ -1,6 +1,0 @@
-image: bsantanna/smokeping:latest
-manifests:
-  - image: bsantanna/smokeping-x86_64:latest
-    platform:
-      architecture: amd64
-      os: linux

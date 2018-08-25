@@ -4,3 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
+  - image: bsantanna/squid-proxy-armhf:latest
+    platform:
+      architecture: armhf
+      os: linux
