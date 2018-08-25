@@ -4,8 +4,6 @@ ENV CREATED_AT 2017-05-22
 ENV REFRESHED_AT 2018-08-19
 ENV DEBIAN_FRONTEND noninteractive
 
-# based on https://github.com/dougborg/rpi-chrometainer
-
 RUN apt-get update && \
     apt-get install -yqq ca-certificates libexif-dev libpango1.0-0 libv4l-0 chromium-browser && \
     apt-get clean && \
