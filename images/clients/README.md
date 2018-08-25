@@ -14,6 +14,16 @@ Configuration and examples can be found in image [README file](chromium-kiosk/RE
 
 ---
 
+## [ddclient](ddclient/)
+
+ - Published image: [bsantanna/ddclient](https://hub.docker.com/r/bsantanna/ddclient/)
+
+### Description
+--  
+ 
+---
+
+
 ## [openssh-client](openssh-client/)
 
  - Published image: [bsantanna/openssh-client](https://hub.docker.com/r/bsantanna/openssh-client/)

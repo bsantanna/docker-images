@@ -16,11 +16,11 @@ final ARCH_ARM = "armhf"
 final IMAGES_CATEGORIES = [
     "clients": [
         "chromium-kiosk",
+        "ddclient",
         "openssh-client",
         "rdesktop"
     ],
     "daemon" : [
-        "ddclient",
         "nfs",
         "nginx-ssl-proxy",
         "nginx-static",

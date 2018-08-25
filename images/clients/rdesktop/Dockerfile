@@ -5,8 +5,6 @@ ENV CREATED_AT 2017-10-11
 ENV REFRESHED_AT 2018-08-19
 ENV DEBIAN_FRONTEND noninteractive
 
-# based on https://github.com/bsantanna/rpi-chrometainer
-
 RUN apt-get update -q && \
     apt-get install -yqq rdesktop && \
     apt-get clean && \
