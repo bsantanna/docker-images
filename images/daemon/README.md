@@ -5,7 +5,7 @@ Service oriented software which performs some work or serves some content.
 
 ## [nfs](nfs/)
 
- - Published image: [bsantanna/nfs](https://hub.docker.com/r/bsantanna/nds/)
+ - Published image: [bsantanna/nfs](https://hub.docker.com/r/bsantanna/nfs/)
 
 ### Description
 
@@ -21,6 +21,5 @@ From the [official project page](http://unfs3.sourceforge.net):
 
 >UNFS3 is a user-space implementation of the NFSv3 server specification. It provides a daemon for the MOUNT and NFS protocols, which are used by NFS clients for accessing files on the server. 
 
-
-
 ---
+
