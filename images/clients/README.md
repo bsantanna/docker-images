@@ -19,7 +19,12 @@ Configuration and examples can be found in image [README file](chromium-kiosk/RE
  - Published image: [bsantanna/ddclient](https://hub.docker.com/r/bsantanna/ddclient/)
 
 ### Description
---  
+This Docker image uses [ddclient](https://packages.ubuntu.com/xenial/ddclient) package.
+From the [official project page](https://sourceforge.net/p/ddclient/wiki/Home/):
+
+> DDclient is a Perl client used to update dynamic DNS entries for accounts on Dynamic DNS Network Service Provider.
+
+Configuration and examples can be found in image [README file](ddclient/README.md).
  
 ---
 

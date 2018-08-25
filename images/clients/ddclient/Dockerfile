@@ -11,7 +11,7 @@ RUN apt-get update -qq && \
 
 ONBUILD ADD config/ddclient.conf /etc/ddclient.conf
 
-ADD entrypoint.sh /sbin/entrypoint
-RUN chmod +x /sbin/entrypoint
+ADD entrypoint.sh /bin/entrypoint
+RUN chmod +x /bin/entrypoint
 
-ENTRYPOINT ["/sbin/entrypoint"]
+ENTRYPOINT ["bash", "/bin/entrypoint"]

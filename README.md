@@ -17,6 +17,8 @@ This project is a collection of base-images used in [apps development with Docke
 A [Jenkins Pipeline](https://jenkins.io/doc/book/pipeline/) daily builds all images and uploads them to [DockerHub](https://hub.docker.com/u/bsantanna/).
 Several images were designed with [IoT](https://en.wikipedia.org/wiki/Internet_of_things) as goal and support computers with [ARM architecture](https://en.wikipedia.org/wiki/ARM_architecture) (such as [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi)), in fact these base-images are published to [DockerHub](https://hub.docker.com/u/bsantanna/) using [Manifests](https://docs.docker.com/registry/spec/manifest-v2-2/), which makes some of them [cross-platform](https://en.wikipedia.org/wiki/Cross-platform).
 
+In fact, major part of the Docker images in this repository are part of another [important personal project](https://medium.com/@brnsantanna/how-my-hobby-made-me-an-anonymous-hero-d63b0c711bec), and they are really doing well in that. (Rememb)
+
 ## Author
 
 This is my contribution [OSS](https://en.wikipedia.org/wiki/Open-source_software) community.
