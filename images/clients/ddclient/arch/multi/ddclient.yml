@@ -4,3 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
+  - image: bsantanna/ddclient-armhf:latest
+    platform:
+      architecture: arm
+      os: linux
