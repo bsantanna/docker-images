@@ -25,6 +25,8 @@ In my latest personal projects I frequently built some images and decided to hos
 I'm an early adopter of [Docker](https://www.docker.com), seeking more in-depth and practical use I decided to read an excellent book: [The Docker Book](https://dockerbook.com), lots of examples are directly borrowed from it and adapted to allow practical study and/or implementation of software projects.  
 This repository was built after countless hours of (out-of-office / hobby project / coding for fun). 
 
+---
+
 # Project directory structure
 
 Project internal directory arrangement has the following general structure:
