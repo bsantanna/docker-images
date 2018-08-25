@@ -25,7 +25,6 @@ final IMAGES_CATEGORIES = [
         "nginx-ssl-proxy",
         "nginx-static",
         "smb",
-        "smokeping",
         "squid-proxy"
     ],
     "dev"    : [
