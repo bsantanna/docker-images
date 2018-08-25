@@ -6,5 +6,5 @@ manifests:
       os: linux
   - image: bsantanna/squid-proxy-armhf:latest
     platform:
-      architecture: armhf
+      architecture: arm
       os: linux
