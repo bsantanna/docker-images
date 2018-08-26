@@ -45,7 +45,7 @@ A [category](images/) in this context is a general end-goal for a set of images.
  
 ---
 
-## Author
+# Author
 
 This is my contribution [OSS](https://en.wikipedia.org/wiki/Open-source_software) community.
 [I'm a geek](http://linkedin.com/in/brnsantanna/) born in Brazil and living in The Netherlands, work coding for automated container terminals in naval logistics industry.
