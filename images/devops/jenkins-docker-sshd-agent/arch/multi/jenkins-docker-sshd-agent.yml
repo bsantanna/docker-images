@@ -1,6 +1,0 @@
-image: bsantanna/jenkins-docker-sshd-agent:latest
-manifests:
-  - image: bsantanna/jenkins-docker-sshd-agent-x86_64:latest
-    platform:
-      architecture: amd64
-      os: linux

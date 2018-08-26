@@ -40,8 +40,7 @@ final IMAGES_CATEGORIES = [
         "jenkins",
         "jenkins-docker",
         "jenkins-docker-agent",
-        "jenkins-docker-jnlp-agent",
-        "jenkins-docker-sshd-agent"
+        "jenkins-docker-jnlp-agent"
     ]
 ]
 
