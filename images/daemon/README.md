@@ -51,7 +51,7 @@ Configuration and examples can be found in image [README file](nginx-static/).
  - Published image: [bsantanna/smb](https://hub.docker.com/r/bsantanna/smb/)
  
 ### Description
-This Docker image uses [smb](https://packages.ubuntu.com/xenial/smb) package.
+This Docker image uses [samba](https://packages.ubuntu.com/xenial/samba) package.
 This is a base-image that uses [Samba](https://www.samba.org) to serve files in a Windows Network.
 Configuration and examples can be found in image [README file](smb/).
 
