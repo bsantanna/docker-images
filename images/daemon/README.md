@@ -28,8 +28,9 @@ From the [official project page](http://unfs3.sourceforge.net):
  - Published image: [bsantanna/nginx-ssl-proxy](https://hub.docker.com/r/bsantanna/nginx-ssl-proxy/)
  
 ### Description
-his Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
-This image is a base-image to containers implementing [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) using [SSL/TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) channel encryption.
+This Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
+This is a base-image that uses [NGINX](http://nginx.com) with [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) role. 
+It is a base for [SSL/TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection negotiation.
 Configuration and examples can be found in image [README file](nginx-ssl-proxy/).
 
 ---
@@ -39,8 +40,28 @@ Configuration and examples can be found in image [README file](nginx-ssl-proxy/)
  - Published image: [bsantanna/nginx-static](https://hub.docker.com/r/bsantanna/nginx-static/)
  
 ### Description
-his Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
+This Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
 This image uses [NGINX](http://nginx.com) to serve static content through HTTP.
 Configuration and examples can be found in image [README file](nginx-static/).
 
 ---
+
+## [smb](smb/)
+
+ - Published image: [bsantanna/smb](https://hub.docker.com/r/bsantanna/smb/)
+ 
+### Description
+This Docker image uses [smb](https://packages.ubuntu.com/xenial/smb) package.
+This is a base-image that uses [Samba](https://www.samba.org) to serve files in a Windows Network.
+Configuration and examples can be found in image [README file](smb/).
+
+---
+
+## [squid-proxy](squid-proxy/)
+
+ - Published image: [bsantanna/squid-proxy](https://hub.docker.com/r/bsantanna/squid-proxy/)
+ 
+### Description
+This Docker image uses [squid](https://packages.ubuntu.com/xenial/squid) package.
+This is a base-image that uses [Squid Cache](http://www.squid-cache.org) to proxy HTTP connections.
+Configuration and examples can be found in image [README file](squid-proxy/).
