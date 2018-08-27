@@ -5,7 +5,7 @@ ENV REFRESHED_AT 2018-08-19
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq && \
-    apt-get install -yqq maven && \
+    apt-get install -yqq curl git git-svn subversion maven && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
