@@ -1,4 +1,4 @@
-FROM bsantanna/openjdk-8-jdk
+FROM bsantanna/maven-build
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2018-08-20
 ENV DEBIAN_FRONTEND noninteractive
@@ -6,11 +6,6 @@ ENV JENKINS_HOME /opt/jenkins/data
 ENV WORKSPACE_DIR /opt/jenkins/data/workspace
 
 VOLUME /var/lib/docker
-
-RUN apt-get update -q && \
-    apt-get install -yqq curl git git-svn subversion maven && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -sSL get.docker.com | sh
 
