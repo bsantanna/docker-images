@@ -1,4 +1,4 @@
-# Categories
+## Docker image categories
 
 A category in this context is a general end-goal for a set of images. Categories are divided in the following directories:
 

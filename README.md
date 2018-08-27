@@ -2,8 +2,8 @@
 
 - [Introduction](#introduction)
   - [About this project](#about-this-project)
-- [Project directory structure](#project-directory-structure)
-  - [Categories](#categories)
+  - [Docker image categories](#docker-image-categories)
+  - [Project directory structure](#project-directory-structure)
 - [Author](#author)
 
 # Introduction
@@ -20,20 +20,7 @@ In fact, major part of the Docker images in this repository are part of another 
 
 ---
 
-# Project directory structure
-
-Project internal directory arrangement has the following general structure:
-
- - **images**         : Image root directory
-   - **category**     : General category which image belongs, criteria is ending goal / purpose of image.
-     - **image**      : Image context is base directory used in *[docker build](https://docs.docker.com/engine/reference/commandline/build/)* commands. Under normal circumstances [Dockerfile](https://docs.docker.com/engine/reference/builder/) is stored in this directory but this is not a rule, for exceptional cases the *[docker build](https://docs.docker.com/engine/reference/commandline/build/)* context can be also in some of nested architecture specific sub-directories.
-       - **arch**     : Architecture specific sub directories.
-         - **armhf**  : Images for [ARM architecture](https://en.wikipedia.org/wiki/ARM_architecture), are currently build and tested with [Raspberry Pi 3](https://en.wikipedia.org/wiki/Raspberry_Pi) (a 32-bit armv7 little cpu which reminds me the year of 1999, the days back I was downloading [Slackware](https://en.wikipedia.org/wiki/Slackware) [Linux](https://en.wikipedia.org/wiki/Linux) ISOs and testing them in my Pentium 100, great memories...)
-         - **x86_64** : Images for [x86-64 architecture](https://en.wikipedia.org/wiki/X86-64), which is used is desktop computers, laptops and servers.
-         - **multi**  : Manifest file directory.
-         
-         
-## Categories
+## Docker image categories
 
 A [category](images/) in this context is a general end-goal for a set of images. Categories are divided in the following directories:
 
@@ -45,7 +32,21 @@ A [category](images/) in this context is a general end-goal for a set of images.
  
 ---
 
-# Author
+## Project directory structure
+
+Project internal directory arrangement has the following general structure:
+
+ - **images**         : Image root directory
+   - **category**     : General category which image belongs, criteria is ending goal / purpose of image.
+     - **image**      : Image context is base directory used in *[docker build](https://docs.docker.com/engine/reference/commandline/build/)* commands. Under normal circumstances [Dockerfile](https://docs.docker.com/engine/reference/builder/) is stored in this directory but this is not a rule, for exceptional cases the *[docker build](https://docs.docker.com/engine/reference/commandline/build/)* context can be also in some of nested architecture specific sub-directories.
+       - **arch**     : Architecture specific sub directories.
+         - **armhf**  : Images for [ARM architecture](https://en.wikipedia.org/wiki/ARM_architecture), are currently build and tested with [Raspberry Pi 3](https://en.wikipedia.org/wiki/Raspberry_Pi) (a 32-bit armv7 little cpu which reminds me the year of 1999, the days back I was downloading [Slackware](https://en.wikipedia.org/wiki/Slackware) [Linux](https://en.wikipedia.org/wiki/Linux) ISOs and testing them in my Pentium 100, great memories...)
+         - **x86_64** : Images for [x86-64 architecture](https://en.wikipedia.org/wiki/X86-64), which is used is desktop computers, laptops and servers.
+         - **multi**  : Manifest file directory.
+         
+---
+
+## Author
 
 This is my contribution [OSS](https://en.wikipedia.org/wiki/Open-source_software) community.
 [I'm a geek](http://linkedin.com/in/brnsantanna/) born in Brazil and living in The Netherlands, work coding for automated container terminals in naval logistics industry.
