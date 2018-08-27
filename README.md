@@ -4,7 +4,7 @@
   - [About this project](#about-this-project)
   - [Docker image categories](#docker-image-categories)
   - [Project directory structure](#project-directory-structure)
-- [Author](#author)
+  - [Author](#author)
 
 # Introduction
 
