@@ -4,3 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
+  - image: bsantanna/openjdk-7-jdk-armhf:latest
+    platform:
+      architecture: arm
+      os: linux
