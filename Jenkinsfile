@@ -58,6 +58,8 @@ def build(arch, category, images) {
     def archExists = fileExists "images/${category}/${image}/arch/${arch}"
     if (archExists) {
       filteredImages.add(image)
+    }  else {
+      echo "==== NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch} ===="
     }
   }
 
@@ -72,10 +74,10 @@ def build(arch, category, images) {
 
 def dockerBuildAndPush(arch, category, image) {
   dir("images/${category}/${image}/arch/${arch}") {
-    echo "==== BUILDING DOCKER IMAGE: ${image} for ARCHITECTURE: ${arch} ===="
+    echo "==== BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch} ===="
     sh "./docker_build.sh"
 
-    echo "==== PUSHING IMAGE TO REGISTRY: ${image} for ARCHITECTURE: ${arch} ===="
+    echo "==== PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch} ===="
     sh "./docker_push.sh"
   }
 }
@@ -90,7 +92,7 @@ def dockerDaemonRestart() {
 def dockerManifestPublish(registryCredentialsId, category, images) {
   for (String image : images) {
     dir("images/${category}/${image}/arch/multi/") {
-      echo "==== PUBLISHING DOCKER IMAGE MANIFEST FOR: ${image} ===="
+      echo "==== PUBLISHING DOCKER IMAGE MANIFEST FOR ${image} ===="
 
       // publish using docker-manifest-publisher image
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: registryCredentialsId, usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
