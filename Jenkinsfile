@@ -28,6 +28,7 @@ final IMAGES_CATEGORIES = [
         "squid-proxy"
     ],
     "dev"    : [
+        "chef-dev",
         "openjdk-7-jdk",
         "openjdk-8-jdk",
         "java-dev",

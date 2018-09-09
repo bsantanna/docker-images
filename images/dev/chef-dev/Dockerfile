@@ -1,0 +1,22 @@
+FROM bsantanna/ubuntu-multi:16.04
+MAINTAINER Bruno Sant'Anna "bruno@btech.software"
+ENV CREATED_AT 2017-04-28
+ENV REFRESHED_AT 2018-09-08
+ENV DEBIAN_FRONTEND noninteractive
+ENV EDITOR=vim
+ENV CHEF_DIR /opt/chef
+#ENV TZ=America/Sao_Paulo
+ENV TZ=Europe/Amsterdam
+RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
+
+RUN mkdir ${CHEF_DIR}
+
+RUN apt-get update -qq && \
+    apt-get install -qqy chef vim && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN gem install chef-vault knife-windows --no-ri --no-rdoc
+
+VOLUME /opt/workspace/chef-repo
+WORKDIR /opt/workspace/chef-repo

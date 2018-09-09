@@ -1,0 +1,10 @@
+image: bsantanna/chef-dev:latest
+manifests:
+  - image: bsantanna/chef-dev-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/chef-dev-armhf:latest
+    platform:
+      architecture: arm
+      os: linux
