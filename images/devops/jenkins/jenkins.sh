@@ -36,4 +36,4 @@ do
 done
 popd
 
-exec java -jar /opt/jenkins/jenkins.war --prefix=/jenkins
+exec java ${JAVA_OPTS} -jar /opt/jenkins/jenkins.war --prefix=/jenkins

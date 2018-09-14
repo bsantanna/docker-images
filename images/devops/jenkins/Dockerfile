@@ -7,6 +7,7 @@ ENV REFRESHED_AT 2018-08-27
 ENV DEBIAN_FRONTEND noninteractive
 ENV JENKINS_HOME /opt/jenkins/data
 ENV WORKSPACE_DIR /opt/jenkins/data/workspace
+ENV JAVA_OPTS "-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=300"
 
 RUN mkdir -p ${JENKINS_HOME}/plugins
 RUN curl -sf -o /opt/jenkins/jenkins.war -L http://mirrors.jenkins.io/war-stable/latest/jenkins.war
