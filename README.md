@@ -1,6 +1,6 @@
 # bsantanna/containers
 
-[![Build Status](https://secure.btech.software/jenkins/job/containers-pipeline/badge/icon)](https://secure.btech.software/jenkins/job/containers-pipeline/)
+[![Build Status](https://secure.btech.software/jenkins/buildStatus/icon?job=containers-pipeline)](https://secure.btech.software/jenkins/job/containers-pipeline/)
 
 - [Introduction](#introduction)
   - [About this project](#about-this-project)
