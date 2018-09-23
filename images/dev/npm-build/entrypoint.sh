@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-npm install;
-bower update --allow-root;
-npm run build;
+echo "npm update && npm run build" | bash -x
