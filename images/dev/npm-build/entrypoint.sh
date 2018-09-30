@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo "npm update && npm run build" | bash -x
+echo "npm install && npm run build" | bash -x
