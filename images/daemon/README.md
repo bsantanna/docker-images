@@ -9,7 +9,6 @@ Service oriented software which performs some work or serves some content.
 
 ### Description
 
-For general information about configuration and examples see [README file](nfs/).
 This image is platform dependent, image build process differs between armhf and x86_64 platforms.
 
 #### Arch x86_64:
@@ -31,7 +30,6 @@ From the [official project page](http://unfs3.sourceforge.net):
 This Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
 This is a base-image that uses [NGINX](http://nginx.com) with [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) role. 
 It is a base for [SSL/TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection negotiation.
-Configuration and examples can be found in image [README file](nginx-ssl-proxy/).
 
 ---
 
@@ -42,7 +40,6 @@ Configuration and examples can be found in image [README file](nginx-ssl-proxy/)
 ### Description
 This Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
 This image uses [NGINX](http://nginx.com) to serve static content through HTTP.
-Configuration and examples can be found in image [README file](nginx-static/).
 
 ---
 
@@ -53,7 +50,6 @@ Configuration and examples can be found in image [README file](nginx-static/).
 ### Description
 This Docker image uses [samba](https://packages.ubuntu.com/xenial/samba) package.
 This is a base-image that uses [Samba](https://www.samba.org) to serve files in a Windows Network.
-Configuration and examples can be found in image [README file](smb/).
 
 ---
 
@@ -64,4 +60,3 @@ Configuration and examples can be found in image [README file](smb/).
 ### Description
 This Docker image uses [squid](https://packages.ubuntu.com/xenial/squid) package.
 This is a base-image that uses [Squid Cache](http://www.squid-cache.org) to proxy HTTP connections.
-Configuration and examples can be found in image [README file](squid-proxy/).
