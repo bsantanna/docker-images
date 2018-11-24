@@ -31,6 +31,7 @@ final IMAGES_CATEGORIES = [
         "chef-dev",
         "openjdk-7-jdk",
         "openjdk-8-jdk",
+        "openjdk-11-jdk",
         "java-dev",
         "maven-build",
         "npm-dev",
