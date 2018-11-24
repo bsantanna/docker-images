@@ -59,7 +59,7 @@ def build(arch, category, images) {
     def archExists = fileExists "images/${category}/${image}/arch/${arch}"
     if (archExists) {
       filteredImages.add(image)
-    }  else {
+    } else {
       echo "==== NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch} ===="
     }
   }
@@ -130,35 +130,35 @@ catchError {
     }
   }
 
-  stage("Build") {
+  stage("Build ${ARCH_AMD64}") {
 
-    // parallel build for different architectures
-    parallel "${ARCH_AMD64}": {
-      node(ARCH_AMD64) {
-        // restart docker environment
-        dockerDaemonRestart()
+    node(ARCH_AMD64) {
+      // restart docker environment
+      dockerDaemonRestart()
 
-        // login docker registry
-        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+      // login docker registry
+      dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
 
-        // build
-        for (String category : IMAGES_CATEGORIES.keySet()) {
-          build(ARCH_AMD64, category, IMAGES_CATEGORIES[category])
-        }
-
+      // build
+      for (String category : IMAGES_CATEGORIES.keySet()) {
+        build(ARCH_AMD64, category, IMAGES_CATEGORIES[category])
       }
-    }, "${ARCH_ARM}": {
-      node(ARCH_ARM) {
-        // restart docker environment
-        dockerDaemonRestart()
 
-        // login docker registry
-        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+    }
 
-        // build
-        for (String category : IMAGES_CATEGORIES.keySet()) {
-          build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
-        }
+  }
+
+  stage("Build ${ARCH_ARM}") {
+    node(ARCH_ARM) {
+      // restart docker environment
+      dockerDaemonRestart()
+
+      // login docker registry
+      dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+
+      // build
+      for (String category : IMAGES_CATEGORIES.keySet()) {
+        build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
       }
     }
 
