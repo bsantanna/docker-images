@@ -46,7 +46,7 @@ final IMAGES_CATEGORIES = [
 ]
 
 // reusable functions
-def build(arch, category, images, credentialsId) {
+def build(arch, category, images) {
   // cleanup workspace
   deleteDir()
 
@@ -59,7 +59,7 @@ def build(arch, category, images, credentialsId) {
     def archExists = fileExists "images/${category}/${image}/arch/${arch}"
     if (archExists) {
       filteredImages.add(image)
-    } else {
+    }  else {
       echo "==== NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch} ===="
     }
   }
@@ -67,17 +67,14 @@ def build(arch, category, images, credentialsId) {
   // build each image
   if (!filteredImages.isEmpty()) {
     for (String image : filteredImages) {
-      dockerBuildAndPush(arch, category, image, credentialsId)
+      dockerBuildAndPush(arch, category, image)
     }
   }
 
 }
 
-def dockerBuildAndPush(arch, category, image, credentialsId) {
+def dockerBuildAndPush(arch, category, image) {
   dir("images/${category}/${image}/arch/${arch}") {
-    // login docker registry
-    dockerRegistryLogin(credentialsId)
-
     echo "==== BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch} ===="
     sh "./docker_build.sh"
 
@@ -139,9 +136,12 @@ catchError {
         // restart docker environment
         dockerDaemonRestart()
 
+        // login docker registry
+        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+
         // build
         for (String category : IMAGES_CATEGORIES.keySet()) {
-          build(ARCH_AMD64, category, IMAGES_CATEGORIES[category], REGISTRY_CREDENTIALS_ID)
+          build(ARCH_AMD64, category, IMAGES_CATEGORIES[category])
         }
 
       }
@@ -150,12 +150,16 @@ catchError {
         // restart docker environment
         dockerDaemonRestart()
 
+        // login docker registry
+        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+
         // build
         for (String category : IMAGES_CATEGORIES.keySet()) {
-          build(ARCH_ARM, category, IMAGES_CATEGORIES[category], REGISTRY_CREDENTIALS_ID)
+          build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
         }
       }
     }
+
   }
 
   stage("Publish") {
