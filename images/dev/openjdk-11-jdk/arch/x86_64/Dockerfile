@@ -1,8 +1,6 @@
 FROM bsantanna/ubuntu-multi:16.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV CREATED_AT 2016-12-29
-#ENV REFRESHED_AT 2018-05-12
-ENV REFRESHED_AT 2018-08-29
+ENV CREATED_AT 2018-11-25
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -q && \

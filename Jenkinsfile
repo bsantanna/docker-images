@@ -95,7 +95,7 @@ def dockerDaemonRestart() {
 
 def dockerManifestPublish(registryCredentialsId, category, images) {
   for (String image : images) {
-    retry(30){
+    retry(30) {
       dir("images/${category}/${image}/arch/multi/") {
         echo "==== PUBLISHING DOCKER IMAGE MANIFEST FOR ${image} ===="
 
@@ -107,6 +107,7 @@ def dockerManifestPublish(registryCredentialsId, category, images) {
               " -v \$(pwd):/opt/workspace/ bsantanna/docker-manifest-publisher /opt/workspace/${image}.yml"
         }
       }
+      sh "sleep 5"
     }
   }
 }
@@ -157,7 +158,9 @@ catchError {
       dockerDaemonRestart()
 
       // login docker registry
-      dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+      retry(5) {
+        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+      }
 
       // build
       for (String category : IMAGES_CATEGORIES.keySet()) {
@@ -173,7 +176,9 @@ catchError {
       dockerDaemonRestart()
 
       // login docker registry
-      dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+      retry(5) {
+        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+      }
 
       // publish each image
       for (String category : IMAGES_CATEGORIES.keySet()) {
