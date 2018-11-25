@@ -167,6 +167,12 @@ catchError {
 
   stage("Publish") {
     node(ARCH_AMD64) {
+      // restart docker environment
+      dockerDaemonRestart()
+
+      // login docker registry
+      dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+
       // publish each image
       for (String category : IMAGES_CATEGORIES.keySet()) {
         dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
