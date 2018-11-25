@@ -95,15 +95,17 @@ def dockerDaemonRestart() {
 
 def dockerManifestPublish(registryCredentialsId, category, images) {
   for (String image : images) {
-    dir("images/${category}/${image}/arch/multi/") {
-      echo "==== PUBLISHING DOCKER IMAGE MANIFEST FOR ${image} ===="
+    retry(3){
+      dir("images/${category}/${image}/arch/multi/") {
+        echo "==== PUBLISHING DOCKER IMAGE MANIFEST FOR ${image} ===="
 
-      // publish using docker-manifest-publisher image
-      withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: registryCredentialsId, usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
-        sh "docker run -i --rm " +
-            " -e DOCKER_REGISTRY_USERNAME=${env.DOCKER_REGISTRY_USERNAME} " +
-            " -e DOCKER_REGISTRY_PASSWORD=${env.DOCKER_REGISTRY_PASSWORD} " +
-            " -v \$(pwd):/opt/workspace/ bsantanna/docker-manifest-publisher /opt/workspace/${image}.yml"
+        // publish using docker-manifest-publisher image
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: registryCredentialsId, usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
+          sh "docker run -i --rm " +
+              " -e DOCKER_REGISTRY_USERNAME=${env.DOCKER_REGISTRY_USERNAME} " +
+              " -e DOCKER_REGISTRY_PASSWORD=${env.DOCKER_REGISTRY_PASSWORD} " +
+              " -v \$(pwd):/opt/workspace/ bsantanna/docker-manifest-publisher /opt/workspace/${image}.yml"
+        }
       }
     }
   }
@@ -175,9 +177,7 @@ catchError {
 
       // publish each image
       for (String category : IMAGES_CATEGORIES.keySet()) {
-        retry(3){
-          dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
-        }
+        dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
       }
     }
   }
