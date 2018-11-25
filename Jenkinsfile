@@ -95,7 +95,7 @@ def dockerDaemonRestart() {
 
 def dockerManifestPublish(registryCredentialsId, category, images) {
   for (String image : images) {
-    retry(3){
+    retry(30){
       dir("images/${category}/${image}/arch/multi/") {
         echo "==== PUBLISHING DOCKER IMAGE MANIFEST FOR ${image} ===="
 
