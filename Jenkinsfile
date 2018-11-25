@@ -175,7 +175,9 @@ catchError {
 
       // publish each image
       for (String category : IMAGES_CATEGORIES.keySet()) {
-        dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
+        retry(3){
+          dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
+        }
       }
     }
   }
