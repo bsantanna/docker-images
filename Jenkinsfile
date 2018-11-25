@@ -68,8 +68,9 @@ def build(arch, category, images) {
   // build each image
   if (!filteredImages.isEmpty()) {
     for (String image : filteredImages) {
-      retry(3) {
+      retry(5) {
         dockerBuildAndPush(arch, category, image)
+        sh "sleep 5"
       }
     }
   }
@@ -160,6 +161,7 @@ catchError {
       // login docker registry
       retry(5) {
         dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+        sh "sleep 5"
       }
 
       // build
@@ -178,6 +180,7 @@ catchError {
       // login docker registry
       retry(5) {
         dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+        sh "sleep 5"
       }
 
       // publish each image
