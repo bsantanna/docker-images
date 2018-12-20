@@ -17,12 +17,9 @@ class DockerUtility extends AbstractPipelineUtility {
   /**
    * Removes all containers, restarts daemon service and sleeps for cooldown time
    *
-   * @param timeoutInSeconds time in seconds after restarting, defaults to 15 seconds
+   * @param timeoutInSeconds time in seconds after restarting
    */
   def daemonCleanRestart(timeoutInSeconds) {
-    if (timeoutInSeconds == null) {
-      timeoutInSeconds = 15
-    }
     print("RESTARTING DOCKER DAEMON...")
     this.pipeline.sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
     this.pipeline.sh "\$(service docker start && sleep ${timeoutInSeconds}) || true"

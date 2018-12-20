@@ -48,9 +48,6 @@ final IMAGES_CATEGORIES = [
 
 // Reusable function library
 def daemonCleanRestart(timeoutInSeconds) {
-  if (timeoutInSeconds == null) {
-    timeoutInSeconds = 15
-  }
   echo "RESTARTING DOCKER DAEMON..."
   this.pipeline.sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
   this.pipeline.sh "\$(service docker start && sleep ${timeoutInSeconds}) || true"
@@ -160,7 +157,7 @@ catchError {
 
     node(ARCH_AMD64) {
       // restart docker environment
-      daemonCleanRestart()
+      daemonCleanRestart(5)
 
       // login docker registry
       registryLogin(REGISTRY_CREDENTIALS_ID)
@@ -177,7 +174,7 @@ catchError {
   stage("Build ${ARCH_ARM}") {
     node(ARCH_ARM) {
       // restart docker environment
-      daemonCleanRestart()
+      daemonCleanRestart(5)
 
       // login docker registry
       retry(5) {
@@ -196,7 +193,7 @@ catchError {
   stage("Publish") {
     node(ARCH_AMD64) {
       // restart docker environment
-      daemonCleanRestart()
+      daemonCleanRestart(5)
 
       // login docker registry
       retry(5) {
