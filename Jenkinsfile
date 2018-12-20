@@ -1,4 +1,5 @@
 #!groovy
+import software.btech.containers.DockerUtility
 
 // credentials git
 final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
@@ -46,6 +47,10 @@ final IMAGES_CATEGORIES = [
     ]
 ]
 
+// Reusable function library
+@Library("containers-library")
+def dockerUtility = new DockerUtility(this)
+
 // reusable functions
 def build(arch, category, images) {
   // cleanup workspace
@@ -61,7 +66,7 @@ def build(arch, category, images) {
     if (archExists) {
       filteredImages.add(image)
     } else {
-      echo "==== NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch} ===="
+      dockerUtility.print("NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch}")
     }
   }
 
@@ -79,29 +84,25 @@ def build(arch, category, images) {
 
 def dockerBuildAndPush(arch, category, image) {
   dir("images/${category}/${image}/arch/${arch}") {
-    echo "==== BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch} ===="
+    dockerUtility.print("BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch}")
     sh "./docker_build.sh"
 
-    echo "==== PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch} ===="
+    dockerUtility.print("PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch}")
     sh "./docker_push.sh"
   }
-}
-
-def dockerDaemonRestart() {
-  echo "==== RESTARTING DOCKER DAEMON ===="
-  sh "\$(service docker start && sleep 15) || true"
-  sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
-  echo "==== DOCKER DAEMON RESTART COMPLETE===="
 }
 
 def dockerManifestPublish(registryCredentialsId, category, images) {
   for (String image : images) {
     retry(30) {
       dir("images/${category}/${image}/arch/multi/") {
-        echo "==== PUBLISHING DOCKER IMAGE MANIFEST FOR ${image} ===="
+        dockerUtility.print("PUBLISHING DOCKER IMAGE MANIFEST FOR ${image}")
 
         // publish using docker-manifest-publisher image
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: registryCredentialsId, usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
+        withCredentials([[$class          : 'UsernamePasswordMultiBinding',
+                          credentialsId   : registryCredentialsId,
+                          usernameVariable: 'DOCKER_REGISTRY_USERNAME',
+                          passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
           sh "docker run -i --rm " +
               " -e DOCKER_REGISTRY_USERNAME=${env.DOCKER_REGISTRY_USERNAME} " +
               " -e DOCKER_REGISTRY_PASSWORD=${env.DOCKER_REGISTRY_PASSWORD} " +
@@ -110,13 +111,6 @@ def dockerManifestPublish(registryCredentialsId, category, images) {
       }
       sh "sleep 5"
     }
-  }
-}
-
-def dockerRegistryLogin(registryCredentialsId) {
-  // login docker hub
-  withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: registryCredentialsId, usernameVariable: 'DOCKER_REGISTRY_USERNAME', passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
-    sh "docker login -u ${env.DOCKER_REGISTRY_USERNAME} -p ${env.DOCKER_REGISTRY_PASSWORD}"
   }
 }
 
@@ -139,10 +133,10 @@ catchError {
 
     node(ARCH_AMD64) {
       // restart docker environment
-      dockerDaemonRestart()
+      dockerUtility.daemonCleanRestart()
 
       // login docker registry
-      dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+      dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
 
       // build
       for (String category : IMAGES_CATEGORIES.keySet()) {
@@ -156,11 +150,11 @@ catchError {
   stage("Build ${ARCH_ARM}") {
     node(ARCH_ARM) {
       // restart docker environment
-      dockerDaemonRestart()
+      dockerUtility.daemonCleanRestart()
 
       // login docker registry
       retry(5) {
-        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
         sh "sleep 5"
       }
 
@@ -175,11 +169,11 @@ catchError {
   stage("Publish") {
     node(ARCH_AMD64) {
       // restart docker environment
-      dockerDaemonRestart()
+      dockerUtility.daemonCleanRestart()
 
       // login docker registry
       retry(5) {
-        dockerRegistryLogin(REGISTRY_CREDENTIALS_ID)
+        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
         sh "sleep 5"
       }
 
