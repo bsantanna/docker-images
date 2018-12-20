@@ -1,5 +1,4 @@
 #!groovy
-import software.btech.containers.DockerUtility
 
 // credentials git
 final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
