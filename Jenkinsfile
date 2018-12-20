@@ -49,8 +49,8 @@ final IMAGES_CATEGORIES = [
 // Reusable function library
 def daemonCleanRestart(timeoutInSeconds) {
   echo "RESTARTING DOCKER DAEMON..."
-  this.pipeline.sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
-  this.pipeline.sh "\$(service docker start && sleep ${timeoutInSeconds}) || true"
+  sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
+  sh "\$(service docker start && sleep ${timeoutInSeconds}) || true"
   echo "DOCKER DAEMON RESTART COMPLETE"
 }
 
@@ -66,10 +66,10 @@ def registryLogin(registryCredentialsId) {
                     usernameVariable: 'DOCKER_REGISTRY_USERNAME',
                     passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
 
-    this.pipeline.sh "" +
+    sh "" +
         "docker login " +
-        "-u ${this.pipeline.env.DOCKER_REGISTRY_USERNAME} " +
-        "-p ${this.pipeline.env.DOCKER_REGISTRY_PASSWORD}"
+        "-u ${env.DOCKER_REGISTRY_USERNAME} " +
+        "-p ${env.DOCKER_REGISTRY_PASSWORD}"
 
     echo "LOGIN COMPLETE"
   }
