@@ -48,8 +48,36 @@ final IMAGES_CATEGORIES = [
 ]
 
 // Reusable function library
-@Library("containers-library")
-def dockerUtility = new DockerUtility(this)
+def daemonCleanRestart(timeoutInSeconds) {
+  if (timeoutInSeconds == null) {
+    timeoutInSeconds = 15
+  }
+  echo "RESTARTING DOCKER DAEMON..."
+  this.pipeline.sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
+  this.pipeline.sh "\$(service docker start && sleep ${timeoutInSeconds}) || true"
+  echo "DOCKER DAEMON RESTART COMPLETE"
+}
+
+/**
+ * Logs in into Docker registry.
+ * @param registryCredentialsId credentials id configured in Jenkins.
+ */
+def registryLogin(registryCredentialsId) {
+  echo "PERFORMING REGISTRY LOGIN..."
+  // perform inside credential injection block
+  withCredentials([[$class          : 'UsernamePasswordMultiBinding',
+                    credentialsId   : registryCredentialsId,
+                    usernameVariable: 'DOCKER_REGISTRY_USERNAME',
+                    passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
+
+    this.pipeline.sh "" +
+        "docker login " +
+        "-u ${this.pipeline.env.DOCKER_REGISTRY_USERNAME} " +
+        "-p ${this.pipeline.env.DOCKER_REGISTRY_PASSWORD}"
+
+    echo "LOGIN COMPLETE"
+  }
+}
 
 // reusable functions
 def build(arch, category, images) {
@@ -66,7 +94,7 @@ def build(arch, category, images) {
     if (archExists) {
       filteredImages.add(image)
     } else {
-      dockerUtility.print("NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch}")
+      echo "NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch}"
     }
   }
 
@@ -84,10 +112,10 @@ def build(arch, category, images) {
 
 def dockerBuildAndPush(arch, category, image) {
   dir("images/${category}/${image}/arch/${arch}") {
-    dockerUtility.print("BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch}")
+    echo "BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch}"
     sh "./docker_build.sh"
 
-    dockerUtility.print("PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch}")
+    echo "PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch}"
     sh "./docker_push.sh"
   }
 }
@@ -96,7 +124,7 @@ def dockerManifestPublish(registryCredentialsId, category, images) {
   for (String image : images) {
     retry(30) {
       dir("images/${category}/${image}/arch/multi/") {
-        dockerUtility.print("PUBLISHING DOCKER IMAGE MANIFEST FOR ${image}")
+        echo "PUBLISHING DOCKER IMAGE MANIFEST FOR ${image}"
 
         // publish using docker-manifest-publisher image
         withCredentials([[$class          : 'UsernamePasswordMultiBinding',
@@ -118,16 +146,14 @@ catchError {
 
   stage("Pipeline setup") {
     node {
-      ws {
-        // cleanup workspace
-        deleteDir()
+      // cleanup workspace
+      deleteDir()
 
-        // checkout
-        git credentialsId: ORIGIN_GIT_CREDENTIALS_ID, url: ORIGIN_GIT_URL, branch: ORIGIN_GIT_BRANCH
+      // checkout
+      git credentialsId: ORIGIN_GIT_CREDENTIALS_ID, url: ORIGIN_GIT_URL, branch: ORIGIN_GIT_BRANCH
 
-        // stash
-        stash name: "sources"
-      }
+      // stash
+      stash name: "sources"
     }
   }
 
@@ -135,10 +161,10 @@ catchError {
 
     node(ARCH_AMD64) {
       // restart docker environment
-      dockerUtility.daemonCleanRestart()
+      daemonCleanRestart()
 
       // login docker registry
-      dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+      registryLogin(REGISTRY_CREDENTIALS_ID)
 
       // build
       for (String category : IMAGES_CATEGORIES.keySet()) {
@@ -152,11 +178,11 @@ catchError {
   stage("Build ${ARCH_ARM}") {
     node(ARCH_ARM) {
       // restart docker environment
-      dockerUtility.daemonCleanRestart()
+      daemonCleanRestart()
 
       // login docker registry
       retry(5) {
-        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+        registryLogin(REGISTRY_CREDENTIALS_ID)
         sh "sleep 5"
       }
 
@@ -171,11 +197,11 @@ catchError {
   stage("Publish") {
     node(ARCH_AMD64) {
       // restart docker environment
-      dockerUtility.daemonCleanRestart()
+      daemonCleanRestart()
 
       // login docker registry
       retry(5) {
-        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+        registryLogin(REGISTRY_CREDENTIALS_ID)
         sh "sleep 5"
       }
 
