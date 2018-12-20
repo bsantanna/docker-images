@@ -118,14 +118,16 @@ catchError {
 
   stage("Pipeline setup") {
     node {
-      // cleanup workspace
-      deleteDir()
+      ws {
+        // cleanup workspace
+        deleteDir()
 
-      // checkout
-      git credentialsId: ORIGIN_GIT_CREDENTIALS_ID, url: ORIGIN_GIT_URL, branch: ORIGIN_GIT_BRANCH
+        // checkout
+        git credentialsId: ORIGIN_GIT_CREDENTIALS_ID, url: ORIGIN_GIT_URL, branch: ORIGIN_GIT_BRANCH
 
-      // stash
-      stash name: "sources"
+        // stash
+        stash name: "sources"
+      }
     }
   }
 
