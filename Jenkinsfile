@@ -44,6 +44,9 @@ final IMAGES_CATEGORIES = [
         "jenkins-docker",
         "jenkins-docker-agent",
         "jenkins-docker-jnlp-agent"
+    ],
+    "util"   : [
+        "finance"
     ]
 ]
 
