@@ -33,6 +33,7 @@ final IMAGES_CATEGORIES = [
         "openjdk-8-jdk",
         "openjdk-11-jdk",
         "java-dev",
+        "java-python-exec",
         "maven-build",
         "npm-dev",
         "npm-build"
