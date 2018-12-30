@@ -1,4 +1,4 @@
-image: bsantanna/maven-build:latest
+image: bsantanna/java-python-exec:latest
 manifests:
   - image: bsantanna/java-python-exec-x86_64:latest
     platform:
