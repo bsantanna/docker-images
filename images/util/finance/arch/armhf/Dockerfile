@@ -4,11 +4,12 @@ ENV CREATED_AT 2018-12-30
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq && \
-    apt-get install -yqq pkg-config libfreetype6-dev libpng12-dev libblas-dev liblapack-dev libatlas-base-dev gfortran && \
+    apt-get install -yqq \
+    python3-scipy python3-numpy python3-ipython \
+    python3-matplotlib python3-pandas \
+    python3-sympy python3-nose python3-oauth2client && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN python3 -m pip install --upgrade \
-    google-api-python-client oauth2client alpha_vantage \
-    numpy scipy matplotlib ipython pandas \
-    pandas-datareader sympy nose quandl
+    google-api-python-client alpha_vantage quandl
