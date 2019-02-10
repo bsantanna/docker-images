@@ -1,4 +1,9 @@
 #!groovy
+@Library("btech-pipeline-library")
+import software.btech.pipeline.DockerUtility
+
+// Docker utility
+final dockerUtility = new DockerUtility(this)
 
 // credentials git
 final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
@@ -49,35 +54,6 @@ final IMAGES_CATEGORIES = [
         "finance"
     ]
 ]
-
-// Reusable function library
-def daemonCleanRestart(timeoutInSeconds) {
-  echo "RESTARTING DOCKER DAEMON..."
-  sh "docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) || true"
-  sh "\$(service docker start && sleep ${timeoutInSeconds}) || true"
-  echo "DOCKER DAEMON RESTART COMPLETE"
-}
-
-/**
- * Logs in into Docker registry.
- * @param registryCredentialsId credentials id configured in Jenkins.
- */
-def registryLogin(registryCredentialsId) {
-  echo "PERFORMING REGISTRY LOGIN..."
-  // perform inside credential injection block
-  withCredentials([[$class          : 'UsernamePasswordMultiBinding',
-                    credentialsId   : registryCredentialsId,
-                    usernameVariable: 'DOCKER_REGISTRY_USERNAME',
-                    passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
-
-    sh "" +
-        "docker login " +
-        "-u ${env.DOCKER_REGISTRY_USERNAME} " +
-        "-p ${env.DOCKER_REGISTRY_PASSWORD}"
-
-    echo "LOGIN COMPLETE"
-  }
-}
 
 // reusable functions
 def build(arch, category, images) {
@@ -161,10 +137,10 @@ catchError {
 
     node(ARCH_AMD64) {
       // restart docker environment
-      daemonCleanRestart(5)
+      dockerUtility.daemonCleanRestart(5)
 
       // login docker registry
-      registryLogin(REGISTRY_CREDENTIALS_ID)
+      dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
 
       // build
       for (String category : IMAGES_CATEGORIES.keySet()) {
@@ -178,11 +154,11 @@ catchError {
   stage("Build ${ARCH_ARM}") {
     node(ARCH_ARM) {
       // restart docker environment
-      daemonCleanRestart(5)
+      dockerUtility.daemonCleanRestart(5)
 
       // login docker registry
       retry(5) {
-        registryLogin(REGISTRY_CREDENTIALS_ID)
+        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
         sh "sleep 5"
       }
 
@@ -197,11 +173,11 @@ catchError {
   stage("Publish") {
     node(ARCH_AMD64) {
       // restart docker environment
-      daemonCleanRestart(5)
+      dockerUtility.daemonCleanRestart(5)
 
       // login docker registry
       retry(5) {
-        registryLogin(REGISTRY_CREDENTIALS_ID)
+        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
         sh "sleep 5"
       }
 
