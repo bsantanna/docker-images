@@ -137,7 +137,7 @@ catchError {
 
     node(ARCH_AMD64) {
       // restart docker environment
-      dockerUtility.daemonCleanRestart(5)
+      dockerUtility.dockerDaemonRestart(5)
 
       // login docker registry
       dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
@@ -154,7 +154,7 @@ catchError {
   stage("Build ${ARCH_ARM}") {
     node(ARCH_ARM) {
       // restart docker environment
-      dockerUtility.daemonCleanRestart(5)
+      dockerUtility.dockerDaemonRestart(5)
 
       // login docker registry
       retry(5) {
@@ -173,7 +173,7 @@ catchError {
   stage("Publish") {
     node(ARCH_AMD64) {
       // restart docker environment
-      dockerUtility.daemonCleanRestart(5)
+      dockerUtility.dockerDaemonRestart(5)
 
       // login docker registry
       retry(5) {
