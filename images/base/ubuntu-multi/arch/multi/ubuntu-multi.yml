@@ -19,3 +19,14 @@ manifests:
     platform:
       architecture: arm
       os: linux
+
+image: bsantanna/ubuntu-multi:18.04
+manifests:
+  - image: ubuntu:18.04
+    platform:
+      architecture: amd64
+      os: linux
+  - image: armhf/ubuntu:18.04
+    platform:
+      architecture: arm
+      os: linux
