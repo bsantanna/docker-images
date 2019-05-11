@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker pull "bsantanna/rdesktop-armhf"
-docker build -t "bsantanna/rdesktop-armhf" ../../
+echo "docker pull 'bsantanna/rdesktop'" | bash -x
+echo "docker build -t 'bsantanna/rdesktop-armhf ../../'" | bash -x

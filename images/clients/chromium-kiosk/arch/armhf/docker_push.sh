@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/chromium-kiosk-armhf"
+echo "docker push 'bsantanna/chromium-kiosk-armhf'" | bash -x

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/openssh-client-armhf"
+echo "docker push 'bsantanna/openssh-client-armhf'" | bash -x

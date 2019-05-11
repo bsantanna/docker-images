@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/rdesktop-armhf"
+echo "docker push 'bsantanna/rdesktop-armhf'" | bash -x
