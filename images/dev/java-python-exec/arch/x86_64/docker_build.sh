@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 
-docker pull "bsantanna/java-python-exec-x86_64"
-docker build -t "bsantanna/java-python-exec-x86_64" ../..
+echo "docker pull 'bsantanna/java-python-exec'" | bash -x
+echo "docker build -t 'bsantanna/java-python-exec-x86_64' ../.." | bash -x

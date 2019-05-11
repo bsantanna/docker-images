@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/npm-build-x86_64"
+echo "docker push 'bsantanna/npm-build-x86_64'" | bash -x

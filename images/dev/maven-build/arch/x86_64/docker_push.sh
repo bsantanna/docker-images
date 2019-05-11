@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/maven-build-x86_64"
+echo "docker push 'bsantanna/maven-build-x86_64'" | bash -x

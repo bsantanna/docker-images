@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/nfs-armhf"
+echo "docker push 'bsantanna/nfs-armhf'" | bash -x

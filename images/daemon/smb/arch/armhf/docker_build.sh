@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker pull "bsantanna/smb-armhf"
-docker build -t "bsantanna/smb-armhf" ../../
+echo "docker pull 'bsantanna/smb'" | bash -x
+echo "docker build -t 'bsantanna/smb-armhf' ../../" | bash -x

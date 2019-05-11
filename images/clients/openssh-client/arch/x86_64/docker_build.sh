@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker pull "bsantanna/openssh-client-x86_64"
-docker build -t "bsantanna/openssh-client-x86_64" ../../
+echo "docker pull 'bsantanna/openssh-client'" | bash -x
+echo "docker build -t 'bsantanna/openssh-client-x86_64' ../../" | bash -x

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/squid-proxy-armhf"
+echo "docker push 'bsantanna/squid-proxy-armhf'" | bash -x
