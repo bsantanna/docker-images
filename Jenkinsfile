@@ -165,6 +165,7 @@ catchError {
       // build
       for (String category : IMAGES_CATEGORIES.keySet()) {
         build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
+        dockerUtility.clearImageCache()
       }
     }
 
