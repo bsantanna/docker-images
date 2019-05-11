@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/chef-dev-armhf"
+echo "docker push 'bsantanna/chef-dev-armhf'" | bash -x

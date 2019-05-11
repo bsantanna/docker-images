@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker pull "bsantanna/nginx-ssl-proxy-armhf"
-docker build -t "bsantanna/nginx-ssl-proxy-armhf" ../..
+echo "docker pull 'bsantanna/nginx-ssl-proxy'" | bash -x
+echo "docker build -t 'bsantanna/nginx-ssl-proxy-armhf' ../.." | bash -x

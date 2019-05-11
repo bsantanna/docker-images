@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker pull "bsantanna/java-dev-armhf"
-docker build -t "bsantanna/java-dev-armhf" ../..
+echo "docker pull 'bsantanna/java-dev'" | bash -x
+echo "docker build -t 'bsantanna/java-dev-armhf' ../.." | bash -x

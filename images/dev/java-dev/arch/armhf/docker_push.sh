@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/java-dev-armhf"
+echo "docker push 'bsantanna/java-dev-armhf'" | bash -x

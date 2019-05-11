@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker pull "bsantanna/openjdk-11-jdk-armhf"
-docker build -t "bsantanna/openjdk-11-jdk-armhf" .
+echo "docker pull 'bsantanna/openjdk-11-jdk'" | bash -x
+echo "docker build -t 'bsantanna/openjdk-11-jdk-armhf' ." | bash -x

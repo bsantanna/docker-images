@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/maven-build-armhf"
+echo "docker push 'bsantanna/maven-build-armhf'" | bash -x

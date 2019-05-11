@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker pull "bsantanna/util-finance-armhf"
-docker build -t "bsantanna/util-finance-armhf" ../..
+echo "docker pull 'bsantanna/util-finance'" | bash -x
+echo "docker build -t 'bsantanna/util-finance-armhf' ../.." | bash -x

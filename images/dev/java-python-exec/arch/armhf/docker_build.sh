@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker pull "bsantanna/java-python-exec-armhf"
-docker build -t "bsantanna/java-python-exec-armhf" ../..
+echo "docker pull 'bsantanna/java-python-exec'" | bash -x
+echo "docker build -t 'bsantanna/java-python-exec-armhf' ../.." | bash -x
