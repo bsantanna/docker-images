@@ -14,7 +14,7 @@ final ORIGIN_GIT_BRANCH = "2.x"
 final REGISTRY_CREDENTIALS_ID = "dockerhub_credentials"
 
 // build vars
-final ARCH_AMD64 = "x86_64"
+final ARCH_AMD64 = "medium"
 final ARCH_ARM = "armhf"
 
 // images categories
