@@ -18,7 +18,7 @@ It uses [Chromium Browser](https://www.chromium.org/Home) distribution in kiosk 
  - Published image: [bsantanna/ddclient](https://hub.docker.com/r/bsantanna/ddclient/)
 
 ### Description
-This Docker image uses [ddclient](https://packages.ubuntu.com/xenial/ddclient) package.
+This Docker image uses [ddclient](https://packages.ubuntu.com/bionic/ddclient) package.
 From the [official project page](https://sourceforge.net/p/ddclient/wiki/Home/):
 
 > DDclient is a Perl client used to update dynamic DNS entries for accounts on Dynamic DNS Network Service Provider.
@@ -31,7 +31,7 @@ From the [official project page](https://sourceforge.net/p/ddclient/wiki/Home/):
  - Published image: [bsantanna/openssh-client](https://hub.docker.com/r/bsantanna/openssh-client/)
 
 ### Description
-This Docker image uses [openssh-client](https://packages.ubuntu.com/xenial/openssh-client) package. During image build process, access keys are configured for three git repositories: [BitBucket](https://bitucket.org), [GitHub](https://www.github.org) and [GitLab](https://www.gitlab.org).
+This Docker image uses [openssh-client](https://packages.ubuntu.com/bionic/openssh-client) package. During image build process, access keys are configured for three git repositories: [BitBucket](https://bitucket.org), [GitHub](https://www.github.org) and [GitLab](https://www.gitlab.org).
 This image is used also as a base image to daemons or build agents which requests data from a remote source using *SSH* channel such as [git clonning](https://git-scm.com/docs/git-clone), [scp](http://man7.org/linux/man-pages/man1/scp.1.html) or [rsync](http://man7.org/linux/man-pages/man1/rsync.1.html).   
 
 ---
@@ -41,5 +41,5 @@ This image is used also as a base image to daemons or build agents which request
  - Published image: [bsantanna/rdesktop](https://hub.docker.com/r/bsantanna/rdesktop/)
  
 ### Description
-This Docker image uses [rdesktop](https://packages.ubuntu.com/xenial/rdesktop) package.
+This Docker image uses [rdesktop](https://packages.ubuntu.com/bionic/rdesktop) package.
 This image is used in [thin clients](https://en.wikipedia.org/wiki/Thin_client) to connect to a remote [Windows Remote Desktop Services (RDS)](https://en.wikipedia.org/wiki/Remote_Desktop_Services).

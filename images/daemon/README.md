@@ -12,7 +12,7 @@ Service oriented software which performs some work or serves some content.
 This image is platform dependent, image build process differs between armhf and x86_64 platforms.
 
 #### Arch x86_64:
-This Docker image uses [nfs-kernel-server](https://packages.ubuntu.com/xenial/nfs-kernel-server) package.
+This Docker image uses [nfs-kernel-server](https://packages.ubuntu.com/bionic/nfs-kernel-server) package.
 
 #### Arch armhf:
 This Docker image uses [UNFS3](http://unfs3.sourceforge.net) built from sources. 
@@ -27,7 +27,7 @@ From the [official project page](http://unfs3.sourceforge.net):
  - Published image: [bsantanna/nginx-ssl-proxy](https://hub.docker.com/r/bsantanna/nginx-ssl-proxy/)
  
 ### Description
-This Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
+This Docker image uses [nginx](https://packages.ubuntu.com/bionic/nginx) package.
 This is a base-image that uses [NGINX](http://nginx.com) with [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) role. 
 It is a base for [SSL/TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection negotiation.
 
@@ -38,7 +38,7 @@ It is a base for [SSL/TLS](https://en.wikipedia.org/wiki/Transport_Layer_Securit
  - Published image: [bsantanna/nginx-static](https://hub.docker.com/r/bsantanna/nginx-static/)
  
 ### Description
-This Docker image uses [nginx](https://packages.ubuntu.com/xenial/nginx) package.
+This Docker image uses [nginx](https://packages.ubuntu.com/bionic/nginx) package.
 This image uses [NGINX](http://nginx.com) to serve static content through HTTP.
 
 ---
@@ -48,7 +48,7 @@ This image uses [NGINX](http://nginx.com) to serve static content through HTTP.
  - Published image: [bsantanna/smb](https://hub.docker.com/r/bsantanna/smb/)
  
 ### Description
-This Docker image uses [samba](https://packages.ubuntu.com/xenial/samba) package.
+This Docker image uses [samba](https://packages.ubuntu.com/bionic/samba) package.
 This is a base-image that uses [Samba](https://www.samba.org) to serve files in a Windows Network.
 
 ---
@@ -58,5 +58,5 @@ This is a base-image that uses [Samba](https://www.samba.org) to serve files in 
  - Published image: [bsantanna/squid-proxy](https://hub.docker.com/r/bsantanna/squid-proxy/)
  
 ### Description
-This Docker image uses [squid](https://packages.ubuntu.com/xenial/squid) package.
+This Docker image uses [squid](https://packages.ubuntu.com/bionic/squid) package.
 This is a base-image that uses [Squid Cache](http://www.squid-cache.org) to proxy HTTP connections.
