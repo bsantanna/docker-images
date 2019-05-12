@@ -21,7 +21,7 @@ final ARCH_ARM = "armhf"
 
 // images categories
 final IMAGES_CATEGORIES = [
-    "base"   : ["ubuntu"],
+    //"base"   : ["ubuntu"],
     "clients": [
         "chromium-kiosk",
         "ddclient",
