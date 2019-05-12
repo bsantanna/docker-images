@@ -14,7 +14,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN npm install -g webpack-cli
+RUN npm install --no-optional -g webpack-cli
 RUN gem install compass
 
 RUN mkdir /opt/npm-dev
