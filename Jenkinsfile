@@ -37,7 +37,7 @@ final IMAGES_CATEGORIES = [
     ],
     "dev"    : [
         "chef-dev",
-        "openjdk-7-jdk",
+        //"openjdk-7-jdk", Ubuntu packages not found
         "openjdk-8-jdk",
         "openjdk-11-jdk",
         "java-dev",
@@ -138,7 +138,7 @@ catchError {
 
   stage("Build ${ARCH_AMD64}") {
 
-    node(ARCH_AMD64) {
+    node("medium") {
       // restart docker environment
       dockerUtility.dockerDaemonRestart(5)
 
@@ -175,7 +175,7 @@ catchError {
   }
 
   stage("Publish") {
-    node(ARCH_AMD64) {
+    node("medium") {
       // restart docker environment
       dockerUtility.dockerDaemonRestart(5)
 

@@ -1,10 +1,12 @@
-FROM bsantanna/ubuntu-multi:16.04
+FROM bsantanna/ubuntu-multi:18.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2017-08-02
 #ENV REFRESHED_AT 2018-05-12
-ENV REFRESHED_AT 2018-08-23
+#ENV REFRESHED_AT 2018-08-23
+ENV REFRESHED_AT 2019-05-12
 ENV DEBIAN_FRONTEND noninteractive
 ENV WORKSPACE_DIR /opt/workspace
+ENV CI=true
 
 RUN apt-get update -qq && \
     apt-get install -yqq nodejs npm ruby ruby-dev libpng-dev libjpeg-dev libfontconfig1 gifsicle nasm autoconf git && \
@@ -12,7 +14,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN npm install -g grunt-cli gulp bower foundation-cli yo webpack-cli
+RUN npm install --no-optional -g webpack-cli
 RUN gem install compass
 
 RUN mkdir /opt/npm-dev
