@@ -1,5 +1,5 @@
 
-FROM bsantanna/ubuntu-multi:16.04
+FROM bsantanna/ubuntu
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2017-10-11
 ENV REFRESHED_AT 2018-08-19

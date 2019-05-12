@@ -37,7 +37,6 @@ final IMAGES_CATEGORIES = [
     ],
     "dev"    : [
         "chef-dev",
-        //"openjdk-7-jdk", Ubuntu packages not found
         "openjdk-8-jdk",
         "openjdk-11-jdk",
         "java-dev",

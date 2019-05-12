@@ -1,4 +1,4 @@
-FROM bsantanna/ubuntu-multi:16.04
+FROM bsantanna/ubuntu
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2018-11-25
 ENV DEBIAN_FRONTEND noninteractive
