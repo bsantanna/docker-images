@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq && \
     apt-get install -yqq \
+    libssl-dev \
     python3-scipy python3-numpy python3-matplotlib python3-pandas \
     python3-sympy python3-nose python3-oauth2client python3-wheel \
     ipython && \
