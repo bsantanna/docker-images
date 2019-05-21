@@ -9,6 +9,11 @@ VOLUME /var/lib/docker
 
 RUN curl -sSL get.docker.com | sh
 
+RUN apt-get update -qq && \
+    apt-get install -yqq docker-compose && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 ONBUILD ADD ./jenkins-agent.sh /usr/local/bin/jenkins-agent
 ONBUILD RUN chmod +x /usr/local/bin/jenkins-agent
 ADD jenkins.sh /usr/local/bin/jenkins
