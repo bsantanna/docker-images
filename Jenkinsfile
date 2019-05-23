@@ -96,6 +96,10 @@ def dockerBuildAndPush(arch, category, image) {
 }
 
 def dockerManifestPublish(registryCredentialsId, category, images) {
+
+  // unstash
+  unstash "sources"
+
   for (String image : images) {
     retry(30) {
       dir("images/${category}/${image}/arch/multi/") {
