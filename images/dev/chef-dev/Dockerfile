@@ -12,7 +12,7 @@ RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezo
 RUN mkdir ${CHEF_DIR}
 
 RUN apt-get update -qq && \
-    apt-get install -qqy chef vim && \
+    apt-get install -qqy ruby-dev chef vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
