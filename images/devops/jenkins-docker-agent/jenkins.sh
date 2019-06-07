@@ -36,8 +36,6 @@ do
 done
 popd
 
-
 rm -fr /var/run/docker*
-service docker restart
 
 jenkins-agent

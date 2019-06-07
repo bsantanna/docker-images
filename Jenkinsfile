@@ -19,7 +19,10 @@ final ARCH_ARM = "armhf"
 
 // images categories
 final IMAGES_CATEGORIES = [
-    //"base"   : ["ubuntu"],
+    "base"   : [
+        "alpine",
+        "ubuntu"
+    ],
     "clients": [
         "chromium-kiosk",
         "ddclient",
@@ -35,8 +38,6 @@ final IMAGES_CATEGORIES = [
     ],
     "dev"    : [
         "chef-dev",
-        "openjdk-8-jdk",
-        "openjdk-11-jdk",
         "java-dev",
         "java-python-exec",
         "maven-build",
@@ -47,8 +48,7 @@ final IMAGES_CATEGORIES = [
         "docker-manifest-publisher",
         "jenkins",
         "jenkins-docker",
-        "jenkins-docker-agent",
-        "jenkins-docker-jnlp-agent"
+        "jenkins-docker-agent"
     ]//,"util"   : ["finance"]
 ]
 
