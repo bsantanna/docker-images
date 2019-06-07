@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/java-python-exec-armhf"
+docker push "bsantanna/java-python-exec:armhf"

@@ -1,6 +1,6 @@
 image: bsantanna/npm-build:latest
 manifests:
-  - image: bsantanna/npm-build-x86_64:latest
+  - image: bsantanna/npm-build:x86_64
     platform:
       architecture: amd64
       os: linux

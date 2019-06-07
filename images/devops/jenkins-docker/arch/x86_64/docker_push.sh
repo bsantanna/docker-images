@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo "docker push 'bsantanna/jenkins-docker-x86_64'" | bash -x
+echo "docker push 'bsantanna/jenkins-docker:x86_64'" | bash -x

@@ -1,10 +1,6 @@
 image: bsantanna/util-finance:latest
 manifests:
-  - image: bsantanna/util-finance-x86_64:latest
+  - image: bsantanna/util-finance:x86_64
     platform:
       architecture: amd64
-      os: linux
-  - image: bsantanna/util-finance-armhf:latest
-    platform:
-      architecture: arm
       os: linux

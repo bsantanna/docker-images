@@ -1,10 +1,10 @@
 image: bsantanna/ubuntu:latest
 manifests:
-  - image: bsantanna/ubuntu-x86_64:latest
+  - image: bsantanna/ubuntu:x86_64
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/ubuntu-armhf:latest
+  - image: bsantanna/ubuntu:armhf
     platform:
       architecture: arm
       os: linux

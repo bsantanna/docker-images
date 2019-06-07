@@ -1,10 +1,10 @@
 image: bsantanna/squid-proxy:latest
 manifests:
-  - image: bsantanna/squid-proxy-x86_64:latest
+  - image: bsantanna/squid-proxy:x86_64
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/squid-proxy-armhf:latest
+  - image: bsantanna/squid-proxy:armhf
     platform:
       architecture: arm
       os: linux

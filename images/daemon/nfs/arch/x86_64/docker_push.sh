@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker push "bsantanna/nfs-x86_64"
+docker push "bsantanna/nfs:x86_64"

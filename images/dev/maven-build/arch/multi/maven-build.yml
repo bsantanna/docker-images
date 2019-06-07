@@ -1,10 +1,10 @@
 image: bsantanna/maven-build:latest
 manifests:
-  - image: bsantanna/maven-build-x86_64:latest
+  - image: bsantanna/maven-build:x86_64
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/maven-build-armhf:latest
+  - image: bsantanna/maven-build:armhf
     platform:
       architecture: arm
       os: linux

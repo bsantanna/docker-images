@@ -1,10 +1,10 @@
 image: bsantanna/ddclient:latest
 manifests:
-  - image: bsantanna/ddclient-x86_64:latest
+  - image: bsantanna/ddclient:x86_64
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/ddclient-armhf:latest
+  - image: bsantanna/ddclient:armhf
     platform:
       architecture: arm
       os: linux

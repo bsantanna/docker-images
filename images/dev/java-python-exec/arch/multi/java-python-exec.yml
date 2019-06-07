@@ -1,10 +1,10 @@
 image: bsantanna/java-python-exec:latest
 manifests:
-  - image: bsantanna/java-python-exec-x86_64:latest
+  - image: bsantanna/java-python-exec:x86_64
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/java-python-exec-armhf:latest
+  - image: bsantanna/java-python-exec:armhf
     platform:
       architecture: arm
       os: linux

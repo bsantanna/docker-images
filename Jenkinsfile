@@ -38,7 +38,6 @@ final IMAGES_CATEGORIES = [
     ],
     "dev"    : [
         "chef-dev",
-        "java-dev",
         "java-python-exec",
         "maven-build",
         "npm-dev",

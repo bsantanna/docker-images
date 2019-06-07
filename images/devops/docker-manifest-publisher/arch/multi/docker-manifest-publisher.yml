@@ -1,6 +1,6 @@
 image: bsantanna/docker-manifest-publisher:latest
 manifests:
-  - image: bsantanna/docker-manifest-publisher-x86_64:latest
+  - image: bsantanna/docker-manifest-publisher:x86_64
     platform:
       architecture: amd64
       os: linux
