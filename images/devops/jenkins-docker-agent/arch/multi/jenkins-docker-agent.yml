@@ -1,6 +1,6 @@
 image: bsantanna/jenkins-docker-agent:latest
 manifests:
-  - image: bsantanna/jenkins-docker-agent-x86_64:latest
+  - image: bsantanna/jenkins-docker-agent:x86_64
     platform:
       architecture: amd64
       os: linux
