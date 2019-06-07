@@ -1,0 +1,10 @@
+image: bsantanna/alpine:latest
+manifests:
+  - image: bsantanna/alpine-x86_64:latest
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/alpine-armhf:latest
+    platform:
+      architecture: arm
+      os: linux
