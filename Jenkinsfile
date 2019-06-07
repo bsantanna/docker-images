@@ -1,8 +1,6 @@
 #!groovy
 @Library("btech-pipeline-library")
 import software.btech.pipeline.DockerUtility
-@Library("btech-pipeline-library")
-import software.btech.pipeline.DockerUtility
 
 // Docker utility
 final dockerUtility = new DockerUtility(this, "192.168.3.1:8082") // proxy host
