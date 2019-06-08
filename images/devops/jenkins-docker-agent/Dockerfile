@@ -6,7 +6,9 @@ ENV JENKINS_HOME /opt/jenkins/data
 ENV JENKINS_AGENT_VERSION 3.30
 ENV WORKSPACE_DIR /opt/jenkins/data/workspace
 
-RUN apk --update add --no-cache --virtual build-deps bash curl docker gcc git libffi-dev libc-dev make openssl-dev py-pip python-dev
+RUN apk --update add --no-cache --virtual \
+    build-deps bash curl docker gcc git libffi-dev libc-dev make openssl-dev openssh-client \
+    py-pip python-dev
 
 RUN pip install docker-compose
 

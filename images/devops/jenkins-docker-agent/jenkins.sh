@@ -38,4 +38,6 @@ popd
 
 rm -fr /var/run/docker*
 
+dockerd &
+
 jenkins-agent
