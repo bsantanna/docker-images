@@ -1,11 +1,15 @@
-FROM bsantanna/java-dev
+FROM bsantanna/alpine:x86_64
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV CREATED_AT 2018-05-12
-ENV REFRESHED_AT 2018-08-18
-ENV DEBIAN_FRONTEND noninteractive
+#ENV CREATED_AT 2018-05-12
+#ENV REFRESHED_AT 2018-08-18
+ENV REFRESHED_AT 2019-06-09
+ENV WORKSPACE_DIR /opt/workspace
 
-# settings.xml adjusts mave local repository to use #${WORKSPACE} env
-# defined in bsantanna/java-dev
+RUN apk --update add --no-cache --virtual maven
+RUN apk --update add --no-cache --virtual bash
+
 ADD config/settings.xml /etc/maven/settings.xml
+ADD ./maven-entrypoint.sh /usr/local/bin/maven-entrypoint
+RUN chmod +x /usr/local/bin/maven-entrypoint
 
-
+ENTRYPOINT ["maven-entrypoint"]
