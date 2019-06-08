@@ -49,7 +49,8 @@ RUN chmod +x /usr/local/bin/jenkins-agent
 RUN chmod +x /usr/local/bin/modprobe
 RUN echo 'hosts: files dns' > /etc/nsswitch.conf
 RUN mkdir -p /usr/share/jenkins
-RUN wget  -O /usr/share/jenkins/agent.jar \
+RUN set -eux; \
+    wget  -O /usr/share/jenkins/agent.jar \
     https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${JENKINS_AGENT_VERSION}/remoting-${JENKINS_AGENT_VERSION}.jar && \
     chmod 755 /usr/share/jenkins && \
     chmod 644 /usr/share/jenkins/agent.jar
