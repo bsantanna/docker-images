@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo "mvn clean install"| bash -x
+echo "mvn --settings /etc/maven/settings.xml clean install"| bash -x
