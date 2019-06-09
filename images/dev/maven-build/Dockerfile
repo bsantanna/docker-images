@@ -9,7 +9,7 @@ RUN apk --update add --no-cache --virtual maven
 RUN apk --update add --no-cache --virtual bash
 
 ADD config/settings.xml /etc/maven/settings.xml
-ADD ./maven-entrypoint.sh /usr/local/bin/maven-entrypoint
+ADD maven-entrypoint.sh /usr/local/bin/maven-entrypoint
 RUN chmod +x /usr/local/bin/maven-entrypoint
 
 RUN mkdir -p ${WORKSPACE_DIR}
