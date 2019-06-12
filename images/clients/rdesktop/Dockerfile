@@ -1,13 +1,9 @@
-
-FROM bsantanna/ubuntu
+FROM bsantanna/alpine
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV CREATED_AT 2017-10-11
-ENV REFRESHED_AT 2018-08-19
-ENV DEBIAN_FRONTEND noninteractive
+#ENV CREATED_AT 2017-10-11
+#ENV REFRESHED_AT 2018-08-19
+ENV REFRESHED_AT 2019-06-12
 
-RUN apt-get update -q && \
-    apt-get install -yqq rdesktop && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apk --update add --no-cache --virtual rdesktop
 
 ENTRYPOINT ["/usr/bin/rdesktop", "-f"]
