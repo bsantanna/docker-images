@@ -2,6 +2,6 @@
 
 mkdir -p "/run/sendsigs.omit.d/rpcbind"
 
-service rpcbind start
+/etc/init.d/rpcbind start
 
 unfsd -d
