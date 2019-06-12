@@ -1,12 +1,9 @@
-FROM bsantanna/ubuntu
+FROM bsantanna/alpine
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV CREATED_AT 2017-05-22
-ENV REFRESHED_AT 2018-08-19
-ENV DEBIAN_FRONTEND noninteractive
+#ENV CREATED_AT 2017-05-22
+#ENV REFRESHED_AT 2018-08-19
+ENV REFRESHED_AT 2019-06-12
 
-RUN apt-get update && \
-    apt-get install -yqq ca-certificates libexif-dev libpango1.0-0 libv4l-0 chromium-browser && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apk --update add --no-cache --virtual ca-certificates chromium
 
 ENTRYPOINT ["/usr/bin/chromium", "--user-data-dir=/tmp", "--disable-setuid-sandbox", "--kiosk"]

@@ -26,16 +26,6 @@ From the [official project page](https://sourceforge.net/p/ddclient/wiki/Home/):
  
 ---
 
-## [openssh-client](openssh-client/)
-
- - Published image: [bsantanna/openssh-client](https://hub.docker.com/r/bsantanna/openssh-client/)
-
-### Description
-This Docker image uses [openssh-client](https://packages.ubuntu.com/bionic/openssh-client) package. During image build process, access keys are configured for three git repositories: [BitBucket](https://bitucket.org), [GitHub](https://www.github.org) and [GitLab](https://www.gitlab.org).
-This image is used also as a base image to daemons or build agents which requests data from a remote source using *SSH* channel such as [git clonning](https://git-scm.com/docs/git-clone), [scp](http://man7.org/linux/man-pages/man1/scp.1.html) or [rsync](http://man7.org/linux/man-pages/man1/rsync.1.html).   
-
----
-
 ## [rdesktop](rdesktop/)
 
  - Published image: [bsantanna/rdesktop](https://hub.docker.com/r/bsantanna/rdesktop/)
