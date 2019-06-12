@@ -1,9 +1,7 @@
-FROM bsantanna/java-dev
+FROM bsantanna/alpine
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV CREATED_AT 2018-12-30
-ENV DEBIAN_FRONTEND noninteractive
+#ENV CREATED_AT 2018-12-30
+ENV REFRESHED_AT 2019-06-13
 
-RUN apt-get update -qq && \
-    apt-get install -yqq python3 python3-pip && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apk --update add --no-cache --virtual \
+    build-deps bash ca-certificates curl gcc git libc-dev make openjdk8 openssl-dev openssh-client py-pip python-dev
