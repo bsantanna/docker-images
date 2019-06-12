@@ -1,8 +1,8 @@
-FROM bsantanna/alpine:x86_64
+FROM bsantanna/alpine
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 #ENV CREATED_AT 2018-05-12
 #ENV REFRESHED_AT 2018-08-18
-ENV REFRESHED_AT 2019-06-09
+ENV REFRESHED_AT 2019-06-13
 ENV WORKSPACE_DIR /opt/workspace
 
 RUN apk --update add --no-cache --virtual maven
