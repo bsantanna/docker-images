@@ -9,7 +9,11 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV WORKSPACE_DIR /opt/workspace
 ENV CI=true
 
-RUN apk --update add --no-cache --virtual nodejs npm libpng-dev libjpeg-dev gifsicle
+RUN apk --update add --no-cache --virtual libpng-dev && \
+    apk --update add --no-cache --virtual libjpeg-dev && \
+    apk --update add --no-cache --virtual gifsicle && \
+    apk --update add --no-cache --virtual npm && \
+    apk --update add --no-cache --virtual nodejs
 
 RUN npm install --no-optional -g webpack-cli
 
@@ -18,7 +22,6 @@ ADD npm-entrypoint.sh /usr/local/bin/npm-entrypoint
 RUN chmod +x /usr/local/bin/npm-entrypoint
 
 RUN mkdir ${WORKSPACE_DIR}
-RUN useradd dev -d ${WORKSPACE_DIR} -s /bin/bash
 WORKDIR ${WORKSPACE_DIR}
 VOLUME ["${WORKSPACE_DIR}"]
 
