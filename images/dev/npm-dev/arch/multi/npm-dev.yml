@@ -4,8 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-
   - image: bsantanna/npm-build:armhf
-      platform:
-        architecture: arm
-        os: linux
+    platform:
+      architecture: arm
+      os: linux
