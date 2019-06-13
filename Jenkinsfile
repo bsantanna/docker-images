@@ -46,7 +46,6 @@ final IMAGES_CATEGORIES = [
     "devops" : [
         "docker-manifest-publisher",
         "jenkins",
-        "jenkins-docker",
         "jenkins-docker-agent"
     ]//,"util"   : ["finance"]
 ]

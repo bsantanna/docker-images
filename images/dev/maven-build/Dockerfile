@@ -5,8 +5,8 @@ MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2019-06-13
 ENV WORKSPACE_DIR /opt/workspace
 
-RUN apk --update add --no-cache --virtual maven
-RUN apk --update add --no-cache --virtual bash
+RUN apk --update add --no-cache --virtual maven && \
+    apk --update add --no-cache --virtual bash
 
 ADD config/settings.xml /etc/maven/settings.xml
 ADD maven-entrypoint.sh /usr/local/bin/maven-entrypoint
