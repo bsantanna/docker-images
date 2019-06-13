@@ -1,24 +1,21 @@
-FROM bsantanna/ubuntu
+FROM bsantanna/alpine
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV CREATED_AT 2017-08-02
+#ENV CREATED_AT 2017-08-02
 #ENV REFRESHED_AT 2018-05-12
 #ENV REFRESHED_AT 2018-08-23
-ENV REFRESHED_AT 2019-05-12
+#ENV REFRESHED_AT 2019-05-12
+ENV REFRESHED_AT 2019-06-13
 ENV DEBIAN_FRONTEND noninteractive
 ENV WORKSPACE_DIR /opt/workspace
 ENV CI=true
 
-RUN apt-get update -qq && \
-    apt-get install -yqq nodejs npm ruby ruby-dev libpng-dev libjpeg-dev libfontconfig1 gifsicle nasm autoconf git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apk --update add --no-cache --virtual nodejs npm libpng-dev libjpeg-dev gifsicle
 
 RUN npm install --no-optional -g webpack-cli
-RUN gem install compass
 
 RUN mkdir /opt/npm-dev
-ONBUILD ADD entrypoint.sh /opt/npm-dev/entrypoint.sh
-ONBUILD RUN chmod +x /opt/npm-dev/entrypoint.sh
+ADD npm-entrypoint.sh /usr/local/bin/npm-entrypoint
+RUN chmod +x /usr/local/bin/npm-entrypoint
 
 RUN mkdir ${WORKSPACE_DIR}
 RUN useradd dev -d ${WORKSPACE_DIR} -s /bin/bash
@@ -27,4 +24,4 @@ VOLUME ["${WORKSPACE_DIR}"]
 
 EXPOSE 9000
 
-ENTRYPOINT ["/opt/npm-dev/entrypoint.sh"]
+ENTRYPOINT ["npm-entrypoint"]
