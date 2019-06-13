@@ -1,11 +1,11 @@
 FROM bsantanna/npm-dev
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV CREATED_AT 2016-12-29
+#ENV CREATED_AT 2016-12-29
 #ENV REFRESHED_AT 2018-05-12
-ENV REFRESHED_AT 2018-08-18
-ENV DEBIAN_FRONTEND noninteractive
+#ENV REFRESHED_AT 2018-08-18
+ENV REFRESHED_AT 2019-06-13
 
-ADD entrypoint.sh /opt/npm-dev/entrypoint.sh
-RUN chmod +x /opt/npm-dev/entrypoint.sh
+ADD npm-entrypoint.sh /usr/local/bin/npm-entrypoint
+RUN chmod +x /usr/local/bin/npm-entrypoint
 
-ENTRYPOINT ["/opt/npm-dev/entrypoint.sh"]
+ENTRYPOINT ["npm-entrypoint"]
