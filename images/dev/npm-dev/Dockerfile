@@ -9,7 +9,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV WORKSPACE_DIR /opt/workspace
 ENV CI=true
 
-RUN apk --update add --no-cache --virtual libpng-dev && \
+RUN apk --update add --no-cache --virtual bash && \
+    apk --update add --no-cache --virtual libpng-dev && \
     apk --update add --no-cache --virtual libjpeg-dev && \
     apk --update add --no-cache --virtual gifsicle && \
     apk --update add --no-cache --virtual npm && \
