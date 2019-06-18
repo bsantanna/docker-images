@@ -148,7 +148,7 @@ catchError {
         }
 
       }
-    }, "${ARCH_ARM}" {
+    }, "${ARCH_ARM}": {
       node("micro") {
         // restart docker environment
         dockerUtility.dockerDaemonRestart(5)
