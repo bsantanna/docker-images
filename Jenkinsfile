@@ -132,38 +132,37 @@ catchError {
     }
   }
 
-  stage("Build ${ARCH_AMD64}") {
+  stage("Build") {
 
-    node("medium") {
-      // restart docker environment
-      dockerUtility.dockerDaemonRestart(5)
+    parallel "${ARCH_AMD64}": {
+      node("medium") {
+        // restart docker environment
+        dockerUtility.dockerDaemonRestart(5)
 
-      // login docker registry
-      dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
-
-      // build
-      for (String category : IMAGES_CATEGORIES.keySet()) {
-        build(ARCH_AMD64, category, IMAGES_CATEGORIES[category])
-      }
-
-    }
-
-  }
-
-  stage("Build ${ARCH_ARM}") {
-    node(ARCH_ARM) {
-      // restart docker environment
-      dockerUtility.dockerDaemonRestart(5)
-
-      // login docker registry
-      retry(5) {
+        // login docker registry
         dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
-        sh "sleep 5"
-      }
 
-      // build
-      for (String category : IMAGES_CATEGORIES.keySet()) {
-        build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
+        // build
+        for (String category : IMAGES_CATEGORIES.keySet()) {
+          build(ARCH_AMD64, category, IMAGES_CATEGORIES[category])
+        }
+
+      }
+    }, "${ARCH_ARM}" {
+      node("micro") {
+        // restart docker environment
+        dockerUtility.dockerDaemonRestart(5)
+
+        // login docker registry
+        retry(5) {
+          dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+          sh "sleep 5"
+        }
+
+        // build
+        for (String category : IMAGES_CATEGORIES.keySet()) {
+          build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
+        }
       }
     }
 
