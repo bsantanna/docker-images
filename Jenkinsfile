@@ -26,7 +26,6 @@ final IMAGES_CATEGORIES = [
     "clients": [
         "chromium-kiosk",
         "ddclient",
-        "openssh-client",
         "rdesktop"
     ],
     "daemon" : [
