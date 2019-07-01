@@ -17,7 +17,7 @@ RUN apt-get update -qq && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN gem install chef-vault knife-windows --no-ri --no-rdoc
+RUN gem install chef-vault --no-ri --no-rdoc
 
 VOLUME /opt/workspace/chef-repo
 WORKDIR /opt/workspace/chef-repo
