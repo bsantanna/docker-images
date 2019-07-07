@@ -8,4 +8,6 @@ ENV REFRESHED_AT 2019-06-17
 ADD npm-entrypoint.sh /usr/local/bin/npm-entrypoint
 RUN chmod +x /usr/local/bin/npm-entrypoint
 
+RUN npm install -g webpack
+
 ENTRYPOINT ["npm-entrypoint"]
