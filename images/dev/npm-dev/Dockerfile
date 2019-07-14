@@ -4,15 +4,12 @@ MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 #ENV REFRESHED_AT 2018-05-12
 #ENV REFRESHED_AT 2018-08-23
 #ENV REFRESHED_AT 2019-05-12
-ENV REFRESHED_AT 2019-06-13
-ENV DEBIAN_FRONTEND noninteractive
+#ENV REFRESHED_AT 2019-06-13
+ENV REFRESHED_AT 2019-07-14
 ENV WORKSPACE_DIR /opt/workspace
 ENV CI=true
 
 RUN apk --update add --no-cache --virtual bash && \
-    apk --update add --no-cache --virtual libpng-dev && \
-    apk --update add --no-cache --virtual libjpeg-dev && \
-    apk --update add --no-cache --virtual gifsicle && \
     apk --update add --no-cache --virtual npm && \
     apk --update add --no-cache --virtual nodejs
 
