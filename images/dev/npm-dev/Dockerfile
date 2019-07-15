@@ -11,7 +11,7 @@ ENV CI=true
 
 RUN apk --update add --no-cache --virtual bash npm nodejs
 
-RUN npm install --no-optional -g webpack-cli
+RUN /usr/bin/npm install --no-optional -g webpack-cli
 
 RUN mkdir /opt/npm-dev
 ADD npm-entrypoint.sh /usr/local/bin/npm-entrypoint
