@@ -10,7 +10,8 @@ ENV WORKSPACE_DIR /opt/workspace
 ENV CI=true
 
 RUN apk --update add --no-cache --virtual \
-    libpng-dev libjpeg-dev gifsicle npm nodejs bash
+    libpng-dev libjpeg-dev gifsicle && \
+    apk add --no-cache bash npm nodejs
 
 RUN npm install --no-optional -g webpack-cli
 
