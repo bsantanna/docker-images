@@ -9,7 +9,8 @@ ENV REFRESHED_AT 2019-07-14
 ENV WORKSPACE_DIR /opt/workspace
 ENV CI=true
 
-RUN apk --update add --no-cache --virtual bash npm nodejs
+RUN apk --update add bash
+RUN apk --update add npm
 
 RUN npm install --no-optional -g webpack-cli
 
