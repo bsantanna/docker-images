@@ -5,8 +5,8 @@ MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV REFRESHED_AT 2019-06-13
 ENV WORKSPACE_DIR /opt/workspace
 
-RUN apk --update add --no-cache --virtual bash && \
-    apk --update add --no-cache --virtual maven
+RUN apk --update add bash
+RUN apk --update add maven
 
 
 ADD config/settings.xml /etc/maven/settings.xml
