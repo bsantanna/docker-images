@@ -115,6 +115,8 @@ def dockerManifestPublish(registryCredentialsId, category, images) {
   }
 }
 
+properties([parameters([booleanParam(defaultValue: true, description: '', name: 'ARM')])])
+
 catchError {
 
   stage("Pipeline setup") {
@@ -147,19 +149,21 @@ catchError {
 
       }
     }, "${ARCH_ARM}": {
-      node("micro") {
-        // restart docker environment
-        dockerUtility.dockerDaemonRestart(5)
+      if (params.ARM) {
+        node("micro") {
+          // restart docker environment
+          dockerUtility.dockerDaemonRestart(5)
 
-        // login docker registry
-        retry(5) {
-          dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
-          sh "sleep 5"
-        }
+          // login docker registry
+          retry(5) {
+            dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+            sh "sleep 5"
+          }
 
-        // build
-        for (String category : IMAGES_CATEGORIES.keySet()) {
-          build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
+          // build
+          for (String category : IMAGES_CATEGORIES.keySet()) {
+            build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
+          }
         }
       }
     }
