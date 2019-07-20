@@ -1,0 +1,6 @@
+image: bsantanna/util-math:latest
+manifests:
+  - image: bsantanna/util-math:x86_64
+    platform:
+      architecture: amd64
+      os: linux
