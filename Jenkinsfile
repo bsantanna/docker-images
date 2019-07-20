@@ -46,7 +46,7 @@ final IMAGES_CATEGORIES = [
         "elastic-apm-agent",
         "jenkins-docker-agent",
         "docker-manifest-publisher"
-    ], "util": ["finance"]
+    ]//, "util": ["finance"]
 ]
 
 // reusable functions
