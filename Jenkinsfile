@@ -43,8 +43,9 @@ final IMAGES_CATEGORIES = [
         "npm-build"
     ],
     "devops" : [
-        "docker-manifest-publisher",
-        "jenkins-docker-agent"
+        "elastic-apm-agent",
+        "jenkins-docker-agent",
+        "docker-manifest-publisher"
     ], "util": ["finance"]
 ]
 
