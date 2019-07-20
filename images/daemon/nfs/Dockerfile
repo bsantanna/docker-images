@@ -3,7 +3,6 @@ MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 #ENV CREATED_AT 2017-05-16
 #ENV REFRESHED_AT 2018-08-19
 ENV REFRESHED_AT 2019-02-12
-ENV UNFS3_VERSION 0.9.22
 
 RUN apk --update add --no-cache --virtual unfs3
 
