@@ -3,7 +3,7 @@
 import software.btech.pipeline.DockerUtility
 
 // Docker utility
-final dockerUtility = new DockerUtility(this, "192.168.2.197:8082") // proxy host
+final dockerUtility = new DockerUtility(this, [proxy: "192.168.2.200:8082"]) // proxy host
 
 // credentials git
 final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
@@ -47,7 +47,7 @@ final IMAGES_CATEGORIES = [
         "jenkins-docker-agent",
         "docker-manifest-publisher"
     ],
-    "util": [
+    "util"   : [
         "math",
         "finance"
     ]
