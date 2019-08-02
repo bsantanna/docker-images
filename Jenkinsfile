@@ -3,7 +3,8 @@
 import software.btech.pipeline.DockerUtility
 
 // Docker utility
-final dockerUtility = new DockerUtility(this, [proxy: "192.168.2.200:8082"]) // proxy host
+final DOCKER_MIRROR = "192.168.2.200:8082"
+final dockerUtility = new DockerUtility(this, [proxy: DOCKER_MIRROR])
 
 // credentials git
 final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
