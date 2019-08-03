@@ -3,7 +3,7 @@
 import software.btech.pipeline.DockerUtility
 
 // Docker utility
-final dockerUtility = new DockerUtility(this)
+final dockerUtility = new DockerUtility(this, [])
 
 // credentials git
 final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
