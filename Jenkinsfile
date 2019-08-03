@@ -141,7 +141,7 @@ catchError {
   stage("Build") {
 
     parallel "${ARCH_AMD64}": {
-      node("medium") {
+      node("large") {
         // restart docker environment
         dockerUtility.dockerDaemonRestart(5)
 
@@ -177,7 +177,7 @@ catchError {
   }
 
   stage("Publish") {
-    node("medium") {
+    node {
       // restart docker environment
       dockerUtility.dockerDaemonRestart(5)
 
