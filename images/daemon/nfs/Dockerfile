@@ -4,7 +4,7 @@ MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 #ENV REFRESHED_AT 2018-08-19
 ENV REFRESHED_AT 2019-07-20
 
-RUN apk --update add --no-cache --virtual alpine-conf unfs3
+RUN apk --update add --no-cache --virtual alpine-conf rpcbind unfs3
 
 ONBUILD ADD config/exports /etc/exports
 ADD nfs-entrypoint.sh /usr/local/bin/nfs-entrypoint
