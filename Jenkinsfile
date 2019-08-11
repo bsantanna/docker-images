@@ -29,7 +29,6 @@ final IMAGES_CATEGORIES = [
         "rdesktop"
     ],
     "daemon" : [
-        "nfs",
         "nginx-ssl-proxy",
         "nginx-static",
         "smb",
