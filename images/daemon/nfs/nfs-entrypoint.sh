@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
-unfsd -d
+unfsd -u -p -d
