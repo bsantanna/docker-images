@@ -1,7 +1,10 @@
 #!groovy
-//@Library("btech-pipeline-library")
 @Library("btech-pipeline-library@1.x")
 import software.btech.pipeline.docker.DockerClientUtility
+@Library("btech-pipeline-library@1.x")
+import software.btech.pipeline.docker.DockerClientUtility
+
+//@Library("btech-pipeline-library")
 
 // Docker utility
 final dockerClientUtility = new DockerClientUtility(this, [:])
@@ -20,7 +23,7 @@ final ARCH_ARM = "armhf"
 
 // images categories
 final IMAGES_CATEGORIES = [
-    "base"   : [
+    "base": [
         "alpine",
         "ubuntu"
     ]//,
@@ -77,7 +80,9 @@ def buildImage(dockerClientUtility, arch, category, images) {
     for (String image : filteredImages) {
       dir("images/${category}/${image}/arch/${arch}") {
         dockerClientUtility.print("BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch}")
-        //sh "./docker_build.sh"
+        def buildContext = pwd()
+        def tag = "bsantanna/" + image + ":" + arch
+        dockerClientUtility.buildImage(buildContext, tag)
 
         dockerClientUtility.print("PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch}")
         //sh "./docker_push.sh"
