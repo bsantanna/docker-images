@@ -51,8 +51,8 @@ final IMAGES_CATEGORIES = [
 //        "docker-manifest-publisher"
 //    ],
 //    "util"   : [
-//        "math",
-//        "finance"
+//        "util-math",
+//        "util-finance"
 //    ]
 ]
 
