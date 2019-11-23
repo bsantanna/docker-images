@@ -1,6 +1,5 @@
 #!groovy
-//@Library("btech-pipeline-library")
-@Library("btech-pipeline-library@1.x")
+@Library("btech-pipeline-library")
 import software.btech.pipeline.docker.DockerClientUtility
 
 // Docker utility
@@ -86,31 +85,31 @@ def buildImage(dockerClientUtility, arch, category, images) {
 
 }
 
-//def dockerManifestPublish(registryCredentialsId, category, images) {
-//
-//  // unstash
-//  unstash "sources"
-//
-//  for (String image : images) {
-//    retry(30) {
-//      dir("images/${category}/${image}/arch/multi/") {
-//        echo "PUBLISHING DOCKER IMAGE MANIFEST FOR ${image}"
-//
-//        // publish using docker-manifest-publisher image
-//        withCredentials([[$class          : 'UsernamePasswordMultiBinding',
-//                          credentialsId   : registryCredentialsId,
-//                          usernameVariable: 'DOCKER_REGISTRY_USERNAME',
-//                          passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
-//          sh "docker run -i --rm " +
-//              " -e DOCKER_REGISTRY_USERNAME=${env.DOCKER_REGISTRY_USERNAME} " +
-//              " -e DOCKER_REGISTRY_PASSWORD=${env.DOCKER_REGISTRY_PASSWORD} " +
-//              " -v \$(pwd):/opt/workspace/ bsantanna/docker-manifest-publisher /opt/workspace/${image}.yml"
-//        }
-//      }
-//      sh "sleep 5"
-//    }
-//  }
-//}
+def dockerManifestPublish(registryCredentialsId, category, images) {
+
+  // unstash
+  unstash "sources"
+
+  for (String image : images) {
+    retry(30) {
+      dir("images/${category}/${image}/arch/multi/") {
+        echo "PUBLISHING DOCKER IMAGE MANIFEST FOR ${image}"
+
+        // publish using docker-manifest-publisher image
+        withCredentials([[$class          : 'UsernamePasswordMultiBinding',
+                          credentialsId   : registryCredentialsId,
+                          usernameVariable: 'DOCKER_REGISTRY_USERNAME',
+                          passwordVariable: 'DOCKER_REGISTRY_PASSWORD']]) {
+          sh "docker run -i --rm " +
+              " -e DOCKER_REGISTRY_USERNAME=${env.DOCKER_REGISTRY_USERNAME} " +
+              " -e DOCKER_REGISTRY_PASSWORD=${env.DOCKER_REGISTRY_PASSWORD} " +
+              " -v \$(pwd):/opt/workspace/ bsantanna/docker-manifest-publisher /opt/workspace/${image}.yml"
+        }
+      }
+      sh "sleep 5"
+    }
+  }
+}
 
 catchError {
 
@@ -131,12 +130,18 @@ catchError {
 
     parallel "${ARCH_AMD64}": {
       node("dockerClient&&" + ARCH_AMD64) {
+        // login docker registry
+        dockerClientUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+
         for (String category : IMAGES_CATEGORIES.keySet()) {
           buildImage(dockerClientUtility, ARCH_AMD64, category, IMAGES_CATEGORIES[category])
         }
       }
     }, "${ARCH_ARM}": {
       node("dockerClient&&" + ARCH_ARM) {
+        // login docker registry
+        dockerClientUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+
         for (String category : IMAGES_CATEGORIES.keySet()) {
           buildImage(dockerClientUtility, ARCH_ARM, category, IMAGES_CATEGORIES[category])
         }
@@ -152,7 +157,7 @@ catchError {
 
       // publish each image
       for (String category : IMAGES_CATEGORIES.keySet()) {
-        //dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
+        dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
       }
     }
   }
