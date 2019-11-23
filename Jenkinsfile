@@ -1,10 +1,7 @@
 #!groovy
-@Library("btech-pipeline-library@1.x")
-import software.btech.pipeline.docker.DockerClientUtility
-@Library("btech-pipeline-library@1.x")
-import software.btech.pipeline.docker.DockerClientUtility
-
 //@Library("btech-pipeline-library")
+@Library("btech-pipeline-library@1.x")
+import software.btech.pipeline.docker.DockerClientUtility
 
 // Docker utility
 final dockerClientUtility = new DockerClientUtility(this, [:])
@@ -23,37 +20,37 @@ final ARCH_ARM = "armhf"
 
 // images categories
 final IMAGES_CATEGORIES = [
-    "base": [
+    "base"   : [
         "alpine",
         "ubuntu"
-    ]//,
-//    "clients": [
-//        "chromium-kiosk",
-//        "ddclient",
-//        "rdesktop"
-//    ],
-//    "daemon" : [
-//        "nginx-ssl-proxy",
-//        "nginx-static",
-//        "smb",
-//        "squid-proxy"
-//    ],
-//    "dev"    : [
-//        "chef-dev",
-//        "maven-build",
-//        "java-python-exec",
-//        "npm-dev",
-//        "npm-build"
-//    ],
-//    "devops" : [
-//        "elastic-apm-agent",
-//        "jenkins-docker-agent",
-//        "docker-manifest-publisher"
-//    ],
-//    "util"   : [
-//        "util-math",
-//        "util-finance"
-//    ]
+    ],
+    "clients": [
+        "chromium-kiosk",
+        "ddclient",
+        "rdesktop"
+    ],
+    "daemon" : [
+        "nginx-ssl-proxy",
+        "nginx-static",
+        "smb",
+        "squid-proxy"
+    ],
+    "dev"    : [
+        "chef-dev",
+        "maven-build",
+        "java-python-exec",
+        "npm-dev",
+        "npm-build"
+    ],
+    "devops" : [
+        "elastic-apm-agent",
+        "jenkins-docker-agent",
+        "docker-manifest-publisher"
+    ],
+    "util"   : [
+        "util-math",
+        "util-finance"
+    ]
 ]
 
 // reusable functions
@@ -81,11 +78,8 @@ def buildImage(dockerClientUtility, arch, category, images) {
       dir("images/${category}/${image}/arch/${arch}") {
         def buildContext = pwd()
         def tag = "bsantanna/" + image + ":" + arch
-
-        dockerClientUtility.print("\nBUILDING DOCKER IMAGE:\n\tTAG: ${tag} \n\tCONTEXT: ${buildContext}")
         dockerClientUtility.buildImage(buildContext, tag)
-        dockerClientUtility.print("\nPUSHING IMAGE TO REGISTRY:\n\tTAG: ${tag}")
-        // todo
+        // todo push
       }
     }
   }
@@ -135,19 +129,19 @@ catchError {
 
   stage("Build") {
 
-    //parallel "${ARCH_AMD64}": {
-    node("dockerClient") {
-      for (String category : IMAGES_CATEGORIES.keySet()) {
-        buildImage(dockerClientUtility, ARCH_AMD64, category, IMAGES_CATEGORIES[category])
+    parallel "${ARCH_AMD64}": {
+      node("dockerClient") {
+        for (String category : IMAGES_CATEGORIES.keySet()) {
+          buildImage(dockerClientUtility, ARCH_AMD64, category, IMAGES_CATEGORIES[category])
+        }
+      }
+    }, "${ARCH_ARM}": {
+      node("micro") {
+        for (String category : IMAGES_CATEGORIES.keySet()) {
+          buildImage(dockerClientUtility, ARCH_ARM, category, IMAGES_CATEGORIES[category])
+        }
       }
     }
-    //}, "${ARCH_ARM}": {
-    // node("micro") {
-    //   for (String category : IMAGES_CATEGORIES.keySet()) {
-    //     buildImage(ARCH_ARM, category, IMAGES_CATEGORIES[category])
-    //   }
-    // }
-    //}
 
   }
 
