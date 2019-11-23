@@ -47,7 +47,7 @@ final IMAGES_CATEGORIES = [
         "jenkins-docker-agent",
         "docker-manifest-publisher"
     ],
-    "util"   : [
+    "utils"   : [
         "util-math",
         "util-finance"
     ]
@@ -79,7 +79,7 @@ def buildImage(dockerClientUtility, arch, category, images) {
         def buildContext = pwd()
         def tag = "bsantanna/" + image + ":" + arch
         dockerClientUtility.buildImage(buildContext, tag)
-        // todo push
+        sh "docker push " + tag
       }
     }
   }
