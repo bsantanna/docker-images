@@ -2,11 +2,6 @@
 @Library("btech-pipeline-library")
 import software.btech.pipeline.DockerUtility
 
-// Job properties
-properties([parameters([
-    booleanParam(defaultValue: true, description: 'Build ARM based images', name: 'ARM')]
-)])
-
 // Docker utility
 final dockerUtility = new DockerUtility(this, [skipDaemonSetup: true])
 
@@ -58,7 +53,7 @@ final IMAGES_CATEGORIES = [
 ]
 
 // reusable functions
-def buildImage(arch, category, images) {
+def build(arch, category, images) {
   // cleanup workspace
   deleteDir()
 
@@ -72,23 +67,30 @@ def buildImage(arch, category, images) {
     if (archExists) {
       filteredImages.add(image)
     } else {
-      dockerClient.print("NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch}")
+      echo "NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch}"
     }
   }
 
   // build each image
   if (!filteredImages.isEmpty()) {
     for (String image : filteredImages) {
-      dir("images/${category}/${image}/arch/${arch}") {
-        dockerUtility.print("BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch}")
-        //sh "./docker_build.sh"
-
-        dockerUtility.print("PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch}")
-        //sh "./docker_push.sh"
+      retry(5) {
+        dockerBuildAndPush(arch, category, image)
+        sh "sleep 5"
       }
     }
   }
 
+}
+
+def dockerBuildAndPush(arch, category, image) {
+  dir("images/${category}/${image}/arch/${arch}") {
+    echo "BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch}"
+    sh "./docker_build.sh"
+
+    echo "PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch}"
+    sh "./docker_push.sh"
+  }
 }
 
 def dockerManifestPublish(registryCredentialsId, category, images) {
@@ -117,6 +119,8 @@ def dockerManifestPublish(registryCredentialsId, category, images) {
   }
 }
 
+properties([parameters([booleanParam(defaultValue: true, description: '', name: 'ARM')])])
+
 catchError {
 
   stage("Pipeline setup") {
@@ -136,15 +140,33 @@ catchError {
 
     parallel "${ARCH_AMD64}": {
       node("large") {
+        // restart docker environment
+        dockerUtility.dockerDaemonRestart(5)
+
+        // login docker registry
+        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+
+        // build
         for (String category : IMAGES_CATEGORIES.keySet()) {
-          buildImage(ARCH_AMD64, category, IMAGES_CATEGORIES[category])
+          build(ARCH_AMD64, category, IMAGES_CATEGORIES[category])
         }
+
       }
     }, "${ARCH_ARM}": {
       if (params.ARM) {
         node("micro") {
+          // restart docker environment
+          dockerUtility.dockerDaemonRestart(5)
+
+          // login docker registry
+          retry(5) {
+            dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+            sh "sleep 5"
+          }
+
+          // build
           for (String category : IMAGES_CATEGORIES.keySet()) {
-            buildImage(ARCH_ARM, category, IMAGES_CATEGORIES[category])
+            build(ARCH_ARM, category, IMAGES_CATEGORIES[category])
           }
         }
       }
@@ -154,12 +176,18 @@ catchError {
 
   stage("Publish") {
     node {
+      // restart docker environment
+      dockerUtility.dockerDaemonRestart(5)
+
       // login docker registry
-      dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+      retry(5) {
+        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
+        sh "sleep 5"
+      }
 
       // publish each image
       for (String category : IMAGES_CATEGORIES.keySet()) {
-        //dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
+        dockerManifestPublish(REGISTRY_CREDENTIALS_ID, category, IMAGES_CATEGORIES[category])
       }
     }
   }
