@@ -115,7 +115,7 @@ def buildImage(dockerClientUtility, arch, category, images) {
 catchError {
 
   stage("Pipeline setup") {
-    node {
+    node("dockerClient") {
       // cleanup workspace
       deleteDir()
 
@@ -130,13 +130,13 @@ catchError {
   stage("Build") {
 
     parallel "${ARCH_AMD64}": {
-      node("dockerClient") {
+      node("dockerClient&&" + ARCH_AMD64) {
         for (String category : IMAGES_CATEGORIES.keySet()) {
           buildImage(dockerClientUtility, ARCH_AMD64, category, IMAGES_CATEGORIES[category])
         }
       }
     }, "${ARCH_ARM}": {
-      node("micro") {
+      node("dockerClient&&" + ARCH_ARM) {
         for (String category : IMAGES_CATEGORIES.keySet()) {
           buildImage(dockerClientUtility, ARCH_ARM, category, IMAGES_CATEGORIES[category])
         }
@@ -146,7 +146,7 @@ catchError {
   }
 
   stage("Publish") {
-    node("dockerClient") {
+    node("dockerClient&&" + ARCH_AMD64) {
       // login docker registry
       dockerClientUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
 
