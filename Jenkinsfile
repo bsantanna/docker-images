@@ -71,7 +71,7 @@ def buildImage(dockerClientUtility, arch, category, images) {
     if (archExists) {
       filteredImages.add(image)
     } else {
-      dockerClientUtility.print("NOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch}")
+      dockerClientUtility.print("\nNOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch}")
     }
   }
 
@@ -79,13 +79,13 @@ def buildImage(dockerClientUtility, arch, category, images) {
   if (!filteredImages.isEmpty()) {
     for (String image : filteredImages) {
       dir("images/${category}/${image}/arch/${arch}") {
-        dockerClientUtility.print("BUILDING DOCKER IMAGE ${image} FOR ARCHITECTURE ${arch}")
         def buildContext = pwd()
         def tag = "bsantanna/" + image + ":" + arch
-        dockerClientUtility.buildImage(buildContext, tag)
 
-        dockerClientUtility.print("PUSHING IMAGE TO REGISTRY ${image} FOR ARCHITECTURE ${arch}")
-        //sh "./docker_push.sh"
+        dockerClientUtility.print("\nBUILDING DOCKER IMAGE:\n\tTAG: ${tag} \n\tCONTEXT: ${buildContext}")
+        dockerClientUtility.buildImage(buildContext, tag)
+        dockerClientUtility.print("\nPUSHING IMAGE TO REGISTRY:\n\tTAG: ${tag}")
+        // todo
       }
     }
   }
