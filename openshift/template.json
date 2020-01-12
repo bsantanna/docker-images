@@ -1,0 +1,41 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "docker-images-template",
+    "annotations": {
+      "description": "Personal collection of Docker Images: https://hub.docker.com/u/bsantanna/",
+      "tags": "docker,image"
+    }
+  },
+  "objects": [
+    {
+      "kind": "Secret",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "registry-secret"
+      },
+      "stringData": {
+        "registry-user": "${REGISTRY_USER}",
+        "registry-password": "${REGISTRY_PASSWORD}"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "REGISTRY_USER",
+      "description": "Docker registry username",
+      "from": "[a-zA-Z0-9]{3}",
+      "required": true
+    },
+    {
+      "name": "REGISTRY_PASSWORD",
+      "description": "Docker registry password",
+      "from": "[a-zA-Z0-9]{3}",
+      "required": true
+    }
+  ],
+  "labels": {
+    "template": "docker-images-template"
+  }
+}
