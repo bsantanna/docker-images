@@ -5,5 +5,5 @@
  - **[daemon](daemon/)**   : service oriented software which performs some work or serves some content.
  - **[dev](dev/)**         : base-images used for general software development.
  - **[devops](devops/)**   : base-images used for devops purposes.
- - **[util](util/)**       : base-images used for software processing purposes.
+ - **[util](util/)**       : base-images used for data processing purposes.
  
