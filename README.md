@@ -22,8 +22,8 @@ topics:
  * Internet-of-Things (IoT)
  * Finances
  
-This effort started back in 2014 when I started using [Docker](https://www.docker.com), at some point in time 
-the production of these binary artifacts had to be automated and using Jenkins Pipelines with Openshift 
+This effort started back in 2014 when became a [Docker](https://www.docker.com) user, at some point in time 
+the production of the images had to be automated and using Jenkins Pipelines with Openshift 
 was a perfect match for the commodity hardware I had at hand. 
- 
+
 ---
