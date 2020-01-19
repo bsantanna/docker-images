@@ -66,13 +66,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/base/alpine/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/base/alpine/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -128,13 +126,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/base/ubuntu/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/base/ubuntu/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -190,13 +186,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/clients/chromium-kiosk/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/clients/chromium-kiosk/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -252,13 +246,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/clients/ddclient/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/clients/ddclient/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -314,13 +306,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/clients/rdesktop/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/clients/rdesktop/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -376,13 +366,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/dev/chef-dev/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/dev/chef-dev/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -438,13 +426,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/dev/java-python-exec/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/dev/java-python-exec/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -500,13 +486,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/dev/maven-build/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/dev/maven-build/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -562,13 +546,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/dev/npm-build/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/dev/npm-build/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -624,13 +606,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/dev/npm-dev/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/dev/npm-dev/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -686,13 +666,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/devops/docker-manifest-publisher/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/devops/docker-manifest-publisher/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -748,13 +726,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/devops/elastic-apm-agent/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/devops/elastic-apm-agent/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -810,13 +786,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/devops/jenkins-docker-agent/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/devops/jenkins-docker-agent/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -872,13 +846,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/servers/nginx-ssl-proxy/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/servers/nginx-ssl-proxy/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -934,13 +906,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/servers/nginx-static/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/servers/nginx-static/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -996,13 +966,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/servers/smb/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/servers/smb/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -1058,13 +1026,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/servers/squid-proxy/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/servers/squid-proxy/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -1120,13 +1086,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/utils/util-finance/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/utils/util-finance/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
@@ -1182,13 +1146,11 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
-          }
+          },
+          "contextDir": "images/utils/util-math/arch/x86_64"
         },
         "strategy": {
-          "type": "Docker",
-          "dockerStrategy": {
-            "dockerfilePath": "images/utils/util-math/arch/x86_64/Dockerfile"
-          }
+          "type": "Docker"
         },
         "output": {
           "to": {
