@@ -5,4 +5,6 @@ ENV REFRESHED_AT 2020-01-21
 
 RUN apk --update add py3-numpy
 RUN apk --update add py3-scipy
-RUN pip3 install --upgrade numpy sympy pandas==0.24.1 matplotlib
+RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+RUN apk --update add py3-pandas@testing
+RUN pip3 install --upgrade sympy matplotlib
