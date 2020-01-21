@@ -5,6 +5,4 @@ ENV REFRESHED_AT 2020-01-21
 
 RUN apk --update add py3-numpy
 RUN apk --update add py3-scipy
-RUN apk --update add py3-pandas
-RUN apk --update add py3-matplotlib
-RUN pip3 install --upgrade sympy
+RUN pip3 install --upgrade sympy pandas matplotlib
