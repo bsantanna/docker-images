@@ -1,4 +1,4 @@
-FROM bsantanna/maven-build
+FROM bsantanna/maven-build:x86_64
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 #ENV CREATED_AT 2018-12-30
 ENV REFRESHED_AT 2019-06-13

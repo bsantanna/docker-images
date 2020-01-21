@@ -1,4 +1,4 @@
-FROM bsantanna/util-math
+FROM bsantanna/util-math:x86_64
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2018-12-30
 

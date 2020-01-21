@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM bsantanna/ubuntu:x86_64
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2018-08-19
 ENV DEBIAN_FRONTEND noninteractive

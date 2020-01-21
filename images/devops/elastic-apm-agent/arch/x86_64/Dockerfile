@@ -1,4 +1,4 @@
-FROM bsantanna/java-python-exec
+FROM bsantanna/java-python-exec:x86_64
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2019-07-20
 ENV APM_ROOT "/usr/share/elastic"

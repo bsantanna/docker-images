@@ -1,4 +1,4 @@
-FROM bsantanna/ubuntu
+FROM bsantanna/ubuntu:x86_64
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2017-05-15
 ENV REFRESHED_AT 2018-08-19
