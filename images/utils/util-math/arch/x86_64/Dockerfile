@@ -1,8 +1,9 @@
 FROM bsantanna/java-python-exec
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
-ENV CREATED_AT 2019-07-20
+# ENV CREATED_AT 2019-07-20
+ENV REFRESHED_AT 2020-01-21
 
-RUN apk --update add libffi-dev openblas-dev freetype-dev cython automake
+RUN apk --update add gfortran libpng-dev libffi-dev openblas-dev freetype-dev cython automake
 
 RUN pip3 install --upgrade cython
 RUN pip3 install --upgrade numpy
