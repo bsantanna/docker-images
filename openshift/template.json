@@ -83,7 +83,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -147,7 +146,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -211,7 +209,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -275,7 +272,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -339,7 +335,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -403,7 +398,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -467,7 +461,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -531,7 +524,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -595,7 +587,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -659,7 +650,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -723,7 +713,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -787,7 +776,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -851,7 +839,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -915,7 +902,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -979,7 +965,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -1043,7 +1028,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -1107,7 +1091,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -1171,7 +1154,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
@@ -1235,7 +1217,6 @@
         },
         "resources": {},
         "nodeSelector": {
-          "node-role.kubernetes.io/compute": true,
           "beta.kubernetes.io/arch": "amd64"
         }
       },
