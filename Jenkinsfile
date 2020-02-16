@@ -42,11 +42,12 @@ final IMAGE_MAP = [
         "elastic-apm-agent",
         "jenkins-docker-agent",
         "docker-manifest-publisher"
-    ],
-    "utils"   : [
-        "util-math",
-        "util-finance"
     ]
+//    ],
+//     "utils"   : [
+//         "util-math",
+//         "util-finance"
+//     ]
 ]
 
 def buildImage(dockerClientUtility, arch, baseDir, images) {

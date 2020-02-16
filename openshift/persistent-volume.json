@@ -1,0 +1,20 @@
+{
+  "kind": "PersistentVolume",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "docker-images-volume"
+  },
+  "spec": {
+    "capacity": {
+      "storage": "1Gi"
+    },
+    "accessModes": [
+      "ReadWriteOnce"
+    ],
+    "nfs": {
+      "path": "/cluster-data/docker-images",
+      "server": "sdam-apps"
+    },
+    "persistentVolumeReclaimPolicy": "Retain"
+  }
+}
