@@ -14,6 +14,73 @@ final OPENSHIFT_PROJECT = "docker-images"
 final dockerUtility = new DockerClientUtility(this, [:])
 final openshiftUtility = new OpenShiftClientUtility(this, OPENSHIFT_CLUSTER)
 
+// images categories
+final IMAGE_MAP = [
+    "base"   : [
+        "alpine",
+        "ubuntu"
+    ],
+    "clients": [
+        "chromium-kiosk",
+        "ddclient",
+        "rdesktop"
+    ],
+    "daemon" : [
+        "nginx-ssl-proxy",
+        "nginx-static",
+        "smb",
+        "squid-proxy"
+    ],
+    "dev"    : [
+        "chef-dev",
+        "maven-build",
+        "java-python-exec",
+        "npm-dev",
+        "npm-build"
+    ],
+    "devops" : [
+        "elastic-apm-agent",
+        "jenkins-docker-agent",
+        "docker-manifest-publisher"
+    ],
+    "utils"   : [
+        "util-math",
+        "util-finance"
+    ]
+]
+
+def buildImage(dockerClientUtility, arch, baseDir, images) {
+  // cleanup workspace
+  deleteDir()
+
+  // unstash
+  unstash "sources"
+
+  // filter image list
+  List<String> filteredImages = []
+  for (String image : images) {
+    def archExists = fileExists "images/${baseDir}/${image}/arch/${arch}"
+    if (archExists) {
+      filteredImages.add(image)
+    } else {
+      dockerClientUtility.print("\nNOT FOUND IMAGE ${image} FOR ARCHITECTURE ${arch}")
+    }
+  }
+
+  // build each image
+  if (!filteredImages.isEmpty()) {
+    for (String image : filteredImages) {
+      dir("images/${baseDir}/${image}/arch/${arch}") {
+        def buildContext = pwd()
+        def tag = "bsantanna/" + image + ":" + arch
+        dockerClientUtility.buildImage(buildContext, tag)
+        sh "docker push " + tag
+      }
+    }
+  }
+
+}
+
 catchError {
 
   stage("Pipeline setup") {
@@ -30,14 +97,19 @@ catchError {
   }
 
   stage("armhf build") {
-    node("armhf && dockerClient") {
-      // TODO: use dockerUtility to build images
+    node("armhf") {
+      // dockerUtility to build images
+      dockerUtility.print("Building ARM Images")
+
+      for (String baseDir : IMAGE_MAP.keySet()) {
+        buildImage(dockerUtility, "armhf", baseDir, IMAGE_MAP[baseDir])
+      }
     }
   }
 
   stage("x86_64 build") {
     node("openshiftClient") {
-      // openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
+     openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
     }
   }
 
