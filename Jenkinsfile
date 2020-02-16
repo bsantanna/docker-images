@@ -1,5 +1,5 @@
 #!groovy
-@Library("btech-pipeline-library")
+@Library("btech-pipeline-library@1.x")
 
 import software.btech.pipeline.openshift.OpenShiftClientUtility
 
