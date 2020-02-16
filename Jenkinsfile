@@ -9,6 +9,8 @@ final ORIGIN_GIT_URL = "git@github.com:bsantanna/docker-images.git"
 final BRANCH_NAME = "3.x"
 final OPENSHIFT_CLUSTER = "sdam-openshift"
 final OPENSHIFT_PROJECT = "docker-images"
+final OPENSHIFT_NFS_VOLUME = "/cluster-data/docker-images"
+final OPENSHIFT_JOB_TEMPLATE = "manifest-publisher-job.json"
 
 // pipeline utilities
 final dockerUtility = new DockerClientUtility(this, [:])
@@ -25,12 +27,6 @@ final IMAGE_MAP = [
         "ddclient",
         "rdesktop"
     ],
-    "daemon" : [
-        "nginx-ssl-proxy",
-        "nginx-static",
-        "smb",
-        "squid-proxy"
-    ],
     "dev"    : [
         "chef-dev",
         "maven-build",
@@ -42,6 +38,12 @@ final IMAGE_MAP = [
         "elastic-apm-agent",
         "jenkins-docker-agent",
         "docker-manifest-publisher"
+    ],
+    "servers" : [
+        "nginx-ssl-proxy",
+        "nginx-static",
+        "smb",
+        "squid-proxy"
     ]
 //    ],
 //     "utils"   : [
@@ -97,7 +99,7 @@ catchError {
     }
   }
 
-  stage("armhf build") {
+  stage("Build armhf") {
     node("armhf") {
       // dockerUtility to build images
       dockerUtility.print("Building ARM Images")
@@ -108,9 +110,46 @@ catchError {
     }
   }
 
-  stage("x86_64 build") {
+  stage("Build x86_64") {
     node("openshiftClient") {
-     openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
+     openshiftUtility.buildProject(OPENSHIFT_PROJECT, 35)
+    }
+  }
+
+  stage("Deploy Manifest Publisher Job") {
+    node("openshiftClient") {
+      unstash "sources"
+
+      // cleanup remote share
+      sh "rm ${OPENSHIFT_NFS_VOLUME}/*"
+
+      for (String baseDir : IMAGE_MAP.keySet()) {
+        for (String image : IMAGE_MAP[baseDir]) {
+          dir("images/${baseDir}/${image}/arch/multi") {
+            sh "cp ${image}.yml ${OPENSHIFT_NFS_VOLUME}/"
+          }
+        }
+      }
+
+      dir("openshift") {
+
+        // copy job entrypoint
+        sh "cp manifest-publisher-job.sh ${OPENSHIFT_NFS_VOLUME}/"
+
+        // execute cluster commands
+        openshift.withCluster(OPENSHIFT_CLUSTER) {
+
+          // in project scope
+          openshift.withProject(OPENSHIFT_PROJECT) {
+
+            // delete project previous jobs
+            openshift.selector( "job" ).delete()
+
+            // create new job from json
+            openshift.create( readFile( OPENSHIFT_JOB_TEMPLATE ) )
+          }
+        }
+      }
     }
   }
 
