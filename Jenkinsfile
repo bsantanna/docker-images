@@ -1,21 +1,36 @@
 #!groovy
+@Library("btech-pipeline-library")
 
-stage("prototype_build"){
-    node('openshiftClient') {
-        openshift.withCluster('sdam-openshift') {
-            openshift.withProject('docker-images') {
+import software.btech.pipeline.openshift.OpenShiftClientUtility
 
-                def builds = openshift.selector('bc')
-                builds.withEach {
-                    it.startBuild()
-                }
+final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
+final ORIGIN_GIT_URL = "git@github.com:bsantanna/docker-images.git"
+final BRANCH_NAME = "3.x"
+final OPENSHIFT_CLUSTER = "sdam-openshift"
+final OPENSHIFT_PROJECT = "docker-images"
 
-                timeout(30) {
-                    builds.untilEach(1) {
-                        return it.object().status.phase == "Complete"
-                    }
-                }
-            }
-        }
+// pipeline utilities
+final openshiftUtility = new OpenShiftClientUtility(this, OPENSHIFT_CLUSTER)
+
+catchError {
+
+  stage("Pipeline setup") {
+    node("gitClient") {
+      // cleanup workspace
+      deleteDir()
+
+      // checkout
+      git credentialsId: ORIGIN_GIT_CREDENTIALS_ID, url: ORIGIN_GIT_URL, branch: BRANCH_NAME
+
+      // stash
+      stash name: "sources"
     }
+  }
+
+  stage("x86_64 build") {
+    node("openshiftClient"){
+      openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
+    }
+  }
+
 }
