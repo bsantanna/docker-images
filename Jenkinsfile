@@ -1,6 +1,7 @@
 #!groovy
 @Library("btech-pipeline-library@1.x")
 
+import software.btech.pipeline.docker.DockerClientUtility
 import software.btech.pipeline.openshift.OpenShiftClientUtility
 
 final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
@@ -10,6 +11,7 @@ final OPENSHIFT_CLUSTER = "sdam-openshift"
 final OPENSHIFT_PROJECT = "docker-images"
 
 // pipeline utilities
+final dockerUtility = new DockerClientUtility(this, [:])
 final openshiftUtility = new OpenShiftClientUtility(this, OPENSHIFT_CLUSTER)
 
 catchError {
@@ -27,9 +29,15 @@ catchError {
     }
   }
 
+  stage("armhf build") {
+    node("armhf && dockerClient") {
+      // TODO: use dockerUtility to build images
+    }
+  }
+
   stage("x86_64 build") {
-    node("openshiftClient"){
-      openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
+    node("openshiftClient") {
+      // openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
     }
   }
 
