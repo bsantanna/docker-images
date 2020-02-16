@@ -121,12 +121,12 @@ catchError {
       unstash "sources"
 
       // cleanup remote share
-      sh "rm ${OPENSHIFT_NFS_VOLUME}/*"
+      sh "rm ${OPENSHIFT_NFS_VOLUME}/manifest-publisher-job/* || true"
 
       for (String baseDir : IMAGE_MAP.keySet()) {
         for (String image : IMAGE_MAP[baseDir]) {
           dir("images/${baseDir}/${image}/arch/multi") {
-            sh "cp ${image}.yml ${OPENSHIFT_NFS_VOLUME}/"
+            sh "cp ${image}.yml ${OPENSHIFT_NFS_VOLUME}/manifest-publisher-job/"
           }
         }
       }
