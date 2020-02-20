@@ -57,6 +57,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -120,6 +122,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -183,6 +187,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -246,6 +252,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -309,6 +317,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -372,6 +382,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -435,6 +447,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -498,6 +512,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -561,6 +577,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -624,6 +642,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -687,6 +707,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -750,6 +772,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -813,6 +837,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -876,6 +902,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -939,6 +967,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -1002,6 +1032,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -1065,6 +1097,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -1128,6 +1162,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
@@ -1191,6 +1227,8 @@
         }
       },
       "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
         "triggers": [
           {
             "type": "GitHub",
