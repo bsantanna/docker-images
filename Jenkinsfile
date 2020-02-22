@@ -85,72 +85,72 @@ def buildImage(dockerClientUtility, arch, baseDir, images) {
 }
 
 catchError {
+  timestamps {
+    stage("Pipeline setup") {
+      node("gitClient") {
+        // cleanup workspace
+        deleteDir()
 
-  stage("Pipeline setup") {
-    node("gitClient") {
-      // cleanup workspace
-      deleteDir()
+        // checkout
+        git credentialsId: ORIGIN_GIT_CREDENTIALS_ID, url: ORIGIN_GIT_URL, branch: BRANCH_NAME
 
-      // checkout
-      git credentialsId: ORIGIN_GIT_CREDENTIALS_ID, url: ORIGIN_GIT_URL, branch: BRANCH_NAME
-
-      // stash
-      stash name: "sources"
-    }
-  }
-
-  stage("Build armhf") {
-    node("armhf") {
-      // dockerUtility to build images
-      dockerUtility.print("Building ARM Images")
-
-      for (String baseDir : IMAGE_MAP.keySet()) {
-        buildImage(dockerUtility, "armhf", baseDir, IMAGE_MAP[baseDir])
+        // stash
+        stash name: "sources"
       }
     }
-  }
 
-  stage("Build x86_64") {
-    node("openshiftClient") {
-     openshiftUtility.buildProject(OPENSHIFT_PROJECT, 35)
-    }
-  }
+    stage("Build armhf") {
+      node("armhf") {
+        // dockerUtility to build images
+        dockerUtility.print("Building ARM Images")
 
-  stage("Deploy Manifest Publisher Job") {
-    node("openshiftClient") {
-      unstash "sources"
-
-      // cleanup remote share
-      sh "rm ${OPENSHIFT_NFS_VOLUME}/manifest-publisher-job/* || true"
-
-      for (String baseDir : IMAGE_MAP.keySet()) {
-        for (String image : IMAGE_MAP[baseDir]) {
-          dir("images/${baseDir}/${image}/arch/multi") {
-            sh "cp ${image}.yml ${OPENSHIFT_NFS_VOLUME}/manifest-publisher-job/"
-          }
-        }
-      }
-
-      dir("openshift") {
-
-        // copy job entrypoint
-        sh "cp manifest-publisher-job.sh ${OPENSHIFT_NFS_VOLUME}/"
-
-        // execute cluster commands
-        openshift.withCluster(OPENSHIFT_CLUSTER) {
-
-          // in project scope
-          openshift.withProject(OPENSHIFT_PROJECT) {
-
-            // delete project previous jobs
-            openshift.selector( "job" ).delete()
-
-            // create new job from json
-            openshift.create( readFile( OPENSHIFT_JOB_TEMPLATE ) )
-          }
+        for (String baseDir : IMAGE_MAP.keySet()) {
+          buildImage(dockerUtility, "armhf", baseDir, IMAGE_MAP[baseDir])
         }
       }
     }
-  }
 
+    stage("Build x86_64") {
+      node("openshiftClient") {
+       openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
+      }
+    }
+
+    stage("Deploy Manifest Publisher Job") {
+      node("openshiftClient") {
+        unstash "sources"
+
+        // cleanup remote share
+        sh "rm ${OPENSHIFT_NFS_VOLUME}/manifest-publisher-job/* || true"
+
+        for (String baseDir : IMAGE_MAP.keySet()) {
+          for (String image : IMAGE_MAP[baseDir]) {
+            dir("images/${baseDir}/${image}/arch/multi") {
+              sh "cp ${image}.yml ${OPENSHIFT_NFS_VOLUME}/manifest-publisher-job/"
+            }
+          }
+        }
+
+        dir("openshift") {
+
+          // copy job entrypoint
+          sh "cp manifest-publisher-job.sh ${OPENSHIFT_NFS_VOLUME}/"
+
+          // execute cluster commands
+          openshift.withCluster(OPENSHIFT_CLUSTER) {
+
+            // in project scope
+            openshift.withProject(OPENSHIFT_PROJECT) {
+
+              // delete project previous jobs
+              openshift.selector( "job" ).delete()
+
+              // create new job from json
+              openshift.create( readFile( OPENSHIFT_JOB_TEMPLATE ) )
+            }
+          }
+        }
+      }
+    }
+  }
 }
