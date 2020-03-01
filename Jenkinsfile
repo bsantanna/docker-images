@@ -18,33 +18,33 @@ final openshiftUtility = new OpenShiftClientUtility(this, OPENSHIFT_CLUSTER)
 
 // images categories
 final IMAGE_MAP = [
-    "base"   : [
-        "alpine",
-        "ubuntu"
-    ],
-    "clients": [
-        //"chromium-kiosk",
-        "ddclient",
-        "rdesktop"
-    ],
-    "dev"    : [
-        "chef-dev",
-        "maven-build",
-        "java-python-exec",
-        "npm-dev",
-        "npm-build"
-    ],
-    "devops" : [
-        "elastic-apm-agent",
-        "jenkins-docker-agent",
-        "docker-manifest-publisher"
-    ],
-    "servers" : [
-        "nginx-ssl-proxy",
-        "nginx-static",
-        "smb",
-        "squid-proxy"
-    ]
+  "base"   : [
+    "alpine",
+    "ubuntu"
+  ],
+  "clients": [
+    //"chromium-kiosk",
+    "ddclient",
+    "rdesktop"
+  ],
+  "dev"    : [
+    "chef-dev",
+    "maven-build",
+    "java-python-exec",
+    "npm-dev",
+    "npm-build"
+  ],
+  "devops" : [
+    "elastic-apm-agent",
+    "jenkins-docker-agent",
+    "docker-manifest-publisher"
+  ],
+  "servers": [
+    "nginx-ssl-proxy",
+    "nginx-static",
+    "smb",
+    "squid-proxy"
+  ]
 //    ],
 //     "utils"   : [
 //         "util-math",
@@ -112,7 +112,7 @@ catchError {
 
     stage("Build x86_64") {
       node("openshiftClient") {
-       openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
+        openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
       }
     }
 
@@ -143,10 +143,10 @@ catchError {
             openshift.withProject(OPENSHIFT_PROJECT) {
 
               // delete project previous jobs
-              openshift.selector( "job" ).delete()
+              openshift.selector("job").delete()
 
               // create new job from json
-              openshift.create( readFile( OPENSHIFT_JOB_TEMPLATE ) )
+              openshift.create(readFile(OPENSHIFT_JOB_TEMPLATE))
             }
           }
         }
