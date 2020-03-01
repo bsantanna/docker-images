@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-echo "mvn ${JAVA_OPTS} --settings  /etc/maven/settings.xml clean install deploy"| bash -x
+
+echo "mvn -T ${MAVEN_THREAD_COUNT} ${JAVA_OPTS} --settings /etc/maven/settings.xml clean install"| bash -x
