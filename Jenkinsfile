@@ -44,12 +44,11 @@ final IMAGE_MAP = [
     "nginx-static",
     "smb",
     "squid-proxy"
+  ],
+  "utils"  : [
+    "util-math",
+    "util-finance"
   ]
-//    ],
-//     "utils"   : [
-//         "util-math",
-//         "util-finance"
-//     ]
 ]
 
 def buildImage(dockerClientUtility, arch, baseDir, images) {
