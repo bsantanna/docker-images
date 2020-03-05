@@ -15,7 +15,7 @@
         "containers": [
           {
             "name": "manifest-publisher-container",
-            "image": "bsantanna/docker-manifest-publisher",
+            "image": "docker-registry.default.svc:5000/docker-images/manifest-publisher-image:latest",
             "command": [
               "/opt/workspace/manifest-publisher-job.sh"
             ],

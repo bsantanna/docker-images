@@ -27,6 +27,58 @@
       }
     },
     {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "manifest-publisher-image"
+      },
+      "spec": {},
+      "status": {
+        "dockerImageRepository": ""
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "manifest-publisher-image",
+        "labels": {
+          "name": "manifest-publisher-image"
+        },
+        "annotations": {
+          "template.alpha.openshift.io/wait-for-ready": "true"
+        }
+      },
+      "spec": {
+        "runPolicy": "Serial",
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "https://github.com/bsantanna/docker-images.git"
+          },
+          "contextDir": "images/devops/manifest-publisher",
+          "sourceSecret": {
+            "name": "github"
+          }
+        },
+        "strategy": {
+          "type": "Docker"
+        },
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "manifest-publisher-image:latest"
+          }
+        },
+        "resources": {}
+      },
+      "status": {
+        "lastVersion": 0
+      }
+    },
+    {
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
