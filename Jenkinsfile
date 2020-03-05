@@ -120,6 +120,7 @@ catchError {
 
         // cleanup remote share
         sh "rm ${OPENSHIFT_VOLUME}/manifest-publisher-job/* || true"
+        sh "mkdir -p ${OPENSHIFT_VOLUME}/manifest-publisher-job/ || true"
 
         for (String baseDir : IMAGE_MAP.keySet()) {
           for (String image : IMAGE_MAP[baseDir]) {
