@@ -53,15 +53,34 @@
         "runPolicy": "Serial",
         "successfulBuildsHistoryLimit": 5,
         "failedBuildsHistoryLimit": 5,
+        "triggers": [
+          {
+            "type": "GitHub",
+            "github": {
+              "secret": "secret101"
+            }
+          },
+          {
+            "type": "Generic",
+            "generic": {
+              "secret": "secret101",
+              "allowEnv": true
+            }
+          },
+          {
+            "type": "ImageChange",
+            "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
         "source": {
           "type": "Git",
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
           },
-          "contextDir": "images/devops/manifest-publisher",
-          "sourceSecret": {
-            "name": "github"
-          }
+          "contextDir": "images/devops/manifest-publisher"
         },
         "strategy": {
           "type": "Docker"
