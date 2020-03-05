@@ -9,7 +9,7 @@ final ORIGIN_GIT_URL = "git@github.com:bsantanna/docker-images.git"
 final BRANCH_NAME = "3.x"
 final OPENSHIFT_CLUSTER = "sdam-openshift"
 final OPENSHIFT_PROJECT = "docker-images"
-final OPENSHIFT_NFS_VOLUME = "/cluster-data/docker-images"
+final OPENSHIFT_VOLUME = "/cluster-data/docker-images"
 final OPENSHIFT_JOB_TEMPLATE = "manifest-publisher-job.json"
 
 // pipeline utilities
@@ -119,20 +119,20 @@ catchError {
         unstash "sources"
 
         // cleanup remote share
-        sh "rm ${OPENSHIFT_NFS_VOLUME}/manifest-publisher-job/* || true"
+        sh "rm ${OPENSHIFT_VOLUME}/manifest-publisher-job/* || true"
 
         for (String baseDir : IMAGE_MAP.keySet()) {
           for (String image : IMAGE_MAP[baseDir]) {
             dir("images/${baseDir}/${image}/arch/multi") {
-              sh "cp ${image}.yml ${OPENSHIFT_NFS_VOLUME}/manifest-publisher-job/"
+              sh "cp ${image}.yml ${OPENSHIFT_VOLUME}/manifest-publisher-job/"
             }
           }
         }
 
-        dir("openshift") {
+        dir("kubernetes/openshift") {
 
           // copy job entrypoint
-          sh "cp manifest-publisher-job.sh ${OPENSHIFT_NFS_VOLUME}/"
+          sh "cp manifest-publisher-job.sh ${OPENSHIFT_VOLUME}/"
 
           // execute cluster commands
           openshift.withCluster(OPENSHIFT_CLUSTER) {
