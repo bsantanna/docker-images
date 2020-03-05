@@ -36,8 +36,7 @@ final IMAGE_MAP = [
   ],
   "devops" : [
     "elastic-apm-agent",
-    "jenkins-docker-agent",
-    "docker-manifest-publisher"
+    "jenkins-docker-agent"
   ],
   "servers": [
     "nginx-ssl-proxy",

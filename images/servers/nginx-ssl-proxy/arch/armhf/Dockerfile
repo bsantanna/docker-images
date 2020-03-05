@@ -1,7 +1,8 @@
-FROM bsantanna/ubuntu
+FROM bsantanna/ubuntu:armhf
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2016-12-29
-ENV REFRESHED_AT 2018-08-19
+#ENV REFRESHED_AT 2018-08-19
+ENV REFRESHED_AT 2020-03-05
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq && \
