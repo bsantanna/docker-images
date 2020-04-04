@@ -115,7 +115,7 @@ catchError {
     }
 
     stage("Deploy Manifest Publisher Job") {
-      node("openshiftClient") {
+      node("nfsClient") {
         unstash "sources"
 
         // cleanup remote share
