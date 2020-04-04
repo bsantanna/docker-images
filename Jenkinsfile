@@ -114,7 +114,7 @@ catchError {
       }
     }
 
-    stage("Deploy Manifest Publisher Job") {
+    stage("Prepare Cluster Data Volume") {
       node("nfsClient") {
         unstash "sources"
 
@@ -129,7 +129,11 @@ catchError {
             }
           }
         }
+      }
+    }
 
+    stage("Deploy Manifest Publisher Job") {
+      node("openshiftClient") {
         dir("kubernetes/openshift") {
 
           // copy job entrypoint
