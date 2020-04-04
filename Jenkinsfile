@@ -129,15 +129,18 @@ catchError {
             }
           }
         }
+
+        // copy job entrypoint
+        dir("kubernetes/openshift") {
+          sh "cp manifest-publisher-job.sh ${OPENSHIFT_VOLUME}/"
+        }
+
       }
     }
 
     stage("Deploy Manifest Publisher Job") {
       node("openshiftClient") {
         dir("kubernetes/openshift") {
-
-          // copy job entrypoint
-          sh "cp manifest-publisher-job.sh ${OPENSHIFT_VOLUME}/"
 
           // execute cluster commands
           openshift.withCluster(OPENSHIFT_CLUSTER) {
