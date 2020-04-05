@@ -6,10 +6,7 @@
 
 ## About this project
 
-This project is an automated pipeline leveraged over RedHat OpenShit ([OKD](https://www.okd.io/) v3.11) as 
-[Kubernetes](https://kubernetes.io/) platform.
-
-Result of pipeline is a set of multiple platform container images in Docker format published on 
+This project contains is a set of container images in Docker format published on my personal account at 
 [DockerHub](https://hub.docker.com/u/bsantanna). These images are used mostly for my own research in the following 
 topics:
  
@@ -19,11 +16,13 @@ topics:
  * Kubernetes
  * Enterprise Linux
  * Cloud Computing
- * Internet-of-Things (IoT)
+ * Internet-of-Things (IoT) => Raspberry Pi
  * Finances
  
 This effort started back in 2014 when became a [Docker](https://www.docker.com) user, at some point in time 
-the production of the images had to be automated and using Jenkins Pipelines with Openshift 
-was a perfect match for the commodity hardware I had at hand. 
+the production of the images had to be automated, the efforts converged into a combination of Jenkins Pipelines and 
+RedHat OpenShift ([OKD](https://www.okd.io/) v3.11) [Kubernetes](https://kubernetes.io/) Platform used to automate CI
+Tasks. 
+
 
 ---
