@@ -13,7 +13,7 @@
     ],
     "nfs": {
       "path": "/cluster-data/docker-images",
-      "server": "sdam-apps.btech.software"
+      "server": "sdam-vhost-infra.btech.software"
     },
     "persistentVolumeReclaimPolicy": "Retain"
   }

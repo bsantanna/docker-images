@@ -97,19 +97,18 @@ catchError {
       }
     }
 
-    stage("Build armhf") {
-      node("armhf") {
-        // dockerUtility to build images
+    stage("Build Raspberry Pi 3 Compatible Images") {
+      node("dockerClient && armhf") {
         dockerUtility.print("Building ARM Images")
-
         for (String baseDir : IMAGE_MAP.keySet()) {
           buildImage(dockerUtility, "armhf", baseDir, IMAGE_MAP[baseDir])
         }
       }
     }
 
-    stage("Build x86_64") {
+    stage("Build OpenShift Project") {
       node("openshiftClient") {
+        // build project with timeout 45 minutes
         openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
       }
     }
