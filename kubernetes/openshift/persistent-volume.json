@@ -12,7 +12,7 @@
       "ReadWriteOnce"
     ],
     "nfs": {
-      "path": "/cluster-data/docker-images",
+      "path": "/cluster-nfs-data/docker-images",
       "server": "sdam-vhost-infra.btech.software"
     },
     "persistentVolumeReclaimPolicy": "Retain"
