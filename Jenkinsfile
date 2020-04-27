@@ -139,6 +139,9 @@ catchError {
 
     stage("Deploy Manifest Publisher Job") {
       node("openshiftClient") {
+
+        unstash "sources"
+
         dir("kubernetes/openshift") {
 
           // execute cluster commands
