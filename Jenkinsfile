@@ -9,7 +9,7 @@ final ORIGIN_GIT_URL = "git@github.com:bsantanna/docker-images.git"
 final BRANCH_NAME = "3.x"
 final OPENSHIFT_CLUSTER = "sdam-openshift"
 final OPENSHIFT_PROJECT = "docker-images"
-final OPENSHIFT_VOLUME = "/cluster-data/docker-images"
+final OPENSHIFT_VOLUME = "/cluster-nfs-data/docker-images"
 final OPENSHIFT_JOB_TEMPLATE = "manifest-publisher-job.json"
 
 // pipeline utilities
