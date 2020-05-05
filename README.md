@@ -1,10 +1,10 @@
 # bsantanna/docker-images
 
-  - [About this project](#about-this-project)
+  - [About this repository](#about-this-repository)
 
 ---
 
-## About this project
+## About this repository
 
 This project is a set of container images in Docker format published on my personal account at 
 [DockerHub](https://hub.docker.com/u/bsantanna). These images are used mostly for my own research in the following 
