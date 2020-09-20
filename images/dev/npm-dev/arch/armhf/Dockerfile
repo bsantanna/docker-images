@@ -13,7 +13,7 @@ ENV CI=true
 RUN echo http://uk.alpinelinux.org/alpine/edge/main > /etc/apk/repositories; \
     echo http://uk.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
 
-RUN apk --update --no-cache add bash npm
+RUN apk --update --no-cache add npm
 RUN mkdir /opt/npm-dev
 ADD npm-entrypoint.sh /usr/local/bin/npm-entrypoint
 RUN chmod +x /usr/local/bin/npm-entrypoint
