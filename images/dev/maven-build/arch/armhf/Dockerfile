@@ -8,6 +8,11 @@ ENV REFRESHED_AT 2020-09-20
 ENV WORKSPACE_DIR /opt/workspace
 ENV MAVEN_THREAD_COUNT 4
 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories; \
+    echo "http://uk.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
+    echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
+    echo "@community http://uk.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+
 RUN apk --update --no-cache add maven
 
 ADD config/settings.xml /etc/maven/settings.xml
