@@ -9,8 +9,8 @@ RUN echo http://uk.alpinelinux.org/alpine/edge/main > /etc/apk/repositories; \
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
-RUN apk --update add py3-numpy
-RUN apk --update add py3-scipy
+RUN apk --update add py3-numpy@community
+RUN apk --update add py3-scipy@community
 RUN apk --update add py3-pandas@community
 RUN apk --update add py3-matplotlib@community
 RUN pip3 install --upgrade sympy
