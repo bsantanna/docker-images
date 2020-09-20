@@ -11,6 +11,7 @@ final OPENSHIFT_CLUSTER = "sdam-openshift"
 final OPENSHIFT_PROJECT = "docker-images"
 final OPENSHIFT_VOLUME = "/cluster-nfs-data/docker-images"
 final OPENSHIFT_JOB_TEMPLATE = "manifest-publisher-job.json"
+final REGISTRY_CREDENTIALS_ID = "dockerhub_credentials"
 
 // pipeline utilities
 final dockerUtility = new DockerClientUtility(this, [:])
@@ -97,9 +98,10 @@ catchError {
       }
     }
 
-    stage("Build Raspberry Pi 3 Compatible Images") {
+    stage("Build Raspberry Pi Compatible Images") {
       node("dockerClient && armhf") {
         dockerUtility.print("Building ARM Images")
+        dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
         for (String baseDir : IMAGE_MAP.keySet()) {
           buildImage(dockerUtility, "armhf", baseDir, IMAGE_MAP[baseDir])
         }
