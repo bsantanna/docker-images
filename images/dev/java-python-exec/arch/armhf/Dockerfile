@@ -8,7 +8,7 @@ RUN echo http://uk.alpinelinux.org/alpine/edge/main > /etc/apk/repositories; \
     echo http://uk.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
 
 RUN apk --update --no-cache add \
-    bash ca-certificates curl gcc g++ git libc-dev make \
+    ca-certificates curl gcc g++ git libc-dev make \
     openjdk8 openssl-dev openssh-client py-pip python2-dev python3-dev
 
 ADD exec-entrypoint.sh /usr/local/bin/exec-entrypoint
