@@ -9,7 +9,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositorie
 
 RUN apk --update --no-cache add \
     ca-certificates curl gcc g++ git libc-dev make \
-    openjdk8 openssl-dev openssh-client py-pip@community python2-dev@community python3-dev@community
+    openjdk8 openssl-dev openssh-client py-pip python2-dev python3-dev
 
 ADD exec-entrypoint.sh /usr/local/bin/exec-entrypoint
 RUN chmod +x /usr/local/bin/exec-entrypoint
