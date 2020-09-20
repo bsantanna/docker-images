@@ -10,7 +10,7 @@ ENV MAVEN_THREAD_COUNT 4
 
 RUN echo http://uk.alpinelinux.org/alpine/edge/main > /etc/apk/repositories; \
     echo http://uk.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
-RUN apk --update --no-cache add bash maven
+RUN apk --update --no-cache add maven
 
 ADD config/settings.xml /etc/maven/settings.xml
 ADD maven-entrypoint.sh /usr/local/bin/maven-entrypoint
