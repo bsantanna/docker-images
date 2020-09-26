@@ -110,8 +110,8 @@ catchError {
 
     stage("Build OpenShift Project") {
       node("openshiftClient") {
-        // build project with timeout 45 minutes
-        openshiftUtility.buildProject(OPENSHIFT_PROJECT, 45)
+        // build project with timeout in minutes
+        openshiftUtility.buildProject(OPENSHIFT_PROJECT, 120)
       }
     }
 
