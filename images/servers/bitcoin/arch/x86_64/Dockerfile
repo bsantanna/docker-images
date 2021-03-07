@@ -14,9 +14,8 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN cd /opt && git clone https://github.com/bitcoin/bitcoin.git && \
-    cd /opt/bitcoin && git checkout ${BITCOIN_RELEASE} && rm -fr /opt/bitcoin/.git
-
-RUN cd /opt/bitcoin && ./autogen.sh && \
+    cd /opt/bitcoin && git checkout ${BITCOIN_RELEASE} && rm -fr /opt/bitcoin/.git && \
+    cd /opt/bitcoin && ./autogen.sh && \
     cd /opt/bitcoin/depends && make && \
     cd /opt/bitcoin && ./configure ${CONFIG_OPTS}  && \
     make && make check && make install && \
