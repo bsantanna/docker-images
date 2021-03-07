@@ -40,6 +40,7 @@ final IMAGE_MAP = [
     "jenkins-docker-agent"
   ],
   "servers": [
+    "bitcoin",
     "nginx-ssl-proxy",
     "nginx-static",
     "smb",
