@@ -3,7 +3,7 @@ MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2021-03-06
 ENV DEBIAN_FRONTEND noninteractive
 ENV BITCOIN_RELEASE v0.21.0
-ENV CONFIG_OPTS --with-incompatible-bdb --with-gui=no --prefix=/opt/bitcoin/depends/x86_64-pc-linux-gnu --with-miniupnpc --enable-upnp-default --with-natpmp --enable-natpmp-default
+ENV CONFIG_OPTS --with-incompatible-bdb --with-gui=no --prefix=/opt/bitcoin/depends/x86_64-pc-linux-gnu --with-miniupnpc=yes --enable-upnp-default --with-natpmp=yes --enable-natpmp-default
 
 RUN apt-get update -qq && \
     apt-get install -yqq \
