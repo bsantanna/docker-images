@@ -1,7 +1,8 @@
-FROM bsantanna/ubuntu:x86_64
+FROM ubuntu:20.04
 MAINTAINER Bruno Sant'Anna "bruno@btech.software"
 ENV CREATED_AT 2016-12-29
-ENV REFRESHED_AT 2018-08-19
+#ENV REFRESHED_AT 2018-08-19
+ENV REFRESHED_AT 2021-09-30
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq && \
