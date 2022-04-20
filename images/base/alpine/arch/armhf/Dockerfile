@@ -1,3 +1,3 @@
 FROM alpine:edge
-MAINTAINER Bruno Sant'Anna "bruno@btech.software"
+LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV CREATED_AT 2019-06-12

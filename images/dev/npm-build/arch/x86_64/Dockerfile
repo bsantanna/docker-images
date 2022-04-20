@@ -1,5 +1,5 @@
 FROM bsantanna/npm-dev:x86_64
-MAINTAINER Bruno Sant'Anna "bruno@btech.software"
+LABEL org.opencontainers.image.authors="bruno@btech.software"
 #ENV CREATED_AT 2016-12-29
 #ENV REFRESHED_AT 2018-05-12
 #ENV REFRESHED_AT 2018-08-18

@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER Bruno Sant'Anna "bruno@btech.software"
+LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV CREATED_AT 2016-12-29
 #ENV REFRESHED_AT 2018-08-19
 ENV REFRESHED_AT 2021-09-30

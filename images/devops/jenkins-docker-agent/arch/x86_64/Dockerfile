@@ -1,5 +1,5 @@
 FROM bsantanna/java-python-exec:x86_64
-MAINTAINER Bruno Sant'Anna "bruno@btech.software"
+LABEL org.opencontainers.image.authors="bruno@btech.software"
 #ENV CREATED_AT 2018-08-20
 #ENV REFRESHED_AT 2019-06-07
 ENV REFRESHED_AT 2020-03-14

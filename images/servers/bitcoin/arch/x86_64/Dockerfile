@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER Bruno Sant'Anna "bruno@btech.software"
+LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV CREATED_AT 2021-03-06
 ENV DEBIAN_FRONTEND noninteractive
 ENV BITCOIN_RELEASE v0.21.0
