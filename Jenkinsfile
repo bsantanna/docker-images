@@ -24,9 +24,7 @@ final IMAGE_MAP = [
     "ubuntu"
   ],
   "clients": [
-    //"chromium-kiosk",
-    "ddclient",
-    "rdesktop"
+    "ddclient"
   ],
   "dev"    : [
     "chef-dev",
