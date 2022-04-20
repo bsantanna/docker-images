@@ -3,7 +3,6 @@ LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV CREATED_AT 2021-03-06
 ENV DEBIAN_FRONTEND noninteractive
 ENV BITCOIN_RELEASE v0.21.0
-ENV CONFIG_OPTS --with-incompatible-bdb --without-gui=yes --prefix=/opt/bitcoin/depends/x86_64-pc-linux-gnu --with-miniupnpc=yes --with-natpmp=yes
 
 RUN apt-get update -qq && \
     apt-get install -yqq \
@@ -17,7 +16,7 @@ RUN cd /opt && git clone https://github.com/bitcoin/bitcoin.git && \
     cd /opt/bitcoin && git checkout ${BITCOIN_RELEASE} && rm -fr /opt/bitcoin/.git && \
     cd /opt/bitcoin && ./autogen.sh && \
     cd /opt/bitcoin/depends && make && \
-    cd /opt/bitcoin && ./configure ${CONFIG_OPTS}  && \
+    cd /opt/bitcoin && ./configure --prefix=/opt/bitcoin/depends/x86_64-pc-linux-gnu --with-miniupnpc --with-natpmp --with-incompatible-bdb --without-gui && \
     make && make check && make install && \
     mv /opt/bitcoin/depends/x86_64-pc-linux-gnu /opt/bitcoin/dist && \
     rm -fr /opt/bitcoin/depends && rm -fr /opt/bitcoin/src
