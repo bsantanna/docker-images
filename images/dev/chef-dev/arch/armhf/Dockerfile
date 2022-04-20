@@ -17,7 +17,7 @@ RUN apt-get update -qq && \
     apt-get install -qqy ruby-dev chef vim tmux jq && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN gem install chef-vault --no-ri --no-rdoc
+RUN gem install chef-vault -v 4.1.5  --no-ri --no-rdoc
 RUN gem install chef-zero -v 14.0.17 --no-ri --no-rdoc
 RUN gem install knife-windows -v 1.9.6 --no-ri --no-rdoc
 
