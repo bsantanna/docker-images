@@ -12,18 +12,10 @@ RUN apt-get update -qq && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN cd /opt && git clone https://github.com/bitcoin/bitcoin.git && \
-    cd /opt/bitcoin && git checkout ${BITCOIN_RELEASE} && rm -fr /opt/bitcoin/.git && \
-    cd /opt/bitcoin && ./autogen.sh && \
-    cd /opt/bitcoin/depends && make && \
-    cd /opt/bitcoin && ./configure --prefix=/opt/bitcoin/depends/x86_64-pc-linux-gnu --with-miniupnpc --with-natpmp --with-incompatible-bdb --without-gui && \
-    make && make check && make install && \
-    mv /opt/bitcoin/depends/x86_64-pc-linux-gnu /opt/bitcoin/dist && \
-    rm -fr /opt/bitcoin/depends && rm -fr /opt/bitcoin/src
-
+RUN mkdir -p /opt/bitcoin/data
 ADD entrypoint.sh /opt/bitcoin/docker-entrypoint.sh
 ADD conf /opt/bitcoin/conf
-RUN chmod +x /opt/bitcoin/docker-entrypoint.sh && mkdir /opt/bitcoin/data
+RUN chmod +x /opt/bitcoin/docker-entrypoint.sh
 
 VOLUME /opt/bitcoin/data
 
