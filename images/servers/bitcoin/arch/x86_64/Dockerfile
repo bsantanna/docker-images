@@ -10,7 +10,7 @@ RUN apt-get update -qq && \
     apt-get install -yqq wget && \
     mkdir -p /opt/bitcoin/data && mkdir -p /opt/bitcoin/dist && \
         cd /tmp/ && wget -q "https://bitcoin.org/bin/${BITCOIN_CORE_RELEASE}/${BITCOIN_RELEASE}-${TARGET_ENV}.tar.gz" && \
-        tar -zxvf ${BITCOIN_RELEASE}-${TARGET_ENV}.tar.gz && mv ${BITCOIN_RELEASE}/* /opt/bitcoin/dist/ && \
+        tar -zxf ${BITCOIN_RELEASE}-${TARGET_ENV}.tar.gz && mv ${BITCOIN_RELEASE}/* /opt/bitcoin/dist/ && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
