@@ -6,9 +6,7 @@ ENV BITCOIN_RELEASE v0.21.0
 
 RUN apt-get update -qq && \
     apt-get install -yqq \
-      git curl build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 \
-      libevent-dev libboost-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev \
-      libminiupnpc-dev libnatpmp-dev libzmq3-dev libdb-dev libdb++-dev libsqlite3-dev && \
+      bitcoind && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
