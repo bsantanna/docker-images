@@ -1,8 +1,6 @@
 FROM bsantanna/ubuntu:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV CREATED_AT 2017-10-26
-ENV REFRESHED_AT 2018-08-19
-ENV DEBIAN_FRONTEND noninteractive
+ENV REFRESHED_AT 2022-06-03
 
 RUN apt-get update -qq && \
     apt-get install -yqq ca-certificates ddclient && \
