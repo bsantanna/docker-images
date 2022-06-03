@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17
+FROM eclipse-temurin:17-jdk-focal
 LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV REFRESHED_AT 2022-06-03
 ENV DEBIAN_FRONTEND noninteractive
