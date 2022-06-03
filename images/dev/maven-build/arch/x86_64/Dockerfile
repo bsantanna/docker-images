@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17
+FROM bsantanna/ubuntu:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV REFRESHED_AT 2022-06-03
 ENV WORKSPACE_DIR /opt/workspace
