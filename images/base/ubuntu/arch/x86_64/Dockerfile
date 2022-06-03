@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM eclipse-temurin:17
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV CREATED_AT 2020-09-30
+ENV REFRESHED_AT 2022-06-03
 ENV DEBIAN_FRONTEND noninteractive
