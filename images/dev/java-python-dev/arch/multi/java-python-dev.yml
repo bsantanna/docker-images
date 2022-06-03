@@ -1,0 +1,10 @@
+image: bsantanna/java-python-dev:latest
+manifests:
+  - image: bsantanna/java-python-dev:x86_64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bsantanna/java-python-dev:armhf
+      platform:
+        architecture: arm
+        os: linux
