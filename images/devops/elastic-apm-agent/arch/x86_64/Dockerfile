@@ -1,9 +1,14 @@
-FROM bsantanna/java-python-exec:x86_64
+FROM bsantanna/java-python-dev:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV CREATED_AT 2019-07-20
+ENV REFRESHED_AT 2022-06-03
 ENV APM_ROOT "/usr/share/elastic"
 ENV APM_JAVA_AGENT_URI "https://secure.btech.software/repo/iot/elastic/elastic-apm-agent-1.7.0.jar"
 ENV APM_JAVA_AGENT_PATH "${APM_ROOT}/agent.jar"
+
+RUN apt-get update -qq && \
+    apt-get install -yqq ca-certificates wget && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p ${APM_ROOT}
 

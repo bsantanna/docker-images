@@ -1,8 +1,6 @@
 FROM bsantanna/ubuntu:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV CREATED_AT 2017-05-15
-ENV REFRESHED_AT 2018-08-19
-ENV DEBIAN_FRONTEND noninteractive
+ENV REFRESHED_AT 2022-06-04
 
 RUN apt-get update -q && \
     apt-get install -yqq samba expect rpcbind && \

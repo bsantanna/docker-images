@@ -1,8 +1,6 @@
 FROM bsantanna/ubuntu:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV CREATED_AT 2016-12-29
-ENV REFRESHED_AT 2018-08-19
-ENV DEBIAN_FRONTEND noninteractive
+ENV REFRESHED_AT 2022-06-03
 
 RUN apt-get update -qq && \
     apt-get install -qqy nginx && \
@@ -15,6 +13,6 @@ ADD conf/nginx.conf /etc/nginx/
 
 VOLUME ["/var/www/html/website"]
 
-ENTRYPOINT ["nginx"]
+CMD ["nginx"]
 
 EXPOSE 80

@@ -27,13 +27,12 @@ final IMAGE_MAP = [
   ],
   "dev"    : [
     "chef-dev",
-    "maven-build",
     "java-python-dev",
-    "node-dev"
+    "maven-build",
+    "nodejs-dev"
   ],
   "devops" : [
-    "elastic-apm-agent",
-    "jenkins-docker-agent"
+    "elastic-apm-agent"
   ],
   "servers": [
     "bitcoin",

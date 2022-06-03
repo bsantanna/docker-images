@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM bsantanna/ubuntu:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV CREATED_AT 2021-03-06
+ENV REFRESHED_AT 2022-06-03
 ENV DEBIAN_FRONTEND noninteractive
 ENV BITCOIN_RELEASE bitcoin-22.0
 ENV BITCOIN_CORE_RELEASE bitcoin-core-22.0
@@ -22,4 +22,4 @@ VOLUME /opt/bitcoin/data
 
 EXPOSE 8332
 
-ENTRYPOINT ["bash", "/opt/bitcoin/docker-entrypoint.sh"]
+CMD ["bash", "/opt/bitcoin/docker-entrypoint.sh"]
