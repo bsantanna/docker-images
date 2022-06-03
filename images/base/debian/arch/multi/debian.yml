@@ -1,0 +1,6 @@
+image: bsantanna/debian:latest
+manifests:
+  - image: bsantanna/debian:armhf
+    platform:
+      architecture: arm
+      os: linux

@@ -20,6 +20,7 @@ final openshiftUtility = new OpenShiftClientUtility(this, OPENSHIFT_CLUSTER)
 // images categories
 final IMAGE_MAP = [
   "base"   : [
+    "debian",
     "ubuntu"
   ],
   "clients": [

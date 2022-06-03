@@ -4,7 +4,3 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: bsantanna/smb:armhf
-    platform:
-      architecture: arm
-      os: linux
