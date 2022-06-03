@@ -29,7 +29,7 @@ final IMAGE_MAP = [
     "chef-dev",
     "maven-build",
     "java-python-dev",
-    "npm-dev"
+    "node-dev"
   ],
   "devops" : [
     "elastic-apm-agent",
