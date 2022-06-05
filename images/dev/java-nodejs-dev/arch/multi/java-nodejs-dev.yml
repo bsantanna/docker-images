@@ -1,5 +1,9 @@
 image: bsantanna/java-nodejs-dev:latest
 manifests:
+  - image: bsantanna/java-nodejs-dev:arm
+    platform:
+      architecture: arm
+      os: linux
   - image: bsantanna/java-nodejs-dev:x86_64
     platform:
       architecture: amd64
