@@ -1,5 +1,9 @@
 image: bsantanna/java-python-dev:latest
 manifests:
+  - image: bsantanna/java-python-dev:arm
+    platform:
+      architecture: arm
+      os: linux
   - image: bsantanna/java-python-dev:x86_64
     platform:
       architecture: amd64
