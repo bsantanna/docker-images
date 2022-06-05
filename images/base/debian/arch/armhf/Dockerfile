@@ -11,3 +11,5 @@ RUN apt-get update -q && \
     apt-get install -yqq ca-certificates openjdk-11-jdk && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+CMD ["bash"]

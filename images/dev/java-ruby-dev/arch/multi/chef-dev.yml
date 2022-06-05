@@ -1,0 +1,6 @@
+image: bsantanna/chef-dev:latest
+manifests:
+  - image: bsantanna/chef-dev:x86_64
+    platform:
+      architecture: amd64
+      os: linux
