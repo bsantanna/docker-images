@@ -1,6 +1,10 @@
 image: bsantanna/debian:latest
 manifests:
-  - image: bsantanna/debian:armhf
+  - image: bsantanna/debian:arm
     platform:
       architecture: arm
       os: linux
+  - image: bsantanna/debian:x86_64
+      platform:
+        architecture: amd64
+        os: linux

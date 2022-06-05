@@ -8,7 +8,7 @@ ENV TZ=Europe/Amsterdam
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
 
 RUN apt-get update -q && \
-    apt-get install -yqq ca-certificates openjdk-11-jdk && \
+    apt-get install -yqq --no-install-recommends ca-certificates openjdk-11-jdk && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

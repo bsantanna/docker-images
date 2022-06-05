@@ -106,6 +106,71 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
+        "name": "base-debian-amd64",
+        "labels": {
+          "name": "base-debian-amd64"
+        },
+        "annotations": {
+          "template.alpha.openshift.io/wait-for-ready": "true"
+        }
+      },
+      "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
+        "triggers": [
+          {
+            "type": "GitHub",
+            "github": {
+              "secret": "secret101"
+            }
+          },
+          {
+            "type": "Generic",
+            "generic": {
+              "secret": "secret101",
+              "allowEnv": true
+            }
+          },
+          {
+            "type": "ImageChange",
+            "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "https://github.com/bsantanna/docker-images.git"
+          },
+          "contextDir": "images/base/debian/arch/x86_64"
+        },
+        "strategy": {
+          "type": "Docker"
+        },
+        "output": {
+          "to": {
+            "kind": "DockerImage",
+            "name": "docker.io/bsantanna/debian:x86_64"
+          },
+          "pushSecret": {
+            "name": "dockerhub"
+          }
+        },
+        "resources": {},
+        "nodeSelector": {
+          "beta.kubernetes.io/arch": "amd64"
+        }
+      },
+      "status": {
+        "lastVersion": 0
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
         "name": "base-ubuntu-amd64",
         "labels": {
           "name": "base-ubuntu-amd64"
