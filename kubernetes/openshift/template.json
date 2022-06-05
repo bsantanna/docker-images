@@ -41,69 +41,9 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "manifest-publisher-image",
+        "name": "base-ubuntu-amd64",
         "labels": {
-          "name": "manifest-publisher-image"
-        },
-        "annotations": {
-          "template.alpha.openshift.io/wait-for-ready": "true"
-        }
-      },
-      "spec": {
-        "runPolicy": "Serial",
-        "successfulBuildsHistoryLimit": 5,
-        "failedBuildsHistoryLimit": 5,
-        "triggers": [
-          {
-            "type": "GitHub",
-            "github": {
-              "secret": "secret101"
-            }
-          },
-          {
-            "type": "Generic",
-            "generic": {
-              "secret": "secret101",
-              "allowEnv": true
-            }
-          },
-          {
-            "type": "ImageChange",
-            "imageChange": {}
-          },
-          {
-            "type": "ConfigChange"
-          }
-        ],
-        "source": {
-          "type": "Git",
-          "git": {
-            "uri": "https://github.com/bsantanna/docker-images.git"
-          },
-          "contextDir": "images/devops/manifest-publisher"
-        },
-        "strategy": {
-          "type": "Docker"
-        },
-        "output": {
-          "to": {
-            "kind": "ImageStreamTag",
-            "name": "manifest-publisher-image:latest"
-          }
-        },
-        "resources": {}
-      },
-      "status": {
-        "lastVersion": 0
-      }
-    },
-    {
-      "kind": "BuildConfig",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "base-alpine-amd64",
-        "labels": {
-          "name": "base-alpine-amd64"
+          "name": "base-ubuntu-amd64"
         },
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
@@ -139,7 +79,7 @@
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
           },
-          "contextDir": "images/base/alpine/arch/x86_64"
+          "contextDir": "images/base/ubuntu/arch/x86_64"
         },
         "strategy": {
           "type": "Docker"
@@ -231,71 +171,6 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "clients-chromium-kiosk-amd64",
-        "labels": {
-          "name": "clients-chromium-kiosk-amd64"
-        },
-        "annotations": {
-          "template.alpha.openshift.io/wait-for-ready": "true"
-        }
-      },
-      "spec": {
-        "successfulBuildsHistoryLimit": 5,
-        "failedBuildsHistoryLimit": 5,
-        "triggers": [
-          {
-            "type": "GitHub",
-            "github": {
-              "secret": "secret101"
-            }
-          },
-          {
-            "type": "Generic",
-            "generic": {
-              "secret": "secret101",
-              "allowEnv": true
-            }
-          },
-          {
-            "type": "ImageChange",
-            "imageChange": {}
-          },
-          {
-            "type": "ConfigChange"
-          }
-        ],
-        "source": {
-          "type": "Git",
-          "git": {
-            "uri": "https://github.com/bsantanna/docker-images.git"
-          },
-          "contextDir": "images/clients/chromium-kiosk/arch/x86_64"
-        },
-        "strategy": {
-          "type": "Docker"
-        },
-        "output": {
-          "to": {
-            "kind": "DockerImage",
-            "name": "docker.io/bsantanna/chromium-kiosk:x86_64"
-          },
-          "pushSecret": {
-            "name": "dockerhub"
-          }
-        },
-        "resources": {},
-        "nodeSelector": {
-          "beta.kubernetes.io/arch": "amd64"
-        }
-      },
-      "status": {
-        "lastVersion": 0
-      }
-    },
-    {
-      "kind": "BuildConfig",
-      "apiVersion": "v1",
-      "metadata": {
         "name": "clients-ddclient-amd64",
         "labels": {
           "name": "clients-ddclient-amd64"
@@ -343,71 +218,6 @@
           "to": {
             "kind": "DockerImage",
             "name": "docker.io/bsantanna/ddclient:x86_64"
-          },
-          "pushSecret": {
-            "name": "dockerhub"
-          }
-        },
-        "resources": {},
-        "nodeSelector": {
-          "beta.kubernetes.io/arch": "amd64"
-        }
-      },
-      "status": {
-        "lastVersion": 0
-      }
-    },
-    {
-      "kind": "BuildConfig",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "clients-rdesktop-amd64",
-        "labels": {
-          "name": "clients-rdesktop-amd64"
-        },
-        "annotations": {
-          "template.alpha.openshift.io/wait-for-ready": "true"
-        }
-      },
-      "spec": {
-        "successfulBuildsHistoryLimit": 5,
-        "failedBuildsHistoryLimit": 5,
-        "triggers": [
-          {
-            "type": "GitHub",
-            "github": {
-              "secret": "secret101"
-            }
-          },
-          {
-            "type": "Generic",
-            "generic": {
-              "secret": "secret101",
-              "allowEnv": true
-            }
-          },
-          {
-            "type": "ImageChange",
-            "imageChange": {}
-          },
-          {
-            "type": "ConfigChange"
-          }
-        ],
-        "source": {
-          "type": "Git",
-          "git": {
-            "uri": "https://github.com/bsantanna/docker-images.git"
-          },
-          "contextDir": "images/clients/rdesktop/arch/x86_64"
-        },
-        "strategy": {
-          "type": "Docker"
-        },
-        "output": {
-          "to": {
-            "kind": "DockerImage",
-            "name": "docker.io/bsantanna/rdesktop:x86_64"
           },
           "pushSecret": {
             "name": "dockerhub"
@@ -491,9 +301,9 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "dev-java-python-exec-amd64",
+        "name": "dev-java-nodejs-dev-amd64",
         "labels": {
-          "name": "dev-java-python-exec-amd64"
+          "name": "dev-java-nodejs-dev-amd64"
         },
         "annotations": {
           "template.alpha.openshift.io/wait-for-ready": "true"
@@ -529,7 +339,7 @@
           "git": {
             "uri": "https://github.com/bsantanna/docker-images.git"
           },
-          "contextDir": "images/dev/java-python-exec/arch/x86_64"
+          "contextDir": "images/dev/java-nodejs-dev/arch/x86_64"
         },
         "strategy": {
           "type": "Docker"
@@ -537,7 +347,137 @@
         "output": {
           "to": {
             "kind": "DockerImage",
-            "name": "docker.io/bsantanna/java-python-exec:x86_64"
+            "name": "docker.io/bsantanna/java-nodejs-dev:x86_64"
+          },
+          "pushSecret": {
+            "name": "dockerhub"
+          }
+        },
+        "resources": {},
+        "nodeSelector": {
+          "beta.kubernetes.io/arch": "amd64"
+        }
+      },
+      "status": {
+        "lastVersion": 0
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "dev-java-python-dev-amd64",
+        "labels": {
+          "name": "dev-java-python-dev-amd64"
+        },
+        "annotations": {
+          "template.alpha.openshift.io/wait-for-ready": "true"
+        }
+      },
+      "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
+        "triggers": [
+          {
+            "type": "GitHub",
+            "github": {
+              "secret": "secret101"
+            }
+          },
+          {
+            "type": "Generic",
+            "generic": {
+              "secret": "secret101",
+              "allowEnv": true
+            }
+          },
+          {
+            "type": "ImageChange",
+            "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "https://github.com/bsantanna/docker-images.git"
+          },
+          "contextDir": "images/dev/java-python-dev/arch/x86_64"
+        },
+        "strategy": {
+          "type": "Docker"
+        },
+        "output": {
+          "to": {
+            "kind": "DockerImage",
+            "name": "docker.io/bsantanna/java-python-dev:x86_64"
+          },
+          "pushSecret": {
+            "name": "dockerhub"
+          }
+        },
+        "resources": {},
+        "nodeSelector": {
+          "beta.kubernetes.io/arch": "amd64"
+        }
+      },
+      "status": {
+        "lastVersion": 0
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "dev-java-ruby-dev-amd64",
+        "labels": {
+          "name": "dev-java-ruby-dev-amd64"
+        },
+        "annotations": {
+          "template.alpha.openshift.io/wait-for-ready": "true"
+        }
+      },
+      "spec": {
+        "successfulBuildsHistoryLimit": 5,
+        "failedBuildsHistoryLimit": 5,
+        "triggers": [
+          {
+            "type": "GitHub",
+            "github": {
+              "secret": "secret101"
+            }
+          },
+          {
+            "type": "Generic",
+            "generic": {
+              "secret": "secret101",
+              "allowEnv": true
+            }
+          },
+          {
+            "type": "ImageChange",
+            "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "https://github.com/bsantanna/docker-images.git"
+          },
+          "contextDir": "images/dev/java-ruby-dev/arch/x86_64"
+        },
+        "strategy": {
+          "type": "Docker"
+        },
+        "output": {
+          "to": {
+            "kind": "DockerImage",
+            "name": "docker.io/bsantanna/java-ruby-dev:x86_64"
           },
           "pushSecret": {
             "name": "dockerhub"
@@ -621,136 +561,6 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "dev-npm-build-amd64",
-        "labels": {
-          "name": "dev-npm-build-amd64"
-        },
-        "annotations": {
-          "template.alpha.openshift.io/wait-for-ready": "true"
-        }
-      },
-      "spec": {
-        "successfulBuildsHistoryLimit": 5,
-        "failedBuildsHistoryLimit": 5,
-        "triggers": [
-          {
-            "type": "GitHub",
-            "github": {
-              "secret": "secret101"
-            }
-          },
-          {
-            "type": "Generic",
-            "generic": {
-              "secret": "secret101",
-              "allowEnv": true
-            }
-          },
-          {
-            "type": "ImageChange",
-            "imageChange": {}
-          },
-          {
-            "type": "ConfigChange"
-          }
-        ],
-        "source": {
-          "type": "Git",
-          "git": {
-            "uri": "https://github.com/bsantanna/docker-images.git"
-          },
-          "contextDir": "images/dev/npm-build/arch/x86_64"
-        },
-        "strategy": {
-          "type": "Docker"
-        },
-        "output": {
-          "to": {
-            "kind": "DockerImage",
-            "name": "docker.io/bsantanna/npm-build:x86_64"
-          },
-          "pushSecret": {
-            "name": "dockerhub"
-          }
-        },
-        "resources": {},
-        "nodeSelector": {
-          "beta.kubernetes.io/arch": "amd64"
-        }
-      },
-      "status": {
-        "lastVersion": 0
-      }
-    },
-    {
-      "kind": "BuildConfig",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "dev-npm-dev-amd64",
-        "labels": {
-          "name": "dev-npm-dev-amd64"
-        },
-        "annotations": {
-          "template.alpha.openshift.io/wait-for-ready": "true"
-        }
-      },
-      "spec": {
-        "successfulBuildsHistoryLimit": 5,
-        "failedBuildsHistoryLimit": 5,
-        "triggers": [
-          {
-            "type": "GitHub",
-            "github": {
-              "secret": "secret101"
-            }
-          },
-          {
-            "type": "Generic",
-            "generic": {
-              "secret": "secret101",
-              "allowEnv": true
-            }
-          },
-          {
-            "type": "ImageChange",
-            "imageChange": {}
-          },
-          {
-            "type": "ConfigChange"
-          }
-        ],
-        "source": {
-          "type": "Git",
-          "git": {
-            "uri": "https://github.com/bsantanna/docker-images.git"
-          },
-          "contextDir": "images/dev/npm-dev/arch/x86_64"
-        },
-        "strategy": {
-          "type": "Docker"
-        },
-        "output": {
-          "to": {
-            "kind": "DockerImage",
-            "name": "docker.io/bsantanna/npm-dev:x86_64"
-          },
-          "pushSecret": {
-            "name": "dockerhub"
-          }
-        },
-        "resources": {},
-        "nodeSelector": {
-          "beta.kubernetes.io/arch": "amd64"
-        }
-      },
-      "status": {
-        "lastVersion": 0
-      }
-    },
-    {
-      "kind": "BuildConfig",
-      "apiVersion": "v1",
-      "metadata": {
         "name": "devops-elastic-apm-agent",
         "labels": {
           "name": "devops-elastic-apm-agent"
@@ -798,71 +608,6 @@
           "to": {
             "kind": "DockerImage",
             "name": "docker.io/bsantanna/elastic-apm-agent:x86_64"
-          },
-          "pushSecret": {
-            "name": "dockerhub"
-          }
-        },
-        "resources": {},
-        "nodeSelector": {
-          "beta.kubernetes.io/arch": "amd64"
-        }
-      },
-      "status": {
-        "lastVersion": 0
-      }
-    },
-    {
-      "kind": "BuildConfig",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "devops-jenkins-docker-agent-amd64",
-        "labels": {
-          "name": "devops-jenkins-docker-agent-amd64"
-        },
-        "annotations": {
-          "template.alpha.openshift.io/wait-for-ready": "true"
-        }
-      },
-      "spec": {
-        "successfulBuildsHistoryLimit": 5,
-        "failedBuildsHistoryLimit": 5,
-        "triggers": [
-          {
-            "type": "GitHub",
-            "github": {
-              "secret": "secret101"
-            }
-          },
-          {
-            "type": "Generic",
-            "generic": {
-              "secret": "secret101",
-              "allowEnv": true
-            }
-          },
-          {
-            "type": "ImageChange",
-            "imageChange": {}
-          },
-          {
-            "type": "ConfigChange"
-          }
-        ],
-        "source": {
-          "type": "Git",
-          "git": {
-            "uri": "https://github.com/bsantanna/docker-images.git"
-          },
-          "contextDir": "images/devops/jenkins-docker-agent/arch/x86_64"
-        },
-        "strategy": {
-          "type": "Docker"
-        },
-        "output": {
-          "to": {
-            "kind": "DockerImage",
-            "name": "docker.io/bsantanna/jenkins-docker-agent:x86_64"
           },
           "pushSecret": {
             "name": "dockerhub"

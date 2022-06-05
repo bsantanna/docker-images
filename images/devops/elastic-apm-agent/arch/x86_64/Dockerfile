@@ -1,4 +1,4 @@
-FROM bsantanna/java-python-dev:x86_64
+FROM bsantanna/ubuntu:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV REFRESHED_AT 2022-06-03
 ENV APM_ROOT "/usr/share/elastic"

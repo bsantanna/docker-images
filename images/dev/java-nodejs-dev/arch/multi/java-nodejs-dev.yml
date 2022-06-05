@@ -1,0 +1,6 @@
+image: bsantanna/java-nodejs-dev:latest
+manifests:
+  - image: bsantanna/java-nodejs-dev:x86_64
+    platform:
+      architecture: amd64
+      os: linux
