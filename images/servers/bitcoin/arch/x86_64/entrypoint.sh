@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-/opt/bitcoin/dist/bin/bitcoind -conf=/opt/bitcoin/conf -printtoconsole
+/opt/bitcoin/dist/bin/bitcoind -rest -conf=/opt/bitcoin/conf -printtoconsole

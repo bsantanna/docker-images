@@ -1,11 +1,11 @@
-FROM bsantanna/java-python-dev:x86_64
+FROM bsantanna/debian:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV REFRESHED_AT 2022-06-06
 ENV BITCOIN_RELEASE v23.0
 
 RUN apt-get update -qq && \
     apt-get install -yqq --no-install-recommends \
-      git libtool autotools-dev automake pkg-config bsdmainutils \
+      build-essential git libtool autotools-dev automake pkg-config bsdmainutils python3 python3-dev \
       libevent-dev libboost-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev \
       libminiupnpc-dev libnatpmp-dev libzmq3-dev libdb-dev libdb++-dev libsqlite3-dev \
       libxkbcommon-dev && \
@@ -15,8 +15,8 @@ RUN apt-get update -qq && \
 RUN cd /opt && git clone https://github.com/bitcoin/bitcoin.git && \
     cd /opt/bitcoin && git checkout ${BITCOIN_RELEASE} && rm -fr /opt/bitcoin/.git && \
     cd /opt/bitcoin && ./autogen.sh && \
-    cd /opt/bitcoin && ./configure --with-miniupnpc=no \
-      --with-natpmp=no --with-incompatible-bdb --without-gui --disable-wallet \
+    cd /opt/bitcoin && ./configure CXXFLAGS="-O2" \
+      --with-miniupnpc=no --with-natpmp=no --with-incompatible-bdb --without-gui --disable-wallet \
       --prefix=/opt/bitcoin/dist && \
     make && make check && make install && rm -fr /opt/bitcoin/src
 
