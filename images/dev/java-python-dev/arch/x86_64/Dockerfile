@@ -4,7 +4,8 @@ ENV REFRESHED_AT 2022-06-03
 ENV EDITOR=vim
 
 RUN apt-get update -qq && \
-    apt-get install -yqq ca-certificates build-essential vim tmux jq python3 python3-pip && \
+    apt-get install -yqq --no-install-recommends \
+      ca-certificates build-essential vim tmux jq python3 python3-pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

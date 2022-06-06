@@ -4,7 +4,8 @@ ENV CREATED_AT 2018-08-19
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -q && \
-    apt-get install -yqq git make golang && \
+    apt-get install -yqq  --no-install-recommends \
+      build-essential git golang && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
