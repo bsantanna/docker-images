@@ -6,7 +6,7 @@ import software.btech.pipeline.openshift.OpenShiftClientUtility
 
 final ORIGIN_GIT_CREDENTIALS_ID = "github_credentials"
 final ORIGIN_GIT_URL = "git@github.com:bsantanna/docker-images.git"
-final BRANCH_NAME = "3.x"
+final BRANCH_NAME = "main"
 final OPENSHIFT_CLUSTER = "sdam-openshift"
 final OPENSHIFT_PROJECT = "docker-images"
 final OPENSHIFT_VOLUME = "/cluster-nfs-data/docker-images"
