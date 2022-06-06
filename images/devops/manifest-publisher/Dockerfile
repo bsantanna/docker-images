@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -q && \
     apt-get install -yqq  --no-install-recommends \
       build-essential git golang-1.16-go && \
-    ln -s /usr/lib/go-1.16/bin/go /usr/share/bin/go && \
+    ln -s /usr/lib/go-1.16/bin/go /usr/bin/go && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
