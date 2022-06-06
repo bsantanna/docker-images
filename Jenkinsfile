@@ -97,7 +97,7 @@ catchError {
     }
 
     stage("Build Raspberry Pi Compatible Images") {
-      node("dockerClient && armhf") {
+      node("dockerClient && arm") {
         dockerUtility.print("Building ARM Images")
         dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
         for (String baseDir : IMAGE_MAP.keySet()) {
