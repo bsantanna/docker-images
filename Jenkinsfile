@@ -101,7 +101,7 @@ catchError {
         dockerUtility.print("Building ARM Images")
         dockerUtility.registryLogin(REGISTRY_CREDENTIALS_ID)
         for (String baseDir : IMAGE_MAP.keySet()) {
-          buildImage(dockerUtility, "armhf", baseDir, IMAGE_MAP[baseDir])
+          buildImage(dockerUtility, "arm", baseDir, IMAGE_MAP[baseDir])
         }
       }
     }

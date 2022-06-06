@@ -1,25 +1,32 @@
-FROM bsantanna/ubuntu:x86_64
+FROM bsantanna/java-python-dev:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT 2022-06-03
-ENV DEBIAN_FRONTEND noninteractive
-ENV BITCOIN_RELEASE bitcoin-22.0
-ENV BITCOIN_CORE_RELEASE bitcoin-core-22.0
-ENV TARGET_ENV x86_64-linux-gnu
+ENV REFRESHED_AT 2022-06-06
+ENV BITCOIN_RELEASE v23.0
 
 RUN apt-get update -qq && \
-    apt-get install -yqq wget && \
-    mkdir -p /opt/bitcoin/data && mkdir -p /opt/bitcoin/dist && \
-        cd /tmp/ && wget -q "https://bitcoin.org/bin/${BITCOIN_CORE_RELEASE}/${BITCOIN_RELEASE}-${TARGET_ENV}.tar.gz" && \
-        tar -zxf ${BITCOIN_RELEASE}-${TARGET_ENV}.tar.gz && mv ${BITCOIN_RELEASE}/* /opt/bitcoin/dist/ && \
+    apt-get install -yqq --no-install-recommends \
+      git libtool autotools-dev automake pkg-config bsdmainutils \
+      libevent-dev libboost-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev \
+      libminiupnpc-dev libnatpmp-dev libzmq3-dev libdb-dev libdb++-dev libsqlite3-dev \
+      libxkbcommon-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN cd /opt && git clone https://github.com/bitcoin/bitcoin.git && \
+    cd /opt/bitcoin && git checkout ${BITCOIN_RELEASE} && rm -fr /opt/bitcoin/.git && \
+    cd /opt/bitcoin && ./autogen.sh && \
+    cd /opt/bitcoin && ./configure --with-miniupnpc=no \
+      --with-natpmp=no --with-incompatible-bdb --without-gui --disable-wallet \
+      --prefix=/opt/bitcoin/dist && \
+    make && make check && make install && rm -fr /opt/bitcoin/src
+
 ADD entrypoint.sh /opt/bitcoin/docker-entrypoint.sh
 ADD conf /opt/bitcoin/conf
-RUN chmod +x /opt/bitcoin/docker-entrypoint.sh
+RUN chmod +x /opt/bitcoin/docker-entrypoint.sh && mkdir /opt/bitcoin/data
 
 VOLUME /opt/bitcoin/data
 
 EXPOSE 8332
 
 CMD ["bash", "/opt/bitcoin/docker-entrypoint.sh"]
+
