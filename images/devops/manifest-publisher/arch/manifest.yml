@@ -1,0 +1,6 @@
+image: bsantanna/manifest-publisher:current
+manifests:
+  - image: bsantanna/manifest-publisher:latest
+    platform:
+      architecture: amd64
+      os: linux

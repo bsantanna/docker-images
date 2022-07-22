@@ -9,8 +9,6 @@ final ORIGIN_GIT_URL = "git@github.com:bsantanna/docker-images.git"
 final BRANCH_NAME = "main"
 final OPENSHIFT_CLUSTER = "sdam-openshift"
 final OPENSHIFT_PROJECT = "docker-images"
-final OPENSHIFT_VOLUME = "/cluster-nfs-data/docker-images"
-final OPENSHIFT_JOB_TEMPLATE = "manifest-publisher-job.json"
 final REGISTRY_CREDENTIALS_ID = "dockerhub_credentials"
 
 // pipeline utilities
@@ -113,52 +111,5 @@ catchError {
       }
     }
 
-    stage("Prepare Cluster Data Volume") {
-      node("nfsClient") {
-        unstash "sources"
-
-        // cleanup remote share
-        sh "rm ${OPENSHIFT_VOLUME}/manifest-publisher-job/* || true"
-        sh "mkdir -p ${OPENSHIFT_VOLUME}/manifest-publisher-job/ || true"
-
-        for (String baseDir : IMAGE_MAP.keySet()) {
-          for (String image : IMAGE_MAP[baseDir]) {
-            dir("images/${baseDir}/${image}/arch/multi") {
-              sh "cp ${image}.yml ${OPENSHIFT_VOLUME}/manifest-publisher-job/"
-            }
-          }
-        }
-
-        // copy job entrypoint
-        dir("kubernetes/openshift") {
-          sh "cp manifest-publisher-job.sh ${OPENSHIFT_VOLUME}/"
-        }
-
-      }
-    }
-
-    stage("Deploy Manifest Publisher Job") {
-      node("openshiftClient") {
-
-        unstash "sources"
-
-        dir("kubernetes/openshift") {
-
-          // execute cluster commands
-          openshift.withCluster(OPENSHIFT_CLUSTER) {
-
-            // in project scope
-            openshift.withProject(OPENSHIFT_PROJECT) {
-
-              // delete project previous jobs
-              openshift.selector("job").delete()
-
-              // create new job from json
-              openshift.create(readFile(OPENSHIFT_JOB_TEMPLATE))
-            }
-          }
-        }
-      }
-    }
   }
 }

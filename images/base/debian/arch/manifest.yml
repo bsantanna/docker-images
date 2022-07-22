@@ -5,6 +5,6 @@ manifests:
       architecture: arm
       os: linux
   - image: bsantanna/debian:x86_64
-      platform:
-        architecture: amd64
-        os: linux
+    platform:
+      architecture: amd64
+      os: linux
