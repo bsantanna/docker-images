@@ -1,11 +1,11 @@
-FROM bsantanna/ubuntu:x86_64
+FROM bsantanna/base:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT 2022-06-03
+ENV REFRESHED_AT 2024-12-29
 ENV WORKSPACE_DIR /opt/workspace
 ENV MAVEN_THREAD_COUNT 8
 
 RUN apt-get update -qq && \
-    apt-get install -yqq ca-certificates maven && \
+    apt-get install -yqq maven && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
