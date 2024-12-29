@@ -1,4 +1,4 @@
-FROM bsantanna/base:x86_64
+FROM bsantanna/base:latest
 LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV REFRESHED_AT=2024-12-29
 
@@ -7,12 +7,12 @@ RUN apt update -qq && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /var/www/html/website
-ADD conf/global.conf /etc/nginx/conf.d/
 ADD conf/nginx.conf /etc/nginx/
 
-VOLUME ["/var/www/html/website"]
+ONBUILD ADD conf/global.conf /etc/nginx/conf.d/
+ONBUILD ADD ssl/ /etc/nginx/ssl/
 
 CMD ["nginx"]
 
 EXPOSE 80
+EXPOSE 443

@@ -1,4 +1,4 @@
-FROM bsantanna/base:x86_64
+FROM bsantanna/base:latest
 LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV REFRESHED_AT=2024-12-29
 
