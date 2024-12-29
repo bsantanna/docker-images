@@ -16,4 +16,4 @@ RUN chmod +x /usr/local/bin/maven-entrypoint
 RUN mkdir -p ${WORKSPACE_DIR}
 WORKDIR ${WORKSPACE_DIR}
 VOLUME ["${WORKSPACE_DIR}"]
-ENTRYPOINT ["maven-entrypoint"]
+CMD ["maven-entrypoint"]
