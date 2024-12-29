@@ -5,7 +5,7 @@ ENV WORKSPACE_DIR=/opt/workspace
 ENV MAVEN_THREAD_COUNT=8
 
 RUN apt update -qq && \
-    apt install -yqq maven && \
+    apt install -yqq --no-install-recommends maven && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

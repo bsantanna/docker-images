@@ -30,5 +30,6 @@ Most of the images are compatible with Raspberry Pi 3 ARM architecture.
 
 ### Utility Command
 ```bash
-IMAGE_TAG="base:x86_64" bash -c "docker build -t ${IMAGE_TAG} . && docker push ${IMAGE_TAG}"
+export IMAGE_TAG="bsantanna/base:x86_64"
+bash -c "docker build -t ${IMAGE_TAG} . && docker push ${IMAGE_TAG}"
 ---
