@@ -1,8 +1,8 @@
 FROM bsantanna/base:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT 2024-12-29
-ENV WORKSPACE_DIR /opt/workspace
-ENV MAVEN_THREAD_COUNT 8
+ENV REFRESHED_AT=2024-12-29
+ENV WORKSPACE_DIR=/opt/workspace
+ENV MAVEN_THREAD_COUNT=8
 
 RUN apt update -qq && \
     apt install -yqq openssh-client git maven && \
