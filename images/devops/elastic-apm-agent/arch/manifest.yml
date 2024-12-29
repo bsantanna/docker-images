@@ -1,6 +1,0 @@
-image: bsantanna/elastic-apm-agent:latest
-manifests:
-  - image: bsantanna/elastic-apm-agent:x86_64
-    platform:
-      architecture: amd64
-      os: linux

@@ -1,10 +1,10 @@
-FROM bsantanna/ubuntu:x86_64
+FROM bsantanna/base:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT 2022-06-04
+ENV REFRESHED_AT=2024-12-29
 
-RUN apt-get update -qq && \
-    apt-get install -qqy nginx && \
-    apt-get clean && \
+RUN apt update -qq && \
+    apt install -qqy nginx && \
+    apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD conf/nginx.conf /etc/nginx/

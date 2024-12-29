@@ -1,11 +1,9 @@
-FROM bsantanna/ubuntu:x86_64
+FROM bsantanna/maven-build:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT 2022-06-03
-ENV EDITOR=vim
+ENV REFRESHED_AT=2024-12-29
 
 RUN apt-get update -qq && \
-    apt-get install -yqq --no-install-recommends \
-      ca-certificates build-essential vim tmux jq python3 python3-pip && \
+    apt-get install -yqq --no-install-recommends python3 python3-pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

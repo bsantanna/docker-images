@@ -1,6 +1,0 @@
-image: bsantanna/smb:latest
-manifests:
-  - image: bsantanna/smb:x86_64
-    platform:
-      architecture: amd64
-      os: linux

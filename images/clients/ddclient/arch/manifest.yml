@@ -1,6 +1,0 @@
-image: bsantanna/ddclient:latest
-manifests:
-  - image: bsantanna/ddclient:x86_64
-    platform:
-      architecture: amd64
-      os: linux

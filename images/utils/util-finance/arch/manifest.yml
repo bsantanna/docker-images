@@ -1,6 +1,0 @@
-image: bsantanna/util-finance:latest
-manifests:
-  - image: bsantanna/util-finance:x86_64
-    platform:
-      architecture: amd64
-      os: linux

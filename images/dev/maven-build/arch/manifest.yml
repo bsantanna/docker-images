@@ -1,6 +1,0 @@
-image: bsantanna/maven-build:latest
-manifests:
-  - image: bsantanna/maven-build:x86_64
-    platform:
-      architecture: amd64
-      os: linux

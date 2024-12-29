@@ -1,6 +1,0 @@
-image: bsantanna/squid-proxy:latest
-manifests:
-  - image: bsantanna/squid-proxy:x86_64
-    platform:
-      architecture: amd64
-      os: linux

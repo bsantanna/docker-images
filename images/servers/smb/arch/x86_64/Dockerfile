@@ -1,10 +1,10 @@
-FROM bsantanna/ubuntu:x86_64
+FROM bsantanna/base:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT 2022-06-04
+ENV REFRESHED_AT=2024-12-29
 
-RUN apt-get update -q && \
-    apt-get install -yqq samba expect rpcbind && \
-    apt-get clean && \
+RUN apt update -q && \
+    apt install -yqq samba expect rpcbind && \
+    apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD scripts /scripts

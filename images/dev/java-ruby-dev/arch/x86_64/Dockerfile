@@ -1,10 +1,10 @@
-FROM bsantanna/ubuntu:x86_64
+FROM bsantanna/maven-build:x86_64
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT 2022-06-03
-ENV EDITOR=vim
+ENV REFRESHED_AT=2024-12-29
+
 
 RUN apt-get update -qq && \
-    apt-get install -qqy ca-certificates build-essential vim tmux jq ruby-dev && \
+    apt-get install -qqy --no-install-recommends ruby-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
