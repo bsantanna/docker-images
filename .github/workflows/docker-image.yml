@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: bsantanna/base:x86_64
-      run: docker build base/arch/x86_64 --file base/arch/x86_64/Dockerfile --tag bsantanna/base:x86_64
+      run: docker build images/base/arch/x86_64 --file images/base/arch/x86_64/Dockerfile --tag bsantanna/base:x86_64
