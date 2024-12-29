@@ -5,7 +5,7 @@ ENV WORKSPACE_DIR=/opt/workspace
 ENV MAVEN_THREAD_COUNT=8
 
 RUN apt update -qq && \
-    apt install -yqq openssh-client git maven && \
+    apt install -yqq maven && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
