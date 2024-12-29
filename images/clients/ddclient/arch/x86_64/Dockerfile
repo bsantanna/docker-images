@@ -3,7 +3,7 @@ LABEL org.opencontainers.image.authors="bruno@btech.software"
 ENV REFRESHED_AT 2022-06-03
 
 RUN apt-get update -qq && \
-    apt-get install -yqq ca-certificates ddclient && \
+    apt-get install -yqq ddclient && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

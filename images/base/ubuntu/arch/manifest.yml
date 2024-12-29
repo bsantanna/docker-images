@@ -1,6 +1,0 @@
-image: bsantanna/ubuntu:latest
-manifests:
-  - image: bsantanna/ubuntu:x86_64
-    platform:
-      architecture: amd64
-      os: linux

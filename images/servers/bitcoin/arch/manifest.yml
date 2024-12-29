@@ -1,6 +1,0 @@
-image: bsantanna/bitcoin:latest
-manifests:
-  - image: bsantanna/bitcoin:x86_64
-    platform:
-      architecture: amd64
-      os: linux

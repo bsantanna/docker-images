@@ -1,6 +1,0 @@
-image: bsantanna/nginx-static:latest
-manifests:
-  - image: bsantanna/nginx-static:x86_64
-    platform:
-      architecture: amd64
-      os: linux
