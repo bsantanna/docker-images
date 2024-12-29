@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV EDITOR=vim
 
 RUN apt update -qq && \
-    apt install -yqq ca-certificates build-essential git jq openssh-client tmux vim && \
+    apt install -yqq --no-install-recommends ca-certificates curl build-essential git jq openssh-client tmux vim && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
