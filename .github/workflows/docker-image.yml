@@ -7,33 +7,25 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    runs-on: ubuntu-24.04
+  build_base:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      context: images/base
+      file: images/base/Dockerfile
+      tags: |
+        bsantanna/base:latest
+        bsantanna/base:x86_64
+        bsantanna/base:amd64
+        bsantanna/base:arm64
 
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: bsantanna/base
-      uses: docker/build-push-action@v4
-      with:
-        context: images/base
-        file: images/base/Dockerfile
-        platforms: linux/amd64,linux/arm64
-        push: true
-        tags: |
-          bsantanna/base:latest
-          bsantanna/base:x86_64
-          bsantanna/base:amd64
-          bsantanna/base:arm64
+  build_maven_build:
+    needs: build_base
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      context: images/dev/maven-build
+      file: images/dev/maven-build/Dockerfile
+      tags: |
+        bsantanna/maven-build:latest
+        bsantanna/maven-build:x86_64
+        bsantanna/maven-build:amd64
+        bsantanna/maven-build:arm64
