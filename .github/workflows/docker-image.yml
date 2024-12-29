@@ -25,26 +25,56 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - name: Upload context files
+      uses: actions/upload-artifact@v3
+      with:
+        name: context-files
+        path: images/
+
   build_base:
     needs: setup
-    uses: ./.github/workflows/build-and-push.yml
-    with:
-      context: images/base
-      file: images/base/Dockerfile
-      tags: |
-        bsantanna/base:latest
-        bsantanna/base:x86_64
-        bsantanna/base:amd64
-        bsantanna/base:arm64
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Download context files
+      uses: actions/download-artifact@v3
+      with:
+        name: context-files
+        path: .
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/base
+        file: images/base/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/base:latest
+          bsantanna/base:x86_64
+          bsantanna/base:amd64
+          bsantanna/base:arm64
 
   build_maven_build:
     needs: build_base
-    uses: ./.github/workflows/build-and-push.yml
-    with:
-      context: images/dev/maven-build
-      file: images/dev/maven-build/Dockerfile
-      tags: |
-        bsantanna/maven-build:latest
-        bsantanna/maven-build:x86_64
-        bsantanna/maven-build:amd64
-        bsantanna/maven-build:arm64
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Download context files
+      uses: actions/download-artifact@v3
+      with:
+        name: context-files
+        path: .
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/dev/maven-build
+        file: images/dev/maven-build/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/maven-build:latest
+          bsantanna/maven-build:x86_64
+          bsantanna/maven-build:amd64
+          bsantanna/maven-build:arm64
