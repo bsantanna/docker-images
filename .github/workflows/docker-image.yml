@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v4
-
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
 
@@ -25,22 +23,12 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Upload context files
-      uses: actions/upload-artifact@v3
-      with:
-        name: context-files
-        path: images/
-
   build_base:
     needs: setup
     runs-on: ubuntu-24.04
 
     steps:
-    - name: Download context files
-      uses: actions/download-artifact@v3
-      with:
-        name: context-files
-        path: .
+    - uses: actions/checkout@v4
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
@@ -60,11 +48,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-    - name: Download context files
-      uses: actions/download-artifact@v3
-      with:
-        name: context-files
-        path: .
+    - uses: actions/checkout@v4
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
