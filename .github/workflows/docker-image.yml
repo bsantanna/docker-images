@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: bsantanna/base:x86_64
+      run: docker build base/arch/x86_64 --file base/arch/x86_64/Dockerfile --tag bsantanna/base:x86_64
