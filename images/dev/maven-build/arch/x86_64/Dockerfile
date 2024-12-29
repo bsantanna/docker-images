@@ -4,9 +4,9 @@ ENV REFRESHED_AT 2024-12-29
 ENV WORKSPACE_DIR /opt/workspace
 ENV MAVEN_THREAD_COUNT 8
 
-RUN apt-get update -qq && \
-    apt-get install -yqq openssh-client git maven && \
-    apt-get clean && \
+RUN apt update -qq && \
+    apt install -yqq openssh-client git maven && \
+    apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD config/settings.xml /etc/maven/settings.xml
