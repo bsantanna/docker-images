@@ -70,3 +70,227 @@ jobs:
           bsantanna/maven-build:x86_64
           bsantanna/maven-build:amd64
           bsantanna/maven-build:arm64
+
+  build_java_ruby_dev:
+    needs: build_maven_build
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/dev/java-ruby-dev
+        file: images/dev/java-ruby-dev/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/java-ruby-dev:latest
+          bsantanna/java-ruby-dev:x86_64
+          bsantanna/java-ruby-dev:amd64
+          bsantanna/java-ruby-dev:arm64
+
+  build_java_python_dev:
+    needs: build_maven_build
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/dev/java-python-dev
+        file: images/dev/java-python-dev/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/java-python-dev:latest
+          bsantanna/java-python-dev:x86_64
+          bsantanna/java-python-dev:amd64
+          bsantanna/java-python-dev:arm64
+
+  build_java_nodejs_dev:
+    needs: build_maven_build
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/dev/java-nodejs-dev
+        file: images/dev/java-nodejs-dev/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/java-nodejs-dev:latest
+          bsantanna/java-nodejs-dev:x86_64
+          bsantanna/java-nodejs-dev:amd64
+          bsantanna/java-nodejs-dev:arm64
+
+  build_chef_dev:
+    needs: build_java_ruby_dev
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/dev/chef-dev
+        file: images/dev/chef-dev/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/chef-dev:latest
+          bsantanna/chef-dev:x86_64
+          bsantanna/chef-dev:amd64
+          bsantanna/chef-dev:arm64
+
+  build_smb:
+    needs: build_base
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/servers/smb
+        file: images/servers/smb/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/smb:latest
+          bsantanna/smb:x86_64
+          bsantanna/smb:amd64
+          bsantanna/smb:arm64
+
+  build_nginx_static:
+    needs: build_base
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/servers/nginx-static
+        file: images/servers/nginx-static/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/nginx-static:latest
+          bsantanna/nginx-static:x86_64
+          bsantanna/nginx-static:amd64
+          bsantanna/nginx-static:arm64
+
+  build_nginx_ssl_proxy:
+    needs: build_base
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/servers/nginx-ssl-proxy
+        file: images/servers/nginx-ssl-proxy/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/nginx-ssl-proxy:latest
+          bsantanna/nginx-ssl-proxy:x86_64
+          bsantanna/nginx-ssl-proxy:amd64
+          bsantanna/nginx-ssl-proxy:arm64
