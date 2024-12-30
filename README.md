@@ -22,14 +22,5 @@ topics:
  
 This effort started back in 2014 when I started using [Docker](https://www.docker.com), at some point in time 
 the production of the images had to be automated, the efforts converged into a combination of Jenkins Pipelines and 
-RedHat OpenShift ([OKD](https://www.okd.io/) v3.11) [Kubernetes](https://kubernetes.io/) Platform used to execute CI
+ [Kubernetes](https://kubernetes.io/) Platform used to execute CI
 Tasks.
-
-Most of the images are compatible with Raspberry Pi 3 ARM architecture. 
-
-
-### Utility Command
-```bash
-export IMAGE_TAG="bsantanna/???:x86_64"
-bash -c "docker build -t ${IMAGE_TAG} . && docker push ${IMAGE_TAG}"
----
