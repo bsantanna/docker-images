@@ -168,7 +168,7 @@ jobs:
           bsantanna/java-nodejs-dev:arm64
 
   build_chef_dev:
-    needs: build_base
+    needs: build_java_ruby_dev
     runs-on: ubuntu-24.04
 
     steps:

@@ -1,14 +1,18 @@
 # bsantanna/docker-images
 
-  - [About this repository](#about-this-repository)
+[![Docker Image CI](https://github.com/bsantanna/docker-images/actions/workflows/docker-image.yml/badge.svg)](https://github.com/bsantanna/docker-images/actions/workflows/docker-image.yml)
+
+
+  - [About this Repository](#about-this-repository)
+  - [Repository Structure](#repository-structure)
+  - [License](#license)
 
 ---
 
-## About this repository
+## About this Repository
 
-This repository contains a set of container images in Docker format published on my personal account at 
-[DockerHub](https://hub.docker.com/u/bsantanna). These images are used mostly for my own research and practices in the following 
-topics:
+This repository hosts a collection of meticulously crafted Docker container images, available on my personal [DockerHub](https://hub.docker.com/u/bsantanna) account. These images are primarily utilized for my research and professional development in the following areas:
+
  
  * Agile / Lean Software Dev 
  * DevOps practices
@@ -20,7 +24,28 @@ topics:
  * Finances
  * Machine learning
  
-This effort started back in 2014 when I started using [Docker](https://www.docker.com), at some point in time 
-the production of the images had to be automated, the efforts converged into a combination of Jenkins Pipelines and 
- [Kubernetes](https://kubernetes.io/) Platform used to execute CI
-Tasks.
+
+---
+
+## Repository Structure
+
+The repository is organized into several directories, each containing Dockerfiles and related configuration files for different types of images:
+
+- **[base](images/base/)**: Base images from which all other images are derived.
+- **[dev](images/dev/)**: Images used for general software development.
+  - **[chef-dev](images/dev/chef-dev/)**: Development environment for Chef.
+  - **[java-nodejs-dev](images/dev/java-nodejs-dev/)**: Development environment for Java and Node.js.
+  - **[java-python-dev](images/dev/java-python-dev/)**: Development environment for Java and Python.
+  - **[java-ruby-dev](images/dev/java-ruby-dev/)**: Development environment for Java and Ruby.
+  - **[maven-build](images/dev/maven-build/)**: Environment for building Maven projects.
+- **[servers](images/servers/)**: Images used for server software.
+  - **[bitcoin](images/servers/bitcoin/)**: Bitcoin server.
+  - **[nginx-ssl-proxy](images/servers/nginx-ssl-proxy/)**: Nginx SSL proxy server.
+  - **[nginx-static](images/servers/nginx-static/)**: Nginx static server.
+  - **[smb](images/servers/smb/)**: SMB server.
+
+---
+
+## License
+
+This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
