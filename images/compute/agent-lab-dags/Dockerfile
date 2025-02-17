@@ -1,4 +1,6 @@
 FROM apache/airflow:latest
+LABEL org.opencontainers.image.authors="bruno@btech.software"
+ENV REFRESHED_AT=2025-02-17
 
 USER root
 
