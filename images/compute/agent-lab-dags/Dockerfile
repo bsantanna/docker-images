@@ -9,9 +9,9 @@ RUN apt update -qq && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN cd /tmp/ &&  echo test-0227e &&\
+RUN cd /tmp/ && \
     git clone https://github.com/bsantanna/agent-lab.git && \
-    cd /tmp/agent-lab && git checkout feat/airflow-etl-3 && chown airflow:root /tmp/agent-lab/ && \
+    cd /tmp/agent-lab && chown airflow:root /tmp/agent-lab/ && \
     cp -a /tmp/agent-lab/dags ${AIRFLOW_HOME}/dags/
 
 USER airflow
