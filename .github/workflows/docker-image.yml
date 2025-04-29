@@ -388,4 +388,33 @@ jobs:
         tags: |
           bsantanna/compute-agent-lab-dags:latest
           bsantanna/compute-agent-lab-dags:0.1.0
+
+  
+  build_cloudnative_pg_vector:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: images/servers/cloudnative-pg-vector
+        file: images/servers/cloudnative-pg-vector/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          bsantanna/cloudnative-pg-vector:17.4
           
