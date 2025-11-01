@@ -19,4 +19,4 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 # Upgrade pip and install remaining packages
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir eland elasticsearch requests
+    pip install --no-cache-dir eland elasticsearch requests hvac
