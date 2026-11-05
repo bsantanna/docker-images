@@ -1,6 +1,6 @@
-FROM eclipse-temurin:24-jdk-noble
+FROM eclipse-temurin:25-jdk-noble
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT=2025-11-01
+ENV REFRESHED_AT=2026-11-05
 ENV DEBIAN_FRONTEND=noninteractive
 ENV EDITOR=vim
 

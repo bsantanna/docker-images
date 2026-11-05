@@ -1,6 +1,6 @@
 FROM bsantanna/java-ruby-dev:latest
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT=2024-12-30
+ENV REFRESHED_AT=2025-11-05
 ENV RUBYOPT=-W0
 
 RUN curl -s -L https://omnitruck.cinc.sh/install.sh | bash -s -- -v 18 && \

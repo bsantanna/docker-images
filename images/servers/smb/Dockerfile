@@ -1,6 +1,6 @@
 FROM bsantanna/base:latest
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT=2024-12-29
+ENV REFRESHED_AT=2026-11-05
 
 RUN apt update -q && \
     apt install -yqq samba expect rpcbind && \
