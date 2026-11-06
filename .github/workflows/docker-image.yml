@@ -386,4 +386,4 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: |
-          bsantanna/cloudnative-pg-vector:17.4
+          bsantanna/cloudnative-pg-vector:17.11

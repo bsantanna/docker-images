@@ -97,9 +97,9 @@ Docker image collection for research and professional development: Agile/Lean so
 | `images/servers/nginx-static` | `bsantanna/nginx-static` | `bsantanna/base:latest` |
 | `images/servers/nginx-ssl-proxy` | `bsantanna/nginx-ssl-proxy` | `bsantanna/base:latest` |
 | `images/servers/keycloak` | `bsantanna/keycloak` | `quay.io/keycloak/keycloak` (via `ARG KEYCLOAK_VERSION`) |
-| `images/servers/cloudnative-pg-vector` | `bsantanna/cloudnative-pg-vector` | `ghcr.io/cloudnative-pg/postgresql:17.4` |
+| `images/servers/cloudnative-pg-vector` | `bsantanna/cloudnative-pg-vector` | `ghcr.io/cloudnative-pg/postgresql:17.11-minimal-bookworm` |
 
-CI lives in `.github/workflows/docker-image.yml`. It builds and pushes multi-architecture images (`linux/amd64,linux/arm64`) to Docker Hub on pushes and pull requests targeting `main`. Most images publish `latest`, `x86_64`, `amd64`, and `arm64`; `cloudnative-pg-vector` publishes the upstream version tag `17.4`.
+CI lives in `.github/workflows/docker-image.yml`. It builds and pushes multi-architecture images (`linux/amd64,linux/arm64`) to Docker Hub on pushes and pull requests targeting `main`. Most images publish `latest`, `x86_64`, `amd64`, and `arm64`; `cloudnative-pg-vector` publishes the upstream version tag `17.11`.
 
 There is no test suite or linter. Verification is a real `docker build` plus a runtime smoke check of the changed image.
 

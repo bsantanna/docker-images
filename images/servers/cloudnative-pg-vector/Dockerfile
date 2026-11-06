@@ -1,5 +1,5 @@
-FROM ghcr.io/cloudnative-pg/postgresql:17.4
-ENV REFRESHED_AT=2026-11-05
+FROM ghcr.io/cloudnative-pg/postgresql:17.11-minimal-bookworm
+ENV REFRESHED_AT=2026-11-06
 
 USER root
 
