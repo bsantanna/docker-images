@@ -39,7 +39,7 @@ The repository is organized into several directories, each containing Dockerfile
   - **[java-ruby-dev](images/dev/java-ruby-dev/)**: Development environment for Java and Ruby.
   - **[maven-build](images/dev/maven-build/)**: Environment for building Maven projects.
 - **[servers](images/servers/)**: Images used for server software.
-  - **[bitcoin](images/servers/bitcoin/)**: Bitcoin server.
+  
   - **[nginx-ssl-proxy](images/servers/nginx-ssl-proxy/)**: Nginx SSL proxy server.
   - **[nginx-static](images/servers/nginx-static/)**: Nginx static server.
   - **[smb](images/servers/smb/)**: SMB server.
