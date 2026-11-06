@@ -1,6 +1,6 @@
 FROM bsantanna/base:latest
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT=2026-03-27
+ENV REFRESHED_AT=2026-11-06
 
 RUN apt-get update -qq && \
     apt-get install -yqq --no-install-recommends \
@@ -20,3 +20,5 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Upgrade pip and install remaining packages
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir eland elasticsearch requests requests-oauthlib hvac
+
+WORKDIR /

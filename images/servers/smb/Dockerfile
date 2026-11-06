@@ -1,14 +1,16 @@
-FROM bsantanna/base:latest
+FROM debian:bookworm-slim
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT=2024-12-29
+ENV REFRESHED_AT=2026-11-06
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update -q && \
-    apt install -yqq samba expect rpcbind && \
-    apt clean && \
+RUN apt-get update -qq && \
+    apt-get install -yqq --no-install-recommends \
+        samba expect rpcbind init-system-helpers passwd && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD scripts /scripts
-ONBUILD ADD config/ /config
+COPY scripts /scripts
+ONBUILD COPY config/ /config
 ONBUILD RUN mv /config/smb.conf /etc/samba/smb.conf
 ONBUILD RUN bash /scripts/provision/useradd_batch.sh
 ONBUILD RUN bash /scripts/provision/groupadd_batch.sh

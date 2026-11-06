@@ -15,24 +15,24 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/base
         file: images/base/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/base:latest
           bsantanna/base:x86_64
@@ -47,24 +47,24 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/dev/maven-build
         file: images/dev/maven-build/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/maven-build:latest
           bsantanna/maven-build:x86_64
@@ -79,24 +79,24 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/dev/java-ruby-dev
         file: images/dev/java-ruby-dev/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/java-ruby-dev:latest
           bsantanna/java-ruby-dev:x86_64
@@ -111,24 +111,24 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/dev/java-python-dev
         file: images/dev/java-python-dev/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/java-python-dev:latest
           bsantanna/java-python-dev:x86_64
@@ -143,29 +143,61 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/dev/java-nodejs-dev
         file: images/dev/java-nodejs-dev/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/java-nodejs-dev:latest
           bsantanna/java-nodejs-dev:x86_64
           bsantanna/java-nodejs-dev:amd64
           bsantanna/java-nodejs-dev:arm64
+
+  build_omp_harness:
+    needs: build_base
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: images/dev/omp-harness
+        file: images/dev/omp-harness/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: ${{ github.event_name == 'push' }}
+        tags: |
+          bsantanna/omp-harness:latest
+          bsantanna/omp-harness:x86_64
+          bsantanna/omp-harness:amd64
+          bsantanna/omp-harness:arm64
 
   build_chef_dev:
     needs: build_java_ruby_dev
@@ -175,29 +207,60 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/dev/chef-dev
         file: images/dev/chef-dev/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/chef-dev:latest
           bsantanna/chef-dev:x86_64
           bsantanna/chef-dev:amd64
           bsantanna/chef-dev:arm64
+
+  build_keycloak:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: images/servers/keycloak
+        file: images/servers/keycloak/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: ${{ github.event_name == 'push' }}
+        tags: |
+          bsantanna/keycloak:latest
+          bsantanna/keycloak:x86_64
+          bsantanna/keycloak:amd64
+          bsantanna/keycloak:arm64
 
   build_pgcli:
     needs: build_java_python_dev
@@ -207,24 +270,24 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
-        context: images/dev/chef-dev
+        context: images/dev/pgcli
         file: images/dev/pgcli/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/pgcli:latest
           bsantanna/pgcli:x86_64
@@ -233,31 +296,30 @@ jobs:
 
 
   build_smb:
-    needs: build_base
     runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/servers/smb
         file: images/servers/smb/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/smb:latest
           bsantanna/smb:x86_64
@@ -265,31 +327,30 @@ jobs:
           bsantanna/smb:arm64
 
   build_nginx_static:
-    needs: build_base
     runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/servers/nginx-static
         file: images/servers/nginx-static/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/nginx-static:latest
           bsantanna/nginx-static:x86_64
@@ -297,31 +358,30 @@ jobs:
           bsantanna/nginx-static:arm64
 
   build_nginx_ssl_proxy:
-    needs: build_base
     runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/servers/nginx-ssl-proxy
         file: images/servers/nginx-ssl-proxy/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/nginx-ssl-proxy:latest
           bsantanna/nginx-ssl-proxy:x86_64
@@ -336,85 +396,58 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/compute/document-utils
         file: images/compute/document-utils/Dockerfile
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
           bsantanna/compute-document-utils:latest
           bsantanna/compute-document-utils:x86_64
           bsantanna/compute-document-utils:amd64
           bsantanna/compute-document-utils:arm64
 
-  build_agent_lab_dags:
-    runs-on: ubuntu-24.04
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v4
-      with:
-        context: images/compute/agent-lab-dags
-        file: images/compute/agent-lab-dags/Dockerfile
-        platforms: linux/amd64,linux/arm64
-        push: true
-        tags: |
-          bsantanna/compute-agent-lab-dags:latest
-          bsantanna/compute-agent-lab-dags:0.1.0
-
-  
   build_cloudnative_pg_vector:
     runs-on: ubuntu-24.04
+    env:
+      PG_VERSION: "17.11"
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v6
       with:
         context: images/servers/cloudnative-pg-vector
         file: images/servers/cloudnative-pg-vector/Dockerfile
+        build-args: |
+          PG_VERSION=${{ env.PG_VERSION }}
         platforms: linux/amd64,linux/arm64
-        push: true
+        push: ${{ github.event_name == 'push' }}
         tags: |
-          bsantanna/cloudnative-pg-vector:17.4
-          
+          bsantanna/cloudnative-pg-vector:${{ env.PG_VERSION }}
