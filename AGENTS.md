@@ -91,7 +91,7 @@ Docker image collection for research and professional development: Agile/Lean so
 | `images/dev/java-ruby-dev` | `bsantanna/java-ruby-dev` | `bsantanna/base:latest` |
 | `images/dev/java-python-dev` | `bsantanna/java-python-dev` | `bsantanna/base:latest` |
 | `images/dev/java-nodejs-dev` | `bsantanna/java-nodejs-dev` | `bsantanna/base:latest` |
-| `images/dev/omp-harness` | `bsantanna/omp-harness` | `bsantanna/base:latest` |
+| `images/dev/omp-harness` | `bsantanna/omp-harness` | `debian:trixie-slim` (build stage: `bsantanna/base:latest`) |
 | `images/dev/chef-dev` | `bsantanna/chef-dev` | `bsantanna/java-ruby-dev:latest` |
 | `images/dev/pgcli` | `bsantanna/pgcli` | `bsantanna/java-python-dev:latest` |
 | `images/compute/document-utils` | `bsantanna/compute-document-utils` | `bsantanna/java-python-dev:latest` |
