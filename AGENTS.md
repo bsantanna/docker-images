@@ -63,6 +63,7 @@ images/base
 │   ├── images/dev/pgcli
 │   └── images/compute/document-utils
 ├── images/dev/java-nodejs-dev
+├── images/dev/omp-harness
 
 images/servers/smb                      (independent; Debian slim)
 images/servers/nginx-static             (independent; upstream nginx)
@@ -90,6 +91,7 @@ Docker image collection for research and professional development: Agile/Lean so
 | `images/dev/java-ruby-dev` | `bsantanna/java-ruby-dev` | `bsantanna/base:latest` |
 | `images/dev/java-python-dev` | `bsantanna/java-python-dev` | `bsantanna/base:latest` |
 | `images/dev/java-nodejs-dev` | `bsantanna/java-nodejs-dev` | `bsantanna/base:latest` |
+| `images/dev/omp-harness` | `bsantanna/omp-harness` | `bsantanna/base:latest` |
 | `images/dev/chef-dev` | `bsantanna/chef-dev` | `bsantanna/java-ruby-dev:latest` |
 | `images/dev/pgcli` | `bsantanna/pgcli` | `bsantanna/java-python-dev:latest` |
 | `images/compute/document-utils` | `bsantanna/compute-document-utils` | `bsantanna/java-python-dev:latest` |
@@ -129,6 +131,8 @@ docker run --rm bsantanna/java-python-dev:latest python --version
 docker run --rm bsantanna/pgcli:latest pgcli --version
 docker run --rm bsantanna/nginx-static:latest nginx -t
 docker run --rm bsantanna/smb:latest smbd --version
+docker run --rm bsantanna/omp-harness:latest --version
+docker run --rm bsantanna/omp-harness:latest config path
 docker run --rm bsantanna/compute-document-utils:latest bash -c 'command -v libreoffice pdftoppm'
 docker run --rm bsantanna/keycloak:local --version
 docker run --rm --entrypoint bash bsantanna/cloudnative-pg-vector:local -c 'ls /usr/share/postgresql/17/extension/vector.control'

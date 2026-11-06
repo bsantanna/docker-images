@@ -38,6 +38,7 @@ The repository is organized into several directories, each containing Dockerfile
   - **[java-python-dev](images/dev/java-python-dev/)**: Development environment for Java and Python.
   - **[java-ruby-dev](images/dev/java-ruby-dev/)**: Development environment for Java and Ruby.
   - **[maven-build](images/dev/maven-build/)**: Environment for building Maven projects.
+  - **[omp-harness](images/dev/omp-harness/)**: omp coding agent harness with baked-in omp-config.
   - **[pgcli](images/dev/pgcli/)**: PostgreSQL command-line client.
 - **[compute](images/compute/)**: Images used for compute workloads.
   - **[document-utils](images/compute/document-utils/)**: Document conversion and image extraction utilities.
@@ -47,6 +48,18 @@ The repository is organized into several directories, each containing Dockerfile
   - **[nginx-ssl-proxy](images/servers/nginx-ssl-proxy/)**: Nginx SSL proxy server.
   - **[nginx-static](images/servers/nginx-static/)**: Nginx static server.
   - **[smb](images/servers/smb/)**: SMB server.
+
+### Running the omp harness
+
+```bash
+docker run -it --rm \
+  -e LAN_LLM_API_KEY=... \
+  -e LANGFUSE_API_KEY=... \
+  -v "$PWD:/home/omp/workspace" \
+  bsantanna/omp-harness
+```
+
+The image runs as UID 10001; ensure the bind-mounted workspace is writable by that UID.
 
 ---
 
