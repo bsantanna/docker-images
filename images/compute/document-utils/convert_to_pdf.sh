@@ -12,9 +12,12 @@ convert_to_pdf() {
     local filename=$(basename "$file")
     local basename="${filename%.*}"
     local outdir=$(dirname "$(readlink -f "$file")")
+    local profile
+    profile=$(mktemp -d)
     
-    # Convert the file to PDF
-    libreoffice --headless --convert-to pdf "$file" --outdir "$outdir"
+    # Convert the file to PDF with an isolated LibreOffice profile
+    libreoffice --headless -env:UserInstallation="file://$profile" --convert-to pdf "$file" --outdir "$outdir"
+    rm -rf "$profile"
     
     echo "Converted $file to $basename.pdf"
 }

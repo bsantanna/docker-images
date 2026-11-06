@@ -1,15 +1,12 @@
-FROM bsantanna/base:latest
+FROM nginx:stable-bookworm
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT=2026-11-05
+ENV REFRESHED_AT=2026-11-06
 
-RUN apt update -qq && \
-    apt install -qqy nginx && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN rm -f /etc/nginx/conf.d/default.conf && \
+    mkdir -p /var/www/html/website
 
-RUN mkdir -p /var/www/html/website
-ADD conf/global.conf /etc/nginx/conf.d/
-ADD conf/nginx.conf /etc/nginx/
+COPY conf/global.conf /etc/nginx/conf.d/
+COPY conf/nginx.conf /etc/nginx/
 
 VOLUME ["/var/www/html/website"]
 

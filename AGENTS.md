@@ -48,7 +48,7 @@ Rules:
 This repository publishes public images under the `bsantanna/*` namespace on Docker Hub. Image names, tags, and entrypoints are consumer-facing contracts.
 
 - `images/base` is the shared generic base (JDK plus common CLI tooling). Keep it generic; tool-specific packages belong in the derived image.
-- Derived images build from the published `bsantanna/<parent>:latest` tag, matching the existing pattern. Images that wrap an upstream project directly (`keycloak`, `cloudnative-pg-vector`) build from that upstream instead.
+- Derived images build from the published `bsantanna/<parent>:latest` tag, matching the existing pattern. Images that do not need the JDK toolchain (`nginx`, `smb`) build from a minimal upstream base; upstream wrappers (`keycloak`, `cloudnative-pg-vector`) build from their upstream image.
 - Do not add application code or product-specific services here. These are environment and tooling layers.
 - Renaming or removing an image or published tag is a breaking change; update the Dockerfile, CI, and README index in the same change.
 
@@ -63,12 +63,12 @@ images/base
 │   ├── images/dev/pgcli
 │   └── images/compute/document-utils
 ├── images/dev/java-nodejs-dev
-├── images/servers/smb
-├── images/servers/nginx-static
-└── images/servers/nginx-ssl-proxy
 
-images/servers/keycloak               (independent; no CI job)
-images/servers/cloudnative-pg-vector  (independent)
+images/servers/smb                      (independent; Debian slim)
+images/servers/nginx-static             (independent; upstream nginx)
+images/servers/nginx-ssl-proxy          (independent; upstream nginx)
+images/servers/keycloak                 (independent; no CI job)
+images/servers/cloudnative-pg-vector    (independent)
 ```
 
 ## Adapter Policy
@@ -93,19 +93,19 @@ Docker image collection for research and professional development: Agile/Lean so
 | `images/dev/chef-dev` | `bsantanna/chef-dev` | `bsantanna/java-ruby-dev:latest` |
 | `images/dev/pgcli` | `bsantanna/pgcli` | `bsantanna/java-python-dev:latest` |
 | `images/compute/document-utils` | `bsantanna/compute-document-utils` | `bsantanna/java-python-dev:latest` |
-| `images/servers/smb` | `bsantanna/smb` | `bsantanna/base:latest` |
-| `images/servers/nginx-static` | `bsantanna/nginx-static` | `bsantanna/base:latest` |
-| `images/servers/nginx-ssl-proxy` | `bsantanna/nginx-ssl-proxy` | `bsantanna/base:latest` |
+| `images/servers/smb` | `bsantanna/smb` | `debian:bookworm-slim` |
+| `images/servers/nginx-static` | `bsantanna/nginx-static` | `nginx:stable-bookworm` |
+| `images/servers/nginx-ssl-proxy` | `bsantanna/nginx-ssl-proxy` | `nginx:stable-bookworm` |
 | `images/servers/keycloak` | `bsantanna/keycloak` | `quay.io/keycloak/keycloak` (via `ARG KEYCLOAK_VERSION`) |
-| `images/servers/cloudnative-pg-vector` | `bsantanna/cloudnative-pg-vector` | `ghcr.io/cloudnative-pg/postgresql:17.11-minimal-bookworm` |
+| `images/servers/cloudnative-pg-vector` | `bsantanna/cloudnative-pg-vector` | `ghcr.io/cloudnative-pg/postgresql:${PG_VERSION}-minimal-bookworm` |
 
-CI lives in `.github/workflows/docker-image.yml`. It builds and pushes multi-architecture images (`linux/amd64,linux/arm64`) to Docker Hub on pushes and pull requests targeting `main`. Most images publish `latest`, `x86_64`, `amd64`, and `arm64`; `cloudnative-pg-vector` publishes the upstream version tag `17.11`.
+CI lives in `.github/workflows/docker-image.yml`. It builds multi-architecture images (`linux/amd64,linux/arm64`) on pushes and pull requests targeting `main`, and pushes them to Docker Hub only on pushes. Most images publish `latest`, `x86_64`, `amd64`, and `arm64`; `cloudnative-pg-vector` publishes the upstream version tag from `PG_VERSION` (default `17.11`).
 
 There is no test suite or linter. Verification is a real `docker build` plus a runtime smoke check of the changed image.
 
 ## Commands
 
-Build the shared base first. Child Dockerfiles reference `bsantanna/base:latest`, so tagging the local build with that name makes children use your local base instead of the published one. This overwrites the local tag only; it does not push to Docker Hub.
+Build the shared base first for the JDK-derived images. Child Dockerfiles under `images/dev` and `images/compute` reference `bsantanna/base:latest`, so tagging the local build with that name makes children use your local base instead of the published one. This overwrites the local tag only; it does not push to Docker Hub.
 
 ```bash
 docker build -t bsantanna/base:latest images/base
@@ -117,6 +117,8 @@ Build an independent image:
 ```bash
 docker build -t bsantanna/keycloak:local images/servers/keycloak
 docker build -t bsantanna/cloudnative-pg-vector:local images/servers/cloudnative-pg-vector
+docker build -t bsantanna/smb:local images/servers/smb
+docker build -t bsantanna/nginx-static:local images/servers/nginx-static
 ```
 
 Smoke checks after building:
@@ -126,6 +128,7 @@ docker run --rm bsantanna/base:latest bash -c 'java -version && git --version'
 docker run --rm bsantanna/java-python-dev:latest python --version
 docker run --rm bsantanna/pgcli:latest pgcli --version
 docker run --rm bsantanna/nginx-static:latest nginx -t
+docker run --rm bsantanna/smb:latest smbd --version
 docker run --rm bsantanna/compute-document-utils:latest bash -c 'command -v libreoffice pdftoppm'
 docker run --rm bsantanna/keycloak:local --version
 docker run --rm --entrypoint bash bsantanna/cloudnative-pg-vector:local -c 'ls /usr/share/postgresql/17/extension/vector.control'
@@ -147,7 +150,7 @@ Match the existing style. Do not reformat untouched files.
 - Add `LABEL org.opencontainers.image.authors="bruno@btech.software"` on images built from a `bsantanna` base, matching the existing files.
 - Set `ENV REFRESHED_AT=<YYYY-MM-DD>` as a cache-buster and update it in every image you change. Do not bump untouched images.
 - Keep package installation in one `RUN`: `apt-get update -qq`, `apt-get install -yqq --no-install-recommends`, then `apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*`.
-- Use `ADD` for repository-local scripts and configuration, matching the existing files. Do not convert untouched `ADD` instructions to `COPY`.
+- Use `COPY` for repository-local files. Use `ADD` only when tar extraction or URL retrieval is required.
 - Keep `CMD` and `ENTRYPOINT` in exec form where they are already present.
 - Pin upstream versions with `ARG` when wrapping a versioned upstream (the keycloak pattern). Do not introduce pinning elsewhere unless asked.
 - Shell scripts are Bash with `#!/bin/bash` or `#!/usr/bin/env bash`; stdin-driven helpers stay stdin-driven.
@@ -155,10 +158,11 @@ Match the existing style. Do not reformat untouched files.
 
 ## CI and Publishing
 
-- Workflow jobs build and push on both `push` and `pull_request` to `main`; a PR run is still a publish.
+- Workflow jobs build on both `push` and `pull_request` to `main`, but only push images on `push`; a PR run does not overwrite published tags.
 - Adding an image requires a job with `context` and `file` pointing at that image directory, `needs` matching the build graph, `platforms: linux/amd64,linux/arm64`, and tags `latest`, `x86_64`, `amd64`, `arm64` (or the upstream version tag for pinned images).
-- Known trap: `build_pgcli` uses `context: images/dev/chef-dev` with `file: images/dev/pgcli/Dockerfile`. It builds today because that Dockerfile has no context-relative `ADD`/`COPY`. Fix the context before adding one.
-- `images/servers/keycloak` has no CI job and is not published by the workflow. Add a job if it should be.
+- Each job's `context` MUST point at its own image directory; `build_pgcli` uses `images/dev/pgcli`.
+- The workflow includes a `build_keycloak` job; Keycloak is published with the standard tags.
+- `PG_VERSION` is passed to the CloudNativePG build as a build argument and is used for both the source image and the published tag. Update it in one place.
 - The workflow requires the `DOCKER_USERNAME` and `DOCKER_PASSWORD` repository secrets.
 - Do not publish `:latest` from a local build unless intended; local tags are scratch.
 

@@ -1,16 +1,13 @@
-FROM bsantanna/base:latest
+FROM nginx:stable-bookworm
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT=2026-11-05
+ENV REFRESHED_AT=2026-11-06
 
-RUN apt update -qq && \
-    apt install -qqy nginx && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN rm -f /etc/nginx/conf.d/default.conf
 
-ADD conf/nginx.conf /etc/nginx/
+COPY conf/nginx.conf /etc/nginx/
 
-ONBUILD ADD conf/global.conf /etc/nginx/conf.d/
-ONBUILD ADD ssl/ /etc/nginx/ssl/
+ONBUILD COPY conf/global.conf /etc/nginx/conf.d/
+ONBUILD COPY ssl/ /etc/nginx/ssl/
 
 CMD ["nginx"]
 

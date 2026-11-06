@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-echo "mvn -T ${MAVEN_THREAD_COUNT} ${JAVA_OPTS} --settings /etc/maven/settings.xml clean install"| bash -x
+if [ "$#" -eq 0 ]; then
+    set -- clean install
+fi
+
+exec mvn -T "${MAVEN_THREAD_COUNT}" ${JAVA_OPTS:-} --settings /etc/maven/settings.xml "$@"
