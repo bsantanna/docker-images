@@ -16,13 +16,29 @@ RUN curl -fsSL --retry 3 https://omp.sh/install | PI_INSTALL_DIR=/usr/local/bin 
     omp --version > /home/omp/.omp-build.txt && \
     git -C /tmp/omp-config rev-parse HEAD >> /home/omp/.omp-build.txt
 
+# uv stage: the official uv image only ships the uv and uvx binaries.
+FROM ghcr.io/astral-sh/uv:latest AS uv
+
+# Python stage: uv installs a standalone CPython under /opt/uv; --default also
+# links python, python3 and python3.13 into UV_PYTHON_BIN_DIR. omp's eval tool
+# needs a python on PATH, which the slim runtime does not have.
+FROM debian:trixie-slim AS python
+ENV UV_PYTHON_INSTALL_DIR=/opt/uv/python
+ENV UV_PYTHON_BIN_DIR=/opt/uv/bin
+COPY --from=uv /uv /uvx /usr/local/bin/
+RUN uv python install 3.13 --default
+
 # Runtime stage: omp only needs glibc, so a slim Debian replaces the JDK base.
 FROM debian:trixie-slim
 LABEL org.opencontainers.image.authors="bruno@btech.software"
-ENV REFRESHED_AT=2026-11-06
+ENV REFRESHED_AT=2026-11-07
 ENV DEBIAN_FRONTEND=noninteractive
 ENV EDITOR=vim
 ENV HOME=/home/omp
+ENV UV_PYTHON_INSTALL_DIR=/opt/uv/python
+ENV UV_PYTHON_BIN_DIR=/opt/uv/bin
+ENV UV_PYTHON_PREFERENCE=only-managed
+ENV PATH=/opt/uv/bin:$PATH
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -59,6 +75,9 @@ RUN apt-get update -qq && \
 COPY --from=build /usr/local/bin/omp /usr/local/bin/omp
 COPY --from=build --chown=omp:omp /home/omp/.omp /home/omp/.omp
 COPY --from=build --chown=omp:omp /home/omp/.omp-build.txt /home/omp/.omp-build.txt
+# uv plus its managed Python; omp owns /opt/uv so the agent can add versions.
+COPY --from=uv /uv /uvx /usr/local/bin/
+COPY --from=python --chown=omp:omp /opt/uv /opt/uv
 
 USER omp
 WORKDIR /home/omp/workspace
