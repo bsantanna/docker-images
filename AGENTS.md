@@ -101,7 +101,7 @@ Docker image collection for research and professional development: Agile/Lean so
 | `images/servers/keycloak` | `bsantanna/keycloak` | `quay.io/keycloak/keycloak` (via `ARG KEYCLOAK_VERSION`) |
 | `images/servers/cloudnative-pg-vector` | `bsantanna/cloudnative-pg-vector` | `ghcr.io/cloudnative-pg/postgresql:${PG_VERSION}-minimal-bookworm` |
 
-CI lives in `.github/workflows/docker-image.yml`. It builds multi-architecture images (`linux/amd64,linux/arm64`) on pushes and pull requests targeting `main`, and pushes them to Docker Hub only on pushes. Most images publish `latest`, `x86_64`, `amd64`, and `arm64`; `cloudnative-pg-vector` publishes the upstream version tag from `PG_VERSION` (default `17.11`).
+CI lives in `.github/workflows/docker-image.yml`. It builds multi-architecture images (`linux/amd64,linux/arm64`) on pushes and pull requests targeting `main`, and pushes them to Docker Hub only on release tags (`v*`). `.github/workflows/release.yml` runs after a successful CI run on `main` and pushes the next calendar tag `vYYYY.MM.XX` (`XX` counts `01`–`99` per month). Most images publish `latest` and the release version without the `v` (e.g. `2026.11.01`); `cloudnative-pg-vector` publishes the upstream version tag from `PG_VERSION` (default `17.11`).
 
 There is no test suite or linter. Verification is a real `docker build` plus a runtime smoke check of the changed image.
 
@@ -162,12 +162,12 @@ Match the existing style. Do not reformat untouched files.
 
 ## CI and Publishing
 
-- Workflow jobs build on both `push` and `pull_request` to `main`, but only push images on `push`; a PR run does not overwrite published tags.
-- Adding an image requires a job with `context` and `file` pointing at that image directory, `needs` matching the build graph, `platforms: linux/amd64,linux/arm64`, and tags `latest`, `x86_64`, `amd64`, `arm64` (or the upstream version tag for pinned images).
+- Workflow jobs build on `push` and `pull_request` to `main`, but only push images on `v*` tag pushes; branch and PR runs do not overwrite published tags.
+- Adding an image requires a job with `context` and `file` pointing at that image directory, `needs` matching the build graph, `platforms: linux/amd64,linux/arm64`, a `Get the version` step, and tags `latest` and `${{ env.VERSION }}` (or the upstream version tag for pinned images). Do not add architecture tags; buildx publishes a multi-arch manifest.
 - Each job's `context` MUST point at its own image directory; `build_pgcli` uses `images/dev/pgcli`.
 - The workflow includes a `build_keycloak` job; Keycloak is published with the standard tags.
 - `PG_VERSION` is passed to the CloudNativePG build as a build argument and is used for both the source image and the published tag. Update it in one place.
-- The workflow requires the `DOCKER_USERNAME` and `DOCKER_PASSWORD` repository secrets.
+- The workflow requires the `DOCKER_USERNAME` and `DOCKER_PASSWORD` repository secrets. The release workflow requires `GH_TOKEN`, because tags pushed with `GITHUB_TOKEN` do not trigger workflows.
 - Do not publish `:latest` from a local build unless intended; local tags are scratch.
 
 ## Documentation

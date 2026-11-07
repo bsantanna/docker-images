@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  workflow_run:
+    workflows: [ "Docker Image CI" ]
+    types:
+      - completed
+
+concurrency:
+  group: release
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GH_TOKEN }}
+
+    - name: Tag release yyyy.mm.xx
+      env:
+        SHA: ${{ github.event.workflow_run.head_sha }}
+      run: |
+        if git tag --points-at "$SHA" | grep -q '^v'; then
+          echo "$SHA is already released: $(git tag --points-at "$SHA")"
+          exit 0
+        fi
+
+        PREFIX="v$(date -u +%Y.%m)"
+        LAST=$(git tag -l "${PREFIX}.*" | sed "s/^${PREFIX}\.//" | sort -n | tail -1)
+        NEXT=$((10#${LAST:-0} + 1))
+        if [ "$NEXT" -gt 99 ]; then
+          echo "::error::release limit reached for ${PREFIX} (99)"
+          exit 1
+        fi
+
+        TAG=$(printf '%s.%02d' "$PREFIX" "$NEXT")
+        git tag "$TAG" "$SHA"
+        git push origin "$TAG"
+        echo "Released $TAG"
